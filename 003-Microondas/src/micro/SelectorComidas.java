@@ -5,6 +5,7 @@
  */
 package micro;
 
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.JButton;
 
@@ -14,14 +15,17 @@ import javax.swing.JButton;
  */
 public class SelectorComidas extends javax.swing.JFrame {
     private ArrayList<Comida> comidas;
+    private Horno horno;
     
     /**
      * Creates new form SelectorComidas
      * @param comidas
      */
-    public SelectorComidas(ArrayList<Comida> comidas) {
+    public SelectorComidas(ArrayList<Comida> comidas, Horno horno) {
         this.comidas = comidas;
+        this.horno = horno;
         initComponents();
+        cargarComidas();
     }
 
     /**
@@ -35,7 +39,7 @@ public class SelectorComidas extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         lSeleccionar = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        pComidas = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -48,33 +52,45 @@ public class SelectorComidas extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipady = 30;
         getContentPane().add(lSeleccionar, gridBagConstraints);
-        
+
+        pComidas.setLayout(new java.awt.GridLayout(2, 2));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = -30;
+        getContentPane().add(pComidas, gridBagConstraints);
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * Carga las comidas como botones en la ventana.
+     */
+    private void cargarComidas(){
         // Calcula tamaño del grid
         int tam = (int) Math.ceil(comidas.size() / 2.0);
-        jPanel1.setLayout(new java.awt.GridLayout(tam, tam));
+        pComidas.setLayout(new java.awt.GridLayout(tam, tam));
         for(Comida c : comidas){
             JButton btn = new JButton();
             btn.setBackground(new java.awt.Color(255, 255, 255));
             btn.setIcon(c.getImagen());
             btn.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    // TODO
+                    horno.asignarComida(c);
+                    cerrarSelector();
                 }
             });
             
-            jPanel1.add(btn);
+            pComidas.add(btn);
         }
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = -30;
-        getContentPane().add(jPanel1, gridBagConstraints);
-
+        
         pack();
-    }// </editor-fold>//GEN-END:initComponents
-
+    }
+    
+    private void cerrarSelector(){
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }
     
     /**
      * @param args the command line arguments
@@ -106,11 +122,7 @@ public class SelectorComidas extends javax.swing.JFrame {
     }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lSeleccionar;
+    private javax.swing.JPanel pComidas;
     // End of variables declaration//GEN-END:variables
 }
