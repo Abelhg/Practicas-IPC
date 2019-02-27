@@ -295,6 +295,7 @@ public class Horno extends javax.swing.JFrame {
 
     private void btnComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComidaActionPerformed
         SelectorComidas s = new SelectorComidas(comidas);
+        s.setDefaultCloseOperation(SelectorComidas.DISPOSE_ON_CLOSE);
         s.setLocationRelativeTo(null);
         s.setVisible(true);
     }//GEN-LAST:event_btnComidaActionPerformed
