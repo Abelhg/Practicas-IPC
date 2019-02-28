@@ -5,7 +5,7 @@
  */
 package micro;
 
-import javax.swing.JButton;
+import java.awt.event.WindowEvent;
 
 /**
  *
@@ -13,13 +13,15 @@ import javax.swing.JButton;
  */
 public class Resultados extends javax.swing.JFrame {
 
-    private int temperatura;
+    private int resultado;
+    
     /**
      * Creates new form Resultados
      */
-    public Resultados(int temperatura) {
-        this.temperatura = temperatura;
+    public Resultados(int resultado) {
+        this.resultado = resultado;
         initComponents();
+        cargaResultados();
     }
 
     /**
@@ -31,29 +33,87 @@ public class Resultados extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        imgIcono = new javax.swing.JLabel();
+        comentario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1, java.awt.BorderLayout.CENTER);
+        imgIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/micro/imagenes/bien.png"))); // NOI18N
 
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1, java.awt.BorderLayout.PAGE_END);
+        comentario.setBackground(new java.awt.Color(255, 255, 255));
+        comentario.setFont(new java.awt.Font("Rubik", 1, 36)); // NOI18N
+        comentario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        comentario.setText("Comentario");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(imgIcono)
+                .addGap(18, 18, 18)
+                .addComponent(comentario, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(imgIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(comentario, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cierra la ventana.
+     */
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }//GEN-LAST:event_formMouseClicked
+
     public void cargaResultados(){
-        if (this.temperatura==1){
-            jButton1.setBackground(new java.awt.Color(255, 255, 255));
-            jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/micro/imagenes/carita feliz.png")));
+        switch(resultado){
+            case Comida.COCINADO_BIEN:
+                imgIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource(ICONO_BIEN)));
+                comentario.setText(COMENTARIO_BIEN);
+                comentario.setForeground(new java.awt.Color(253, 202, 71));
+                break;
+            case Comida.COCINADO_POCO:
+                imgIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource(ICONO_POCO)));
+                comentario.setText(COMENTARIO_POCO);
+                comentario.setForeground(new java.awt.Color(60, 138, 236));
+                break;
+            case Comida.COCINADO_MUCHO:
+                imgIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource(ICONO_MUCHO)));
+                comentario.setText(COMENTARIO_MUCHO);
+                comentario.setForeground(new java.awt.Color(255, 70, 20));
+                break;
+            default:
+                System.out.println("[!] Error. Valor no válido.");
+                System.exit(-4);
         }
+        
+        pack();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel comentario;
+    private javax.swing.JLabel imgIcono;
     // End of variables declaration//GEN-END:variables
+
+    // Paths iconos
+    private final String ICONO_BIEN = "/micro/imagenes/bien.png";
+    private final String ICONO_POCO = "/micro/imagenes/poco.png";
+    private final String ICONO_MUCHO = "/micro/imagenes/mucho.png";
+    // Comentarios
+    private final String COMENTARIO_BIEN = "¡Al punto!";
+    private final String COMENTARIO_POCO = "Frío frío...";
+    private final String COMENTARIO_MUCHO = "¡¡Te has pasado!!";
+    
 }
