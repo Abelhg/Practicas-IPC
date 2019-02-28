@@ -437,6 +437,7 @@ public class Horno extends javax.swing.JFrame {
     private void actualizarContador(){
         vMinutos.setText(String.format("%02d", minutos));
         vSegundos.setText(String.format("%02d", segundos));
+        temporizador ++;
     }
     
     /**
@@ -445,7 +446,18 @@ public class Horno extends javax.swing.JFrame {
     private void finalizado(){
         // TODO
         CURRENT_MODE = NORMAL_MODE;
-        System.out.println("Frio?");
+        
+        switch (comidaActual.bienCocinado(temporizador)) {
+            case 1:
+                System.out.println("Su comida ha salido to rica!");
+                break;
+            case 2:
+                System.out.println("Su comida ha salido fría!");
+                break;
+            default:
+                System.out.println("Su comida esta ardiendo!");
+                break;
+        }
     }
     
     /**
@@ -456,6 +468,8 @@ public class Horno extends javax.swing.JFrame {
         if(comidaActual != null || comidaActual != comida){
             btnComida.setText("");
             btnComida.setIcon(comida.getImagen());
+            this.comidaActual = comida;
+            this.temporizador = 0;
         }
     }
     
@@ -521,13 +535,15 @@ public class Horno extends javax.swing.JFrame {
     private ArrayList<Comida> comidas;
     private final String PATH_COMIDAS = "/micro/datos/comidas.txt";
     private Comida comidaActual = null;
+    private int temporizador = 0;
     // Temporizador
     private Timer timer;
     private int segundos = 0;
     private int minutos = 0;
     // Estados
     private final int NORMAL_MODE = 1000;
-    private final int FAST_MODE = 50;
+    private final int FAST_MODE = 10;
     private int CURRENT_MODE = NORMAL_MODE;
+    
     
 }
