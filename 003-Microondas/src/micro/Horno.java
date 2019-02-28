@@ -294,7 +294,7 @@ public class Horno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComidaActionPerformed
-        SelectorComidas s = new SelectorComidas(comidas);
+        SelectorComidas s = new SelectorComidas(comidas, this);
         s.setDefaultCloseOperation(SelectorComidas.DISPOSE_ON_CLOSE);
         s.setLocationRelativeTo(null);
         s.setVisible(true);
@@ -449,6 +449,17 @@ public class Horno extends javax.swing.JFrame {
     }
     
     /**
+     * Carga la comida seleccionada en el microondas.
+     * @param comida Comida seleccionada
+     */
+    public void asignarComida(Comida comida){
+        if(comidaActual != null || comidaActual != comida){
+            btnComida.setText("");
+            btnComida.setIcon(comida.getImagen());
+        }
+    }
+    
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -509,6 +520,7 @@ public class Horno extends javax.swing.JFrame {
     // Comidas
     private ArrayList<Comida> comidas;
     private final String PATH_COMIDAS = "/micro/datos/comidas.txt";
+    private Comida comidaActual = null;
     // Temporizador
     private Timer timer;
     private int segundos = 0;
