@@ -444,10 +444,9 @@ public class Horno extends javax.swing.JFrame {
      * Muestra un mensaje dependiendo del alimento y el tiempo calentado.
      */
     private void finalizado(){
-        // TODO
         CURRENT_MODE = NORMAL_MODE;
-        
-        switch (comidaActual.bienCocinado(temporizador)) {
+        int ding = comidaActual.bienCocinado(temporizador);
+        switch (ding) {
             case 1:
                 System.out.println("Su comida ha salido to rica!");
                 break;
@@ -458,6 +457,10 @@ public class Horno extends javax.swing.JFrame {
                 System.out.println("Su comida esta ardiendo!");
                 break;
         }
+        Resultados r = new Resultados(ding);
+        r.setDefaultCloseOperation(SelectorComidas.DISPOSE_ON_CLOSE);
+        r.setLocationRelativeTo(null);
+        r.setVisible(true);
     }
     
     /**

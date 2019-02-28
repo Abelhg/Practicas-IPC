@@ -36,9 +36,9 @@ public class Comida {
      */
     public int bienCocinado(int tiempo){
         int res = 0;
-        
+        System.out.println(tiempo);
         if(Math.abs(tiempo - tiempoIdeal) <= margen){
-            res = 1;
+                res = 1;
         }else{
             if(tiempo - tiempoIdeal < 0 ){
                 res = 2;
