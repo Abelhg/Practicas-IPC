@@ -8,10 +8,16 @@ package casadomoticaModelo;
  * @author hechila
  */
 public class PanelModelo {
-    // Variables de la aplicación
-    // private ...
+    private int porcentaje;
     
-    public PanelModelo(){
-        
+    public PanelModelo(int porcentaje){
+        this.porcentaje = porcentaje;
+    }
+    
+    public int getPorcentaje(){
+        return this.porcentaje;
+    }
+    public void setPorcentaje(int porcentaje){
+        this.porcentaje = porcentaje;
     }
 }
