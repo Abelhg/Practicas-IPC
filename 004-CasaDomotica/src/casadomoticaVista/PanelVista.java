@@ -1,4 +1,6 @@
-package casadomotica.vista;
+package casadomoticaVista;
+
+import casadomoticaModelo.PanelModelo;
 
 /**
  * Se encarga de mostrar los datos al usuario.

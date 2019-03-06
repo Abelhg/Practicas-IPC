@@ -1,6 +1,6 @@
 package casadomotica;
 
-import casadomotica.vista.PanelVista;
+import casadomoticaVista.PanelVista;
 
 /**
  * Se encarga de ejecutar la aplicación.

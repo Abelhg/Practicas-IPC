@@ -1,4 +1,4 @@
-package casadomotica.modelo;
+package casadomoticaModelo;
 
 /**
  * Contiene la información de la aplicación. 
