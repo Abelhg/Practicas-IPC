@@ -300,9 +300,23 @@ public class Horno extends javax.swing.JFrame {
         s.setVisible(true);
     }//GEN-LAST:event_btnComidaActionPerformed
 
+    /**
+     * Inicia/Detiene el temporizador.
+     */
     private void btnStartStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartStopActionPerformed
         if(timer == null){
             if(!(minutos == 0 && segundos == 0)){
+                // Comprueba valores incorrector y corrige
+                if(segundos >= 60){
+                    segundos -= 60;
+                    minutos++;
+                }
+                
+                if(minutos >= 100) 
+                    minutos = 99;
+                
+                actualizarContador();
+
                 // Inicia
                 iniciarContador(CURRENT_MODE);
             }
@@ -366,12 +380,22 @@ public class Horno extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnClearActionPerformed
 
+    /**
+     * Doble click: alterna los modos de velocidad (RÁPIDA/NORMAL)
+     */
     private void pContadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pContadorMouseClicked
         if(evt.getClickCount() == 2 && timer != null){
-            // Esto va a coger velocidaAAAAAAAAAAAAD
-            timer.cancel();
-            timer.purge();
-            iniciarContador((CURRENT_MODE = FAST_MODE));
+            if(CURRENT_MODE == NORMAL_MODE){
+                // Esto va a coger velocidaAAAAAAAAAAAAD
+                timer.cancel();
+                timer.purge();
+                iniciarContador((CURRENT_MODE = FAST_MODE));
+            }else{
+                // Pasito a pasito, suave suavesito
+                timer.cancel();
+                timer.purge();
+                iniciarContador((CURRENT_MODE = NORMAL_MODE));
+            }
         }
     }//GEN-LAST:event_pContadorMouseClicked
 
@@ -402,6 +426,7 @@ public class Horno extends javax.swing.JFrame {
                     }
                 }
 
+                temporizador++;
                 actualizarContador();
             }
         }, millis/2, millis);
@@ -409,7 +434,7 @@ public class Horno extends javax.swing.JFrame {
     }
 
     /**
-     * Añade el siguiente dígito marcado, teniendo en cuenta excepciones.
+     * Añade el siguiente dígito marcado.
      * @param digito Numero marcado
      */
     private void anadirDigito(int digito){
@@ -418,11 +443,6 @@ public class Horno extends javax.swing.JFrame {
             int decSeg = segundos / 10;
             minutos = minutos * 10 + decSeg;
             segundos = (segundos % 10) * 10 + digito;
-            // Comprueba excepciones
-            if(segundos >= 60){
-                segundos -= 60;
-                minutos++;
-            }
             
             // Actualiza los valores
             actualizarContador();
@@ -437,30 +457,39 @@ public class Horno extends javax.swing.JFrame {
     private void actualizarContador(){
         vMinutos.setText(String.format("%02d", minutos));
         vSegundos.setText(String.format("%02d", segundos));
-        temporizador ++;
     }
     
     /**
      * Muestra un mensaje dependiendo del alimento y el tiempo calentado.
      */
     private void finalizado(){
-        CURRENT_MODE = NORMAL_MODE;
-        int ding = comidaActual.bienCocinado(temporizador);
-        switch (ding) {
-            case 1:
-                System.out.println("Su comida ha salido to rica!");
-                break;
-            case 2:
-                System.out.println("Su comida ha salido fría!");
-                break;
-            default:
-                System.out.println("Su comida esta ardiendo!");
-                break;
+        if(comidaActual != null){
+            CURRENT_MODE = NORMAL_MODE;
+            int ding = comidaActual.bienCocinado(temporizador);
+            switch (ding) {
+                case Comida.COCINADO_BIEN:
+                    System.out.println("Su comida ha salido to rica!");
+                    break;
+                case Comida.COCINADO_POCO:
+                    System.out.println("Su comida ha salido fría!");
+                    break;
+                case Comida.COCINADO_MUCHO:
+                    System.out.println("Su comida esta ardiendo!");
+                    break;
+                default:
+                    System.out.println("[!] Error. Valor no válido");
+                    System.exit(-3);
+                    break;
+            }
+
+            Resultados r = new Resultados(ding);
+            r.setDefaultCloseOperation(SelectorComidas.DISPOSE_ON_CLOSE);
+            r.setLocationRelativeTo(null);
+            r.setVisible(true);
         }
-        Resultados r = new Resultados(ding);
-        r.setDefaultCloseOperation(SelectorComidas.DISPOSE_ON_CLOSE);
-        r.setLocationRelativeTo(null);
-        r.setVisible(true);
+
+        temporizador = 0;
+
     }
     
     /**
@@ -547,6 +576,5 @@ public class Horno extends javax.swing.JFrame {
     private final int NORMAL_MODE = 1000;
     private final int FAST_MODE = 10;
     private int CURRENT_MODE = NORMAL_MODE;
-    
     
 }

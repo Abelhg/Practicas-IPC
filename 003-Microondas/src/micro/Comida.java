@@ -7,6 +7,10 @@ import javax.swing.ImageIcon;
  * @author Zarkrosh
  */
 public class Comida {
+    static final int COCINADO_BIEN = 0;
+    static final int COCINADO_POCO = 1;
+    static final int COCINADO_MUCHO = 2;
+    
     private final String nombre;
     private final int tiempoIdeal;
     private final int margen;
@@ -28,24 +32,24 @@ public class Comida {
     }
     
     /**
-     * Devuelve 1 si el tiempo empleado en la cocción es adecuado,
-     * 2 si está frio y 3 si esta caliente. Se calcula mediante un tiempo ideal y un
-     * margen estipulados al crear el objeto.
+     * Devuelve el estado del alimento cocinado. 
+     * Se calcula mediante un tiempo ideal y un margen estipulados al crear el objeto.
      * @param tiempo Tiempo empleado
-     * @return 1 si está bien cocinado, 2 si frio, 3 si caliente
+     * @return Ver constantes
      */
     public int bienCocinado(int tiempo){
         int res = 0;
         System.out.println(tiempo);
         if(Math.abs(tiempo - tiempoIdeal) <= margen){
-                res = 1;
+                res = COCINADO_BIEN;
         }else{
             if(tiempo - tiempoIdeal < 0 ){
-                res = 2;
+                res = COCINADO_POCO;
             }else{
-                res = 3;
+                res = COCINADO_MUCHO;
             }
         }
+        
         return res;
     }
 }
