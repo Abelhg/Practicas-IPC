@@ -5,6 +5,7 @@ import casadomoticaModelo.PanelModelo;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -44,18 +45,19 @@ public class PanelVista extends javax.swing.JFrame {
         controles = new javax.swing.JPanel();
         tituloLuz = new javax.swing.JLabel();
         nombreLuz = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        slider = new javax.swing.JSlider();
-        tituloLuz1 = new javax.swing.JLabel();
-        tituloLuz2 = new javax.swing.JLabel();
-        tituloLuz3 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        tituloEstado = new javax.swing.JLabel();
+        textoEncApa = new javax.swing.JLabel();
+        casillaEstado = new javax.swing.JCheckBox();
+        tituloColor = new javax.swing.JLabel();
+        selectorColor = new javax.swing.JComboBox<>();
+        tituloIntensidad = new javax.swing.JLabel();
+        deslizadorIntensidad = new javax.swing.JSlider();
+        previsColor = new javax.swing.JPanel();
 
         jLabel5.setText("jLabel5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         modosSeleccion.setBackground(new java.awt.Color(204, 255, 255));
@@ -147,95 +149,91 @@ public class PanelVista extends javax.swing.JFrame {
         tituloLuz.setText("Nombre de luz:");
 
         nombreLuz.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        nombreLuz.setText("Nombre Luz");
+        nombreLuz.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         nombreLuz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreLuzActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Encendido/Apagado");
+        tituloEstado.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tituloEstado.setText("Estado:");
 
-        jCheckBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jCheckBox1.setMargin(null);
-        jCheckBox1.setMaximumSize(new java.awt.Dimension(33, 33));
-        jCheckBox1.setMinimumSize(new java.awt.Dimension(33, 33));
-        jCheckBox1.setName(""); // NOI18N
-        jCheckBox1.setPreferredSize(new java.awt.Dimension(33, 33));
+        textoEncApa.setText("Encendido/Apagado");
 
-        slider.setMajorTickSpacing(10);
-        slider.setMinorTickSpacing(10);
-        slider.setPaintLabels(true);
-        slider.setPaintTicks(true);
-        slider.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        slider.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sliderStateChanged(evt);
-            }
-        });
+        casillaEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        casillaEstado.setMargin(null);
+        casillaEstado.setMaximumSize(new java.awt.Dimension(33, 33));
+        casillaEstado.setMinimumSize(new java.awt.Dimension(33, 33));
+        casillaEstado.setName(""); // NOI18N
+        casillaEstado.setPreferredSize(new java.awt.Dimension(33, 33));
 
-        tituloLuz1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        tituloLuz1.setText("Estado:");
+        tituloColor.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tituloColor.setText("Color");
 
-        tituloLuz2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        tituloLuz2.setText("Intensidad");
-
-        tituloLuz3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        tituloLuz3.setText("Color");
-
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amarillo", "Azul", "Blanco", "Naranja", "Verde" }));
-        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        selectorColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amarillo", "Azul", "Blanco", "Naranja", "Verde" }));
+        selectorColor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        selectorColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                selectorColorActionPerformed(evt);
             }
         });
+
+        tituloIntensidad.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tituloIntensidad.setText("Intensidad");
+
+        deslizadorIntensidad.setMajorTickSpacing(10);
+        deslizadorIntensidad.setMinorTickSpacing(10);
+        deslizadorIntensidad.setPaintLabels(true);
+        deslizadorIntensidad.setPaintTicks(true);
+        deslizadorIntensidad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deslizadorIntensidad.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                deslizadorIntensidadStateChanged(evt);
+            }
+        });
+
+        previsColor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+
+        javax.swing.GroupLayout previsColorLayout = new javax.swing.GroupLayout(previsColor);
+        previsColor.setLayout(previsColorLayout);
+        previsColorLayout.setHorizontalGroup(
+            previsColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        previsColorLayout.setVerticalGroup(
+            previsColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout controlesLayout = new javax.swing.GroupLayout(controles);
         controles.setLayout(controlesLayout);
         controlesLayout.setHorizontalGroup(
             controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlesLayout.createSequentialGroup()
-                .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(controlesLayout.createSequentialGroup()
-                        .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(controlesLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, controlesLayout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addComponent(tituloLuz2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(tituloIntensidad)
+                            .addComponent(deslizadorIntensidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addComponent(previsColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33))
-                    .addGroup(controlesLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlesLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tituloLuz3)
-                            .addComponent(tituloLuz1)
+                            .addComponent(tituloColor)
+                            .addComponent(tituloEstado)
                             .addComponent(tituloLuz))
                         .addGap(34, 34, 34)
                         .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(controlesLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(textoEncApa)
                                 .addGap(18, 18, 18)
-                                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(casillaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(nombreLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(selectorColor, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         controlesLayout.setVerticalGroup(
@@ -248,21 +246,21 @@ public class PanelVista extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(tituloLuz1))
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textoEncApa)
+                        .addComponent(tituloEstado))
+                    .addComponent(casillaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tituloLuz3))
+                    .addComponent(selectorColor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tituloColor))
                 .addGap(34, 34, 34)
-                .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(controlesLayout.createSequentialGroup()
-                        .addComponent(tituloLuz2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(tituloIntensidad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deslizadorIntensidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(previsColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -275,13 +273,13 @@ public class PanelVista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderStateChanged
+    private void deslizadorIntensidadStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_deslizadorIntensidadStateChanged
         controlador.cambiaValorIntensidad();
-    }//GEN-LAST:event_sliderStateChanged
+    }//GEN-LAST:event_deslizadorIntensidadStateChanged
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void selectorColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorColorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_selectorColorActionPerformed
 
     private void nombreLuzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreLuzActionPerformed
         // TODO add your handling code here:
@@ -292,19 +290,19 @@ public class PanelVista extends javax.swing.JFrame {
      *              MODOS DE SELECCIÓN            *
      **********************************************/
     private void btnTodasEncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodasEncActionPerformed
-        //controlador.procesaSeleccion()
+        controlador.procesaSeleccion(PanelModelo.CONFIG_TODAS_ENCENDIDAS);
     }//GEN-LAST:event_btnTodasEncActionPerformed
 
     private void btnTodasApaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodasApaActionPerformed
-        // TODO add your handling code here:
+        controlador.procesaSeleccion(PanelModelo.CONFIG_TODAS_APAGADAS);
     }//GEN-LAST:event_btnTodasApaActionPerformed
 
     private void btnAmbienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbienteActionPerformed
-        // TODO add your handling code here:
+        controlador.procesaSeleccion(PanelModelo.CONFIG_AMBIENTE);
     }//GEN-LAST:event_btnAmbienteActionPerformed
 
     private void btnLecturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLecturaActionPerformed
-        // TODO add your handling code here:
+        controlador.procesaSeleccion(PanelModelo.CONFIG_LECTURA);
     }//GEN-LAST:event_btnLecturaActionPerformed
     
     /**********************************************
@@ -328,7 +326,6 @@ public class PanelVista extends javax.swing.JFrame {
         JButton btnLuz;
         int contadorCols = 0;
         for(Luz luz : listaLuces){
-            System.out.println("Cargando luz: " + luz.getNombre());
             ImageIcon resIcon;
             if(luz.estaEncendida()){
                 resIcon = new ImageIcon(getClass().getResource("/casadomoticaRecursos/bomb_amarilla.jpg"));
@@ -337,6 +334,11 @@ public class PanelVista extends javax.swing.JFrame {
             }
             btnLuz = new JButton(resIcon);
             btnLuz.setText(luz.getNombre());
+            btnLuz.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    controlador.seleccionaLuz(luz);
+                }
+            });
             gbl.setConstraints(btnLuz, c);
             pan.add(btnLuz);
             
@@ -355,24 +357,38 @@ public class PanelVista extends javax.swing.JFrame {
         
         // Comprueba si el panel tiene hijos para añadir
         if(pan.getComponents().length > 0){
-            System.out.println("Añadiendo!");
             luces.add(pan);
         }
+    }
+    
+    
+    /********** PANEL DE SELECCIÓN DE LUZ **********/
+    public void marcarSeleccionada(Luz l){
         
-        pack();
-        setVisible(true);
+    }
+    
+    /********** PANEL DE CONFIGURACIÓN **********/
+    public void actualizaConfiguracion(){
+        Luz actual = modelo.getSeleccionadaActual();
+        nombreLuz.setText(actual.getNombre());
+        casillaEstado.setSelected(actual.estaEncendida());
+        // color
+        setNivelIntensidad();
     }
     
     
-    
-    
-    
-    
-    public void setTextSlider(){
-        //textSlider.setText(String.valueOf(modelo.getPorcentaje()));
+    public void setNivelIntensidad(){
+        Luz actual = modelo.getSeleccionadaActual();
+        Color c = new Color(actual.getColor());
+        int intensidad = actual.getIntensidad();
+        deslizadorIntensidad.setValue(intensidad);
+        // Muestra la previsualización del color
+        previsColor.setBackground(new Color(c.getRed(), c.getGreen(), 
+                        c.getBlue(), (intensidad * 255 / 100)));
     }
-    public int getTextSlider(){
-        return slider.getValue();
+    
+    public int getNivelIntensidad(){
+        return deslizadorIntensidad.getValue();
     }
     
     
@@ -382,20 +398,20 @@ public class PanelVista extends javax.swing.JFrame {
     private javax.swing.JButton btnLectura;
     private javax.swing.JButton btnTodasApa;
     private javax.swing.JButton btnTodasEnc;
+    private javax.swing.JCheckBox casillaEstado;
     private javax.swing.JPanel controles;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JSlider deslizadorIntensidad;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel luces;
     private javax.swing.JPanel modosSeleccion;
     private javax.swing.JTextField nombreLuz;
-    private javax.swing.JSlider slider;
+    private javax.swing.JPanel previsColor;
+    private javax.swing.JComboBox<String> selectorColor;
+    private javax.swing.JLabel textoEncApa;
+    private javax.swing.JLabel tituloColor;
+    private javax.swing.JLabel tituloEstado;
+    private javax.swing.JLabel tituloIntensidad;
     private javax.swing.JLabel tituloLuz;
-    private javax.swing.JLabel tituloLuz1;
-    private javax.swing.JLabel tituloLuz2;
-    private javax.swing.JLabel tituloLuz3;
     private javax.swing.JLabel tituloModos;
     // End of variables declaration//GEN-END:variables
 }

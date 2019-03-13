@@ -4,7 +4,7 @@ FF0000
 true
 
 2
-100
+40
 00FF00
 false
 

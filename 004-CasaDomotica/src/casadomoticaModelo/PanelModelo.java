@@ -11,7 +11,15 @@ import java.util.ArrayList;
  */
 public class PanelModelo {
     
+    /* CONSTANTES DE CONFIGURACIONES PREDETERMINADAS */
+    public static final int CONFIG_TODAS_ENCENDIDAS = 0;
+    public static final int CONFIG_TODAS_APAGADAS = 1;
+    public static final int CONFIG_AMBIENTE = 2;
+    public static final int CONFIG_LECTURA = 3;
+    
     private ArrayList<Luz> luces;
+    
+    private Luz seleccionadaActual;
     
     public PanelModelo(){
         
@@ -34,5 +42,20 @@ public class PanelModelo {
         this.luces = luces;
     }
     
+    /**
+     * Devuelve la luz que está seleccionada actualmente en el panel de selección.
+     * @return Luz actualmente seleccionada
+     */
+    public Luz getSeleccionadaActual(){
+        return seleccionadaActual;
+    }
+    
+    /**
+     * Asigna la luz que acaba de ser seleccionada en el panel de selección.
+     * @param act Nueva luz actual
+     */
+    public void setSeleccionadaActual(Luz act){
+        seleccionadaActual = act;
+    }
     
 }

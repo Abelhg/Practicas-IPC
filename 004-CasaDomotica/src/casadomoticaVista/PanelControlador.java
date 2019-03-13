@@ -45,7 +45,6 @@ public final class PanelControlador {
             while(br.ready()){
                 // Lee datos de las luces
                 String nombre = br.readLine();
-                System.out.println("[DEBUG] " + nombre);
                 int intensidad = Integer.parseInt(br.readLine());
                 int color = (int) Long.parseLong(br.readLine(), 16);
                 boolean encendida = Boolean.parseBoolean(br.readLine());
@@ -70,15 +69,53 @@ public final class PanelControlador {
         
         modelo.setLuces(luces);
         vista.cargaLuces();
+        modelo.setSeleccionadaActual(luces.get(0)); // QUITAR ESTO EN UN FUTURO
     }
     
+    /**
+     * Cambia la configuración de las luces según unas selecciones predeterminadas.
+     * 
+     * 1) Todas las luces encendidas: todas a 100% de intensidad y color blanco.
+     * 2) Todas las luces apagadas.
+     * 3) Luz ambiental: todas encendidas al 30% de intensidad y color amarillo.
+     * 4) Luz de lectura: la primera y la tercera luz están encendidas al 60%
+     *     de intensidad y color blanco. El resto están apagadas.
+     * 
+     * @param seleccion Configuración elegida
+     */
+    public void procesaSeleccion(int seleccion){
+        switch(seleccion){
+            case PanelModelo.CONFIG_TODAS_ENCENDIDAS:
+                System.out.println("[DEBUG] Selección TODAS ENCENDIDAS");
+                break;
+            case PanelModelo.CONFIG_TODAS_APAGADAS:
+                System.out.println("[DEBUG] Selección TODAS APAGADAS");
+                break;
+            case PanelModelo.CONFIG_AMBIENTE:
+                System.out.println("[DEBUG] Selección LUZ AMBIENTE");
+                break;
+            case PanelModelo.CONFIG_LECTURA:
+                System.out.println("[DEBUG] Selección LUZ DE LECTURA");
+                break;
+        }
+    }
+    
+    /**
+     * Procesa el evento de selección de luz individual.
+     * @param l
+     */
+    public void seleccionaLuz(Luz l){
+        System.out.println("[DEBUG] Seleccionada " + l.getNombre());
+        modelo.setSeleccionadaActual(l);
+        vista.actualizaConfiguracion();
+    }
     
     /**
      * Procesa el evento de cambio de intensidad.
      */
     public void cambiaValorIntensidad(){
-       //modelo.setPorcentaje(vista.getTextSlider());
-       vista.setTextSlider();
+        modelo.getSeleccionadaActual().setIntensidad(vista.getNivelIntensidad());
+        vista.setNivelIntensidad();
     }
     
 }
