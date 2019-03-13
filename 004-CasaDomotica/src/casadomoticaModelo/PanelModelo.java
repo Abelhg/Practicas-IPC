@@ -1,5 +1,7 @@
 package casadomoticaModelo;
 
+import java.util.ArrayList;
+
 /**
  * Contiene la información de la aplicación. 
  * El controlador le modifica y la vista le consulta.
@@ -8,16 +10,29 @@ package casadomoticaModelo;
  * @author hechila
  */
 public class PanelModelo {
-    private int porcentaje;
     
-    public PanelModelo(int porcentaje){
-        this.porcentaje = porcentaje;
+    private ArrayList<Luz> luces;
+    
+    public PanelModelo(){
+        
     }
     
-    public int getPorcentaje(){
-        return this.porcentaje;
+    
+    /**
+     * Devuelve las luces de la aplicación.
+     * @return Lista de luces
+     */
+    public ArrayList<Luz> getLuces(){
+        return luces;
     }
-    public void setPorcentaje(int porcentaje){
-        this.porcentaje = porcentaje;
+    
+    /**
+     * Asigna las luces de la aplicación.
+     * @param luces Lista de luces
+     */
+    public void setLuces(ArrayList<Luz> luces){
+        this.luces = luces;
     }
+    
+    
 }
