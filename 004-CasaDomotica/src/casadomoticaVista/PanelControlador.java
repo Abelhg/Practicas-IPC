@@ -1,5 +1,6 @@
 package casadomoticaVista;
 
+import casadomoticaModelo.ColorLuz;
 import casadomoticaModelo.PanelModelo;
 import casadomoticaModelo.Luz;
 import java.io.BufferedReader;
@@ -39,21 +40,18 @@ public final class PanelControlador {
         try {
             InputStream is = getClass().getResourceAsStream(PATH_LUCES);
             InputStreamReader isr = new InputStreamReader(is, "UTF-8");
-            BufferedReader br = new BufferedReader(isr);
-            
-            String linea;
-            while(br.ready()){
-                // Lee datos de las luces
-                String nombre = br.readLine();
-                int intensidad = Integer.parseInt(br.readLine());
-                int color = (int) Long.parseLong(br.readLine(), 16);
-                boolean encendida = Boolean.parseBoolean(br.readLine());
-                luces.add(new Luz(nombre, intensidad, color, encendida));
-                
-                br.readLine(); // Siguiente sección
+            try (BufferedReader br = new BufferedReader(isr)) {
+                while(br.ready()){
+                    // Lee datos de las luces
+                    String nombre = br.readLine();
+                    int intensidad = Integer.parseInt(br.readLine());
+                    int color = (int) Long.parseLong(br.readLine(), 16);
+                    int colorImg = Integer.parseInt(br.readLine());
+                    boolean encendida = Boolean.parseBoolean(br.readLine());
+                    luces.add(new Luz(nombre, intensidad, new ColorLuz(color, colorImg), encendida));
+                    br.readLine(); // Siguiente sección
+                }
             }
-            
-            br.close();
         } catch (FileNotFoundException ex) {
             System.out.println("[!] El archivo \"luces.txt\" no existe.");
             System.exit(-1);
@@ -105,7 +103,6 @@ public final class PanelControlador {
      * @param l
      */
     public void seleccionaLuz(Luz l){
-        System.out.println("[DEBUG] Seleccionada " + l.getNombre());
         modelo.setSeleccionadaActual(l);
         vista.actualizaConfiguracion();
     }
@@ -116,6 +113,22 @@ public final class PanelControlador {
     public void cambiaValorIntensidad(){
         modelo.getSeleccionadaActual().setIntensidad(vista.getNivelIntensidad());
         vista.setNivelIntensidad();
+    }
+
+    /**
+     * Procesa el evento de cambio de nombre.
+     */
+    void procesaNombreCambiado() {
+        modelo.getSeleccionadaActual().setNombre(vista.getNombreLuz());
+        vista.actualizaNombreLuz();
+    }
+
+    /**
+     * Procesa el evento de cambio de estado de la luz (apagada/encendida).
+     */
+    void procesaCambioEstado() {
+        modelo.getSeleccionadaActual().setEncendida(vista.getEstadoLuz());
+        vista.actualizaIconosLuces();
     }
     
 }

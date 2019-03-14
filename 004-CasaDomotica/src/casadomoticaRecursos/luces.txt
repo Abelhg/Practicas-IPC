@@ -1,24 +1,29 @@
 1
 100
-FF0000
+fff000
+0
 true
 
 2
 40
-00FF00
+00a7e3
+1
 false
 
 3
 100
-0000FF
+b8e516
+2
 false
 
 4
 80
-FF00FF
+ffca0a
+3
 true
 
 5
 100
-FFFFFF
+fafafa
+4
 true

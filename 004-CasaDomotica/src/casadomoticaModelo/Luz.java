@@ -7,9 +7,10 @@ package casadomoticaModelo;
  * @author hechila
  */
 public class Luz {
+    
     private String nombre;
     private int intensidad;
-    private int color;
+    private ColorLuz color;
     private boolean encendida;
 
     /**
@@ -19,7 +20,7 @@ public class Luz {
      * @param color Color de la luz
      * @param encendida Si esta encendida o no
      */
-    public Luz(String nombre, int intensidad, int color, boolean encendida) {
+    public Luz(String nombre, int intensidad, ColorLuz color, boolean encendida) {
         this.nombre = nombre;
         this.intensidad = intensidad;
         this.color = color;
@@ -57,14 +58,14 @@ public class Luz {
     /**
      * @return Color actual de la luz
      */
-    public int getColor() {
+    public ColorLuz getColor() {
         return color;
     }
     
     /**
      * @param color Color para asignar a la luz
      */
-    public void setColor(int color) {
+    public void setColor(ColorLuz color) {
         this.color = color;
     }
 
@@ -85,7 +86,7 @@ public class Luz {
     @Override
     public String toString(){
         String res = "[Luz - " + nombre + " | " + intensidad + "% | #" + 
-                      Integer.toHexString(color) + " | ";
+                      color + " | ";
         if(encendida){
             res += "Encendida]";
         }else{
