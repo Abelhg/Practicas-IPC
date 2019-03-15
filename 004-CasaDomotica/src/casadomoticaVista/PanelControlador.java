@@ -68,7 +68,8 @@ public final class PanelControlador {
         
         modelo.setLuces(luces);
         vista.cargaLuces();
-        modelo.setSeleccionadaActual(luces.get(0)); // QUITAR ESTO EN UN FUTURO
+        modelo.setSeleccionadaActual(luces.get(0)); // CARGA LA PRIMERA LUZ
+        vista.marcaLuz();
     }
     
     /**
@@ -102,7 +103,7 @@ public final class PanelControlador {
                 }
                 break;
             case PanelModelo.CONFIG_LECTURA:
-                Set<Integer> indices = new HashSet<Integer>();
+                Set<Integer> indices = new HashSet<>();
                 // Luces a encender: primera y tercera
                 indices.add(0);
                 indices.add(2);
@@ -110,8 +111,8 @@ public final class PanelControlador {
                     if(indices.contains(i)){
                         // Se enciende con la configuración deseada
                         modelo.getLuces().get(i).setEncendida(true);
-                        modelo.getLuces().get(i).setIntensidad(30);
-                        modelo.getLuces().get(i).setColor(new ColorLuz(ColorLuz.COLOR_AMARILLO));
+                        modelo.getLuces().get(i).setIntensidad(60);
+                        modelo.getLuces().get(i).setColor(new ColorLuz(ColorLuz.COLOR_BLANCA));
                     }else{
                         // Se apagan
                         modelo.getLuces().get(i).setEncendida(false);
@@ -125,11 +126,24 @@ public final class PanelControlador {
     
     /**
      * Procesa el evento de selección de luz individual.
-     * @param l
      */
     public void seleccionaLuz(){
         modelo.setSeleccionadaActual(vista.getSeleccionadaActual());
+        vista.marcaLuz();
         vista.actualizaConfiguracion();
+    }
+    
+    /**
+     * Comprueba si la configuración actual de las luces se corresponde
+     * con alguna de las predeterminadas, en cuyo caso lo hace notar
+     * en la vista.
+     */
+    private void compruebaSiEsSeleccion(){
+        vista.desmarcarTodas();
+        if(modoTodasEncendidas())    vista.marcarTodasEncendidas();
+        else if(modoTodasApagadas()) vista.marcarTodasApagadas();
+        else if(modoAmbiente())      vista.marcarAmbiente();
+        else if(modoLectura())       vista.marcarLectura();
     }
     
     /**
@@ -138,15 +152,7 @@ public final class PanelControlador {
     public void cambiaValorIntensidad(){
         modelo.getSeleccionadaActual().setIntensidad(vista.getNivelIntensidad());
         vista.actualizaNivelIntensidad(modelo.getSeleccionadaActual());
-        if(modoTodasEncendidas()==true)
-            vista.marcarTodasEncendidas();
-        if(modoTodasApagadas()==true)
-            vista.marcarTodasApagadas();
-        if(modoAmbiente()==true)
-            vista.marcarAmbiente();
-        if(modoLectura()==true)
-            vista.marcarLectura();
-        
+        compruebaSiEsSeleccion();
     }
 
     /**
@@ -163,14 +169,7 @@ public final class PanelControlador {
     void procesaCambioEstado() {
         modelo.getSeleccionadaActual().setEncendida(vista.getEstadoLuz());
         vista.actualizaIconoLuz(modelo.getSeleccionadaActual());
-         if(modoTodasEncendidas()==true)
-            vista.marcarTodasEncendidas();
-        if(modoTodasApagadas()==true)
-            vista.marcarTodasApagadas();
-        if(modoAmbiente()==true)
-            vista.marcarAmbiente();
-        if(modoLectura()==true)
-            vista.marcarLectura();
+        compruebaSiEsSeleccion();
     }
     
     /**
@@ -180,85 +179,92 @@ public final class PanelControlador {
         modelo.getSeleccionadaActual().setColor(new ColorLuz(vista.getColorLuz()));
         vista.actualizaColorLuz(modelo.getSeleccionadaActual());
         vista.actualizaIconoLuz(modelo.getSeleccionadaActual());
-         if(modoTodasEncendidas()==true)
-            vista.marcarTodasEncendidas();
-        if(modoTodasApagadas()==true)
-            vista.marcarTodasApagadas();
-        if(modoAmbiente()==true)
-            vista.marcarAmbiente();
-        if(modoLectura()==true)
-            vista.marcarLectura();
+        compruebaSiEsSeleccion();
     }
     
+    /**
+     * Comprueba si la configuración actual de las luces se corresponde con
+     * la predeterminada de "Todas encendidas", en la que todas las luces 
+     * están encendidas, son de color blanco y brillan al 100% de intensidad.
+     * @return true si es la configuración
+     */
     public boolean modoTodasEncendidas(){
         boolean res = true;
-        
-        for(Luz l : modelo.getLuces()){
-            if(l.getColor()!=new ColorLuz(ColorLuz.COLOR_BLANCA)){
-                res = false;
-                break;
-            }
-            if(l.getIntensidad()!=100){
-                res = false;
-                break;
-            }
-            if(l.estaEncendida()==false){
-                res = false;
-                break;
-                }
+        int i = 0;
+        while(res && i < modelo.getLuces().size()){
+            Luz l = modelo.getLuces().get(i);
+            if(l.getColor().getColorImg() != ColorLuz.COLOR_BLANCA) res = false;
+            if(l.getIntensidad() != 100) res = false;
+            if(!l.estaEncendida()) res = false;
+            i++;
         }
         
         return res;
     }
     
+    /**
+     * Comprueba si la configuración actual de las luces se corresponde con
+     * la predeterminada de "Todas apagadas", en la que todas las luces 
+     * están apagadas, sin importar colores ni intensidades.
+     * @return true si es la configuración
+     */
     public boolean modoTodasApagadas(){
         boolean res = true;
         
-        for(Luz l : modelo.getLuces()){
-            if(l.estaEncendida()==true){
-                res = false;
-                break;
-                }
+        int i = 0;
+        while(res && i < modelo.getLuces().size()){
+            if(modelo.getLuces().get(i).estaEncendida()) res = false;
+            i++;
         }
         
         return res;
     }
-     public boolean modoAmbiente(){
+    
+    /**
+     * Comprueba si la configuración actual de las luces se corresponde con
+     * la predeterminada de "Ambiente", en la que todas las luces 
+     * están encendidas, son de color amarillo y brillan al 30% de intensidad.
+     * @return true si es la configuración
+     */
+    public boolean modoAmbiente(){
         boolean res = true;
-        
-        for(Luz l : modelo.getLuces()){
-            if(l.getColor()!=new ColorLuz(ColorLuz.COLOR_AMARILLO)){
-                res = false;
-                break;
-            }
-            if(l.getIntensidad()!=30){
-                res = false;
-                break;
-            }
-            if(l.estaEncendida()==false){
-                res = false;
-                break;
-                }
+        int i = 0;
+        while(res && i < modelo.getLuces().size()){
+            Luz l = modelo.getLuces().get(i);
+            if(l.getColor().getColorImg() != ColorLuz.COLOR_AMARILLO) res = false;
+            if(l.getIntensidad() != 30) res = false;
+            if(!l.estaEncendida()) res = false;
+            i++;
         }
         
         return res;
     }
-      public boolean modoLectura(){
+    
+    /**
+     * Comprueba si la configuración actual de las luces se corresponde con
+     * la predeterminada de "Ambiente", en la que solo la primera y la tercera
+     * luz están encendidas, son de color blanco y brillan al 60% de intensidad.
+     * @return true si es la configuración
+     */
+    public boolean modoLectura(){
         boolean res = true;
+        Set<Integer> indices = new HashSet<>();
+        // Luces que tienen que estar encendidas: primera y tercera
+        indices.add(0);
+        indices.add(2);
+        for(int i = 0; res && i < modelo.getLuces().size(); i++){
+            Luz l = modelo.getLuces().get(i);
+            if(indices.contains(i)){
+                if(l.getColor().getColorImg() != ColorLuz.COLOR_BLANCA) res = false;
+                if(l.getIntensidad() != 60) res = false;
+                if(!l.estaEncendida()) res = false;
+            }else{
+                // Las demás tienen que estar apagadas
+                if(l.estaEncendida()) res = false;
+            }
+        }
         
-        if(modelo.getLuces().get(0).estaEncendida()!=true)
-            res = false;
-        if(modelo.getLuces().get(0).getColor()!=new ColorLuz(ColorLuz.COLOR_BLANCA))
-            res = false;
-        if(modelo.getLuces().get(0).getIntensidad()!=60)
-            res = false;
-        
-        if(modelo.getLuces().get(2).estaEncendida()!=true)
-            res = false;
-        if(modelo.getLuces().get(2).getColor()!=new ColorLuz(ColorLuz.COLOR_BLANCA))
-            res = false;
-        if(modelo.getLuces().get(2).getIntensidad()!=60)
-            res = false;
         return res;
     }
+    
 }

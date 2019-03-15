@@ -11,6 +11,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+
 
 /**
  * Se encarga de mostrar los datos al usuario.
@@ -69,7 +71,7 @@ public class PanelVista extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        modosSeleccion.setBackground(new java.awt.Color(204, 255, 255));
+        modosSeleccion.setBackground(new java.awt.Color(204, 204, 204));
         modosSeleccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
         modosSeleccion.setLayout(new java.awt.GridBagLayout());
 
@@ -83,14 +85,15 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
         modosSeleccion.add(tituloModos, gridBagConstraints);
 
-        botonesModos.setBackground(new java.awt.Color(204, 255, 255));
+        botonesModos.setBackground(new java.awt.Color(204, 204, 204));
         botonesModos.setLayout(new java.awt.GridLayout(1, 4, 2, 0));
 
-        btnTodasEnc.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnTodasEnc.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnTodasEnc.setText("Todas encendidas");
-        btnTodasEnc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnTodasEnc.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 4, true));
         btnTodasEnc.setBorderPainted(false);
         btnTodasEnc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTodasEnc.setFocusPainted(false);
         btnTodasEnc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTodasEncActionPerformed(evt);
@@ -98,11 +101,12 @@ public class PanelVista extends javax.swing.JFrame {
         });
         botonesModos.add(btnTodasEnc);
 
-        btnTodasApa.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnTodasApa.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnTodasApa.setText("Todas apagadas");
-        btnTodasApa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnTodasApa.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 4, true));
         btnTodasApa.setBorderPainted(false);
         btnTodasApa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTodasApa.setFocusPainted(false);
         btnTodasApa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTodasApaActionPerformed(evt);
@@ -110,11 +114,12 @@ public class PanelVista extends javax.swing.JFrame {
         });
         botonesModos.add(btnTodasApa);
 
-        btnAmbiente.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnAmbiente.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnAmbiente.setText("Ambiente");
-        btnAmbiente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAmbiente.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 4, true));
         btnAmbiente.setBorderPainted(false);
         btnAmbiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAmbiente.setFocusPainted(false);
         btnAmbiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAmbienteActionPerformed(evt);
@@ -122,11 +127,12 @@ public class PanelVista extends javax.swing.JFrame {
         });
         botonesModos.add(btnAmbiente);
 
-        btnLectura.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnLectura.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnLectura.setText("Lectura");
-        btnLectura.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnLectura.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 4, true));
         btnLectura.setBorderPainted(false);
         btnLectura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLectura.setFocusPainted(false);
         btnLectura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLecturaActionPerformed(evt);
@@ -145,7 +151,7 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 30, 0);
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
         getContentPane().add(modosSeleccion, gridBagConstraints);
 
         luces.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Selección de luz", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 24))); // NOI18N
@@ -176,6 +182,7 @@ public class PanelVista extends javax.swing.JFrame {
         tituloEstado.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         tituloEstado.setText("Estado:");
 
+        textoEncApa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         textoEncApa.setText("Encendido/Apagado");
 
         casillaEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -191,8 +198,9 @@ public class PanelVista extends javax.swing.JFrame {
         });
 
         tituloColor.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        tituloColor.setText("Color");
+        tituloColor.setText("Color:");
 
+        selectorColor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         selectorColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amarillo", "Azul", "Verde", "Naranja", "Blanca" }));
         selectorColor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         selectorColor.addActionListener(new java.awt.event.ActionListener() {
@@ -239,17 +247,21 @@ public class PanelVista extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlesLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tituloColor)
-                            .addComponent(tituloEstado)
-                            .addComponent(tituloLuz))
+                            .addComponent(tituloLuz)
+                            .addGroup(controlesLayout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(tituloEstado))
+                            .addGroup(controlesLayout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(tituloColor)))
                         .addGap(34, 34, 34)
-                        .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(controlesLayout.createSequentialGroup()
                                 .addComponent(textoEncApa)
                                 .addGap(18, 18, 18)
-                                .addComponent(casillaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(nombreLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(selectorColor, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(casillaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(selectorColor, 0, 171, Short.MAX_VALUE)
+                            .addComponent(nombreLuz)))
                     .addGroup(controlesLayout.createSequentialGroup()
                         .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(controlesLayout.createSequentialGroup()
@@ -268,24 +280,24 @@ public class PanelVista extends javax.swing.JFrame {
                 .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tituloLuz)
                     .addComponent(nombreLuz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(33, 33, 33)
+                .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(casillaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(textoEncApa)
-                        .addComponent(tituloEstado))
-                    .addComponent(casillaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addComponent(tituloEstado)))
+                .addGap(33, 33, 33)
                 .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(selectorColor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tituloColor))
                 .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(controlesLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(53, 53, 53)
                         .addComponent(tituloIntensidad)
                         .addGap(30, 30, 30)
                         .addComponent(deslizadorIntensidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(controlesLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(29, 29, 29)
                         .addComponent(previsColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -312,7 +324,6 @@ public class PanelVista extends javax.swing.JFrame {
         controlador.procesaColorCambiado();
     }//GEN-LAST:event_selectorColorActionPerformed
 
-    // Poner por encima de los eventos de configu.
     /**********************************************
      *              MODOS DE SELECCIÓN            *
      **********************************************/
@@ -336,8 +347,6 @@ public class PanelVista extends javax.swing.JFrame {
         controlador.procesaSeleccion();
     }//GEN-LAST:event_btnLecturaActionPerformed
 
-    
-    // PONER CON LAS OTRAS
     private void casillaEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casillaEstadoActionPerformed
         controlador.procesaCambioEstado();
     }//GEN-LAST:event_casillaEstadoActionPerformed
@@ -377,6 +386,10 @@ public class PanelVista extends javax.swing.JFrame {
             btnLuz.setText(luz.getNombre());
             btnLuz.setVerticalTextPosition(SwingConstants.BOTTOM);
             btnLuz.setHorizontalTextPosition(SwingConstants.CENTER);
+            btnLuz.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+            btnLuz.setFocusPainted(false);
+            btnLuz.setBorder(new LineBorder(new java.awt.Color(102, 102, 102), 4, true));
+            btnLuz.setBorderPainted(false);
             btnLuz.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     seleccionaLuz(luz);
@@ -407,16 +420,28 @@ public class PanelVista extends javax.swing.JFrame {
     
     
     /********** PANEL DE SELECCIÓN DE MODOS **********/
+    /**
+     * Devuelve el modo de selección actual.
+     * @return Modo actual
+     */
     public int getSeleccion(){
         return MODO_SELECCION_ACTUAL;
     }
     
     /********** PANEL DE SELECCIÓN DE LUZ **********/    
+    /**
+     * Actualiza el nombre de la luz deseada en el panel de botones de luces.
+     * @param l Luz a actualizar
+     */
     public void actualizaNombreLuz(Luz l){
         int i = modelo.getLuces().indexOf(l);
         botonesLuces.get(i).setText(l.getNombre());
     }
     
+    /**
+     * Actualiza el icono de la luz deseada en el panel de botones de luces.
+     * @param l Luz a actualizar
+     */
     public void actualizaIconoLuz(Luz l) {
         int i = modelo.getLuces().indexOf(l);
         JButton btn = botonesLuces.get(i);
@@ -428,21 +453,50 @@ public class PanelVista extends javax.swing.JFrame {
         }
     }
     
-    public void seleccionaLuz(Luz l){
+    /**
+     * Una luz ha sido marcada por el usuario y notifica al controlador.
+     * @param l Luz seleccionada
+     */
+    private void seleccionaLuz(Luz l){
         LUZ_SELECCIONADA_ACTUAL = l;
         controlador.seleccionaLuz();
     }
     
+    /**
+     * Desmarca todas las luces del panel de selección de luz.
+     */
+    private void desmarcaLuces(){
+        for(JButton b : botonesLuces){
+            b.setBorderPainted(false);
+        }
+    }
+    
+    /**
+     * Marca la luz actual en el panel de selección de luz.
+     */
+    public void marcaLuz(){
+        desmarcaLuces();
+        int i = modelo.getLuces().indexOf(modelo.getSeleccionadaActual());
+        botonesLuces.get(i).setBorderPainted(true);
+    }
+    
+    /**
+     * Devuelve la Luz que ha sido seleccionada en el panel de selección
+     * de luces.
+     * @return Luz seleccionada
+     */
     public Luz getSeleccionadaActual(){
         return LUZ_SELECCIONADA_ACTUAL;
     }
     
+    /**
+     * Actualiza los valores y aspectos de todas las luces.
+     */
     public void actualizaLuces() {
         for(Luz l : modelo.getLuces()){
             int i = modelo.getLuces().indexOf(l);
             // Actualiza el icono
             actualizaIconoLuz(l);
-            actualizaNombreLuz(l);
             actualizaNivelIntensidad(l);
         }
         
@@ -450,6 +504,10 @@ public class PanelVista extends javax.swing.JFrame {
     }
     
     /********** PANEL DE CONFIGURACIÓN **********/
+    /**
+     * Actualiza la configuración de la luz actualmente seleccionada, en el
+     * panel de configuración.
+     */
     public void actualizaConfiguracion(){
         Luz actual = modelo.getSeleccionadaActual();
         nombreLuz.setText(actual.getNombre());
@@ -458,18 +516,36 @@ public class PanelVista extends javax.swing.JFrame {
         actualizaNivelIntensidad(actual);
     }
     
+    /**
+     * Devuelve el contenido del editor de nombre del panel de configuración.
+     * @return Nombre actual
+     */
     public String getNombreLuz(){
         return nombreLuz.getText();
     }
     
+    /**
+     * Devuelve el estado de la casilla de encendido/apagado en el panel
+     * de configuración.
+     * @return true si está marcado
+     */
     public boolean getEstadoLuz(){
         return casillaEstado.isSelected();
     }
     
+    /**
+     * Devuelve el índice de la opción seleccionada en el selector de colores
+     * del panel de configuración.
+     * @return Indice de la opción seleccionada
+     */
     public int getColorLuz(){
         return selectorColor.getSelectedIndex();
     }
     
+    /**
+     * Actualiza el color de la luz en el previsualizador.
+     * @param l Luz deseada
+     */
     public void actualizaColorLuz(Luz l){
         // Muestra la previsualización del color
         /**
@@ -482,29 +558,60 @@ public class PanelVista extends javax.swing.JFrame {
          * No conseguimos hacerlo, pues como viste ocurría un error extraño.
          */
         previsColor.setBackground(new Color(l.getColor().getColorHex()));
-        
     }
     
+    /**
+     * Actualiza el nivel de intensidad del deslizador.
+     * @param l Luz deseada
+     */
     public void actualizaNivelIntensidad(Luz l){
         int intensidad = l.getIntensidad();
         deslizadorIntensidad.setValue(intensidad);
         actualizaColorLuz(l);
     }
     
+    /**
+     * Devuelve el nivel de intensidad que marca el deslizador.
+     * @return Nivel de intensidad del deslizador
+     */
     public int getNivelIntensidad(){
         return deslizadorIntensidad.getValue();
     }
+    
+    /**
+     * Desmarca el borde de todas los botones de modo.
+     */
+    public void desmarcarTodas(){
+        btnTodasEnc.setBorderPainted(false);
+        btnTodasApa.setBorderPainted(false);
+        btnAmbiente.setBorderPainted(false);
+        btnLectura.setBorderPainted(false);
+    }
+    
+    /**
+     * Marca el botón de "Todas encendidas".
+     */
     public void marcarTodasEncendidas(){
         btnTodasEnc.setBorderPainted(true);
     }
     
+    /**
+     * Marca el botón de "Todas apagadas".
+     */
     public void marcarTodasApagadas(){
         btnTodasApa.setBorderPainted(true);
     }
+    
+    /**
+     * Marca el botón de "Ambiente".
+     */
     public void marcarAmbiente(){
         btnAmbiente.setBorderPainted(true);
     }
     
+    /**
+     * Marca el botón de "Lectura".
+     */
     public void marcarLectura(){
         btnLectura.setBorderPainted(true);
     }

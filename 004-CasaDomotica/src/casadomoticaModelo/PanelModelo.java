@@ -22,7 +22,7 @@ public class PanelModelo {
     private Luz seleccionadaActual;
     
     public PanelModelo(){
-        
+        luces = new ArrayList<>();
     }
     
     
