@@ -138,6 +138,15 @@ public final class PanelControlador {
     public void cambiaValorIntensidad(){
         modelo.getSeleccionadaActual().setIntensidad(vista.getNivelIntensidad());
         vista.actualizaNivelIntensidad(modelo.getSeleccionadaActual());
+        if(modoTodasEncendidas()==true)
+            vista.marcarTodasEncendidas();
+        if(modoTodasApagadas()==true)
+            vista.marcarTodasApagadas();
+        if(modoAmbiente()==true)
+            vista.marcarAmbiente();
+        if(modoLectura()==true)
+            vista.marcarLectura();
+        
     }
 
     /**
@@ -154,6 +163,14 @@ public final class PanelControlador {
     void procesaCambioEstado() {
         modelo.getSeleccionadaActual().setEncendida(vista.getEstadoLuz());
         vista.actualizaIconoLuz(modelo.getSeleccionadaActual());
+         if(modoTodasEncendidas()==true)
+            vista.marcarTodasEncendidas();
+        if(modoTodasApagadas()==true)
+            vista.marcarTodasApagadas();
+        if(modoAmbiente()==true)
+            vista.marcarAmbiente();
+        if(modoLectura()==true)
+            vista.marcarLectura();
     }
     
     /**
@@ -163,6 +180,85 @@ public final class PanelControlador {
         modelo.getSeleccionadaActual().setColor(new ColorLuz(vista.getColorLuz()));
         vista.actualizaColorLuz(modelo.getSeleccionadaActual());
         vista.actualizaIconoLuz(modelo.getSeleccionadaActual());
+         if(modoTodasEncendidas()==true)
+            vista.marcarTodasEncendidas();
+        if(modoTodasApagadas()==true)
+            vista.marcarTodasApagadas();
+        if(modoAmbiente()==true)
+            vista.marcarAmbiente();
+        if(modoLectura()==true)
+            vista.marcarLectura();
     }
     
+    public boolean modoTodasEncendidas(){
+        boolean res = true;
+        
+        for(Luz l : modelo.getLuces()){
+            if(l.getColor()!=new ColorLuz(ColorLuz.COLOR_BLANCA)){
+                res = false;
+                break;
+            }
+            if(l.getIntensidad()!=100){
+                res = false;
+                break;
+            }
+            if(l.estaEncendida()==false){
+                res = false;
+                break;
+                }
+        }
+        
+        return res;
+    }
+    
+    public boolean modoTodasApagadas(){
+        boolean res = true;
+        
+        for(Luz l : modelo.getLuces()){
+            if(l.estaEncendida()==true){
+                res = false;
+                break;
+                }
+        }
+        
+        return res;
+    }
+     public boolean modoAmbiente(){
+        boolean res = true;
+        
+        for(Luz l : modelo.getLuces()){
+            if(l.getColor()!=new ColorLuz(ColorLuz.COLOR_AMARILLO)){
+                res = false;
+                break;
+            }
+            if(l.getIntensidad()!=30){
+                res = false;
+                break;
+            }
+            if(l.estaEncendida()==false){
+                res = false;
+                break;
+                }
+        }
+        
+        return res;
+    }
+      public boolean modoLectura(){
+        boolean res = true;
+        
+        if(modelo.getLuces().get(0).estaEncendida()!=true)
+            res = false;
+        if(modelo.getLuces().get(0).getColor()!=new ColorLuz(ColorLuz.COLOR_BLANCA))
+            res = false;
+        if(modelo.getLuces().get(0).getIntensidad()!=60)
+            res = false;
+        
+        if(modelo.getLuces().get(2).estaEncendida()!=true)
+            res = false;
+        if(modelo.getLuces().get(2).getColor()!=new ColorLuz(ColorLuz.COLOR_BLANCA))
+            res = false;
+        if(modelo.getLuces().get(2).getIntensidad()!=60)
+            res = false;
+        return res;
+    }
 }

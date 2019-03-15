@@ -88,6 +88,8 @@ public class PanelVista extends javax.swing.JFrame {
 
         btnTodasEnc.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnTodasEnc.setText("Todas encendidas");
+        btnTodasEnc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnTodasEnc.setBorderPainted(false);
         btnTodasEnc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTodasEnc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +100,8 @@ public class PanelVista extends javax.swing.JFrame {
 
         btnTodasApa.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnTodasApa.setText("Todas apagadas");
+        btnTodasApa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnTodasApa.setBorderPainted(false);
         btnTodasApa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTodasApa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +112,8 @@ public class PanelVista extends javax.swing.JFrame {
 
         btnAmbiente.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnAmbiente.setText("Ambiente");
+        btnAmbiente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAmbiente.setBorderPainted(false);
         btnAmbiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAmbiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +124,8 @@ public class PanelVista extends javax.swing.JFrame {
 
         btnLectura.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnLectura.setText("Lectura");
+        btnLectura.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnLectura.setBorderPainted(false);
         btnLectura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLectura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -486,7 +494,20 @@ public class PanelVista extends javax.swing.JFrame {
     public int getNivelIntensidad(){
         return deslizadorIntensidad.getValue();
     }
+    public void marcarTodasEncendidas(){
+        btnTodasEnc.setBorderPainted(true);
+    }
     
+    public void marcarTodasApagadas(){
+        btnTodasApa.setBorderPainted(true);
+    }
+    public void marcarAmbiente(){
+        btnAmbiente.setBorderPainted(true);
+    }
+    
+    public void marcarLectura(){
+        btnLectura.setBorderPainted(true);
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botonesModos;
