@@ -24,7 +24,8 @@ public class PanelVista extends javax.swing.JFrame {
     
     private final ArrayList<JButton> botonesLuces;
     
-    private int SELECCION_ACTUAL = -1;
+    private int MODO_SELECCION_ACTUAL = -1;
+    private Luz LUZ_SELECCIONADA_ACTUAL;
     
     public PanelVista() {
         initComponents();
@@ -184,7 +185,7 @@ public class PanelVista extends javax.swing.JFrame {
         tituloColor.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         tituloColor.setText("Color");
 
-        selectorColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amarillo", "Azul", "Blanco", "Naranja", "Verde" }));
+        selectorColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amarillo", "Azul", "Verde", "Naranja", "Blanca" }));
         selectorColor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         selectorColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -300,7 +301,7 @@ public class PanelVista extends javax.swing.JFrame {
     }//GEN-LAST:event_deslizadorIntensidadStateChanged
 
     private void selectorColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorColorActionPerformed
-        // TODO add your handling code here:
+        controlador.procesaColorCambiado();
     }//GEN-LAST:event_selectorColorActionPerformed
 
     // Poner por encima de los eventos de configu.
@@ -308,22 +309,22 @@ public class PanelVista extends javax.swing.JFrame {
      *              MODOS DE SELECCIÓN            *
      **********************************************/
     private void btnTodasEncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodasEncActionPerformed
-        SELECCION_ACTUAL = PanelModelo.CONFIG_TODAS_ENCENDIDAS;
+        MODO_SELECCION_ACTUAL = PanelModelo.CONFIG_TODAS_ENCENDIDAS;
         controlador.procesaSeleccion();
     }//GEN-LAST:event_btnTodasEncActionPerformed
 
     private void btnTodasApaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodasApaActionPerformed
-        SELECCION_ACTUAL = PanelModelo.CONFIG_TODAS_APAGADAS;
+        MODO_SELECCION_ACTUAL = PanelModelo.CONFIG_TODAS_APAGADAS;
         controlador.procesaSeleccion();
     }//GEN-LAST:event_btnTodasApaActionPerformed
 
     private void btnAmbienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbienteActionPerformed
-        SELECCION_ACTUAL = PanelModelo.CONFIG_AMBIENTE;
+        MODO_SELECCION_ACTUAL = PanelModelo.CONFIG_AMBIENTE;
         controlador.procesaSeleccion();
     }//GEN-LAST:event_btnAmbienteActionPerformed
 
     private void btnLecturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLecturaActionPerformed
-        SELECCION_ACTUAL = PanelModelo.CONFIG_LECTURA;
+        MODO_SELECCION_ACTUAL = PanelModelo.CONFIG_LECTURA;
         controlador.procesaSeleccion();
     }//GEN-LAST:event_btnLecturaActionPerformed
 
@@ -370,7 +371,7 @@ public class PanelVista extends javax.swing.JFrame {
             btnLuz.setHorizontalTextPosition(SwingConstants.CENTER);
             btnLuz.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    controlador.seleccionaLuz(luz);
+                    seleccionaLuz(luz);
                 }
             });
             gbl.setConstraints(btnLuz, c);
@@ -399,26 +400,45 @@ public class PanelVista extends javax.swing.JFrame {
     
     /********** PANEL DE SELECCIÓN DE MODOS **********/
     public int getSeleccion(){
-        return SELECCION_ACTUAL;
+        return MODO_SELECCION_ACTUAL;
     }
     
     /********** PANEL DE SELECCIÓN DE LUZ **********/    
-    public void actualizaNombreLuz(){
-        Luz actual = modelo.getSeleccionadaActual();
-        int i = modelo.getLuces().indexOf(actual);
-        botonesLuces.get(i).setText(actual.getNombre());
+    public void actualizaNombreLuz(Luz l){
+        int i = modelo.getLuces().indexOf(l);
+        botonesLuces.get(i).setText(l.getNombre());
     }
     
-    public void actualizaIconosLuces() {
-        Luz actual = modelo.getSeleccionadaActual();
-        int i = modelo.getLuces().indexOf(actual);
+    public void actualizaIconoLuz(Luz l) {
+        int i = modelo.getLuces().indexOf(l);
         JButton btn = botonesLuces.get(i);
-        if(actual.estaEncendida()){
+        if(l.estaEncendida()){
             btn.setIcon(new ImageIcon(getClass().getResource(
-                          ColorLuz.getIconoColor(actual.getColor().getColorImg()))));
+                          ColorLuz.getIconoColor(l.getColor().getColorImg()))));
         }else{
             btn.setIcon(new ImageIcon(getClass().getResource("/casadomoticaRecursos/bomb_apagada.jpg")));
         }
+    }
+    
+    public void seleccionaLuz(Luz l){
+        LUZ_SELECCIONADA_ACTUAL = l;
+        controlador.seleccionaLuz();
+    }
+    
+    public Luz getSeleccionadaActual(){
+        return LUZ_SELECCIONADA_ACTUAL;
+    }
+    
+    public void actualizaLuces() {
+        for(Luz l : modelo.getLuces()){
+            int i = modelo.getLuces().indexOf(l);
+            // Actualiza el icono
+            actualizaIconoLuz(l);
+            actualizaNombreLuz(l);
+            actualizaNivelIntensidad(l);
+        }
+        
+        actualizaConfiguracion();
     }
     
     /********** PANEL DE CONFIGURACIÓN **********/
@@ -426,8 +446,8 @@ public class PanelVista extends javax.swing.JFrame {
         Luz actual = modelo.getSeleccionadaActual();
         nombreLuz.setText(actual.getNombre());
         casillaEstado.setSelected(actual.estaEncendida());
-        // color
-        setNivelIntensidad();
+        selectorColor.setSelectedIndex(actual.getColor().getColorImg());
+        actualizaNivelIntensidad(actual);
     }
     
     public String getNombreLuz(){
@@ -438,10 +458,11 @@ public class PanelVista extends javax.swing.JFrame {
         return casillaEstado.isSelected();
     }
     
-    public void setNivelIntensidad(){
-        Luz actual = modelo.getSeleccionadaActual();
-        int intensidad = actual.getIntensidad();
-        deslizadorIntensidad.setValue(intensidad);
+    public int getColorLuz(){
+        return selectorColor.getSelectedIndex();
+    }
+    
+    public void actualizaColorLuz(Luz l){
         // Muestra la previsualización del color
         /**
          * IMPORTANTE
@@ -452,7 +473,14 @@ public class PanelVista extends javax.swing.JFrame {
          * 
          * No conseguimos hacerlo, pues como viste ocurría un error extraño.
          */
-        previsColor.setBackground(new Color(actual.getColor().getColorHex()));
+        previsColor.setBackground(new Color(l.getColor().getColorHex()));
+        
+    }
+    
+    public void actualizaNivelIntensidad(Luz l){
+        int intensidad = l.getIntensidad();
+        deslizadorIntensidad.setValue(intensidad);
+        actualizaColorLuz(l);
     }
     
     public int getNivelIntensidad(){

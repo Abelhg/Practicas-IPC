@@ -1,29 +1,24 @@
 1
 100
-fff000
 0
 true
 
 2
 40
-00a7e3
 1
 false
 
 3
 100
-b8e516
 2
 false
 
 4
 80
-ffca0a
 3
 true
 
 5
 100
-fafafa
 4
 true

@@ -30,16 +30,16 @@ public class ColorLuz {
         this.colorImg = colorImg;
         switch(colorImg){
             case COLOR_AMARILLO:
-                colorHex = Long.decode("#fff000").intValue();
+                colorHex = Long.decode("#f9f230").intValue();
                 break;
             case COLOR_AZUL:
-                colorHex = Long.decode("#00a7e3").intValue();
+                colorHex = Long.decode("#37a8f6").intValue();
                 break;
             case COLOR_VERDE:
-                colorHex = Long.decode("#b8e516").intValue();
+                colorHex = Long.decode("#38d04a").intValue();
                 break;
             case COLOR_NARANJA:
-                colorHex = Long.decode("#ffca0a").intValue();
+                colorHex = Long.decode("#ff7d3c").intValue();
                 break;
             case COLOR_BLANCA:
                 colorHex = Long.decode("#fafafa").intValue();

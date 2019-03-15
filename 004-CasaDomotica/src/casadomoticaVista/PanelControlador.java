@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Trata los eventos que le notifica la vista,
@@ -45,7 +47,6 @@ public final class PanelControlador {
                     // Lee datos de las luces
                     String nombre = br.readLine();
                     int intensidad = Integer.parseInt(br.readLine());
-                    int color = (int) Long.parseLong(br.readLine(), 16);
                     int colorImg = Integer.parseInt(br.readLine());
                     boolean encendida = Boolean.parseBoolean(br.readLine());
                     luces.add(new Luz(nombre, intensidad, new ColorLuz(colorImg), encendida));
@@ -87,17 +88,13 @@ public final class PanelControlador {
                     l.setIntensidad(100);
                     l.setColor(new ColorLuz(ColorLuz.COLOR_BLANCA));
                 }
-                System.out.println("[DEBUG] Selección TODAS ENCENDIDAS");
                 break;
             case PanelModelo.CONFIG_TODAS_APAGADAS:
                 for(Luz l : modelo.getLuces()){
                     l.setEncendida(false);
-                    l.setIntensidad(0);
                 }
-                System.out.println("[DEBUG] Selección TODAS APAGADAS");
                 break;
             case PanelModelo.CONFIG_AMBIENTE:
-                System.out.println("[DEBUG] Selección LUZ AMBIENTE");
                 for(Luz l : modelo.getLuces()){
                     l.setEncendida(true);
                     l.setIntensidad(30);
@@ -105,20 +102,33 @@ public final class PanelControlador {
                 }
                 break;
             case PanelModelo.CONFIG_LECTURA:
-                modelo.getLuces().get(0).setEncendida(true);
-                modelo.getLuces().get(0).setIntensidad(60);
-                modelo.getLuces().get(0).setColor(new ColorLuz(ColorLuz.COLOR_BLANCA));
-                System.out.println("[DEBUG] Selección LUZ DE LECTURA");
+                Set<Integer> indices = new HashSet<Integer>();
+                // Luces a encender: primera y tercera
+                indices.add(0);
+                indices.add(2);
+                for(int i = 0; i < modelo.getLuces().size(); i++){
+                    if(indices.contains(i)){
+                        // Se enciende con la configuración deseada
+                        modelo.getLuces().get(i).setEncendida(true);
+                        modelo.getLuces().get(i).setIntensidad(30);
+                        modelo.getLuces().get(i).setColor(new ColorLuz(ColorLuz.COLOR_AMARILLO));
+                    }else{
+                        // Se apagan
+                        modelo.getLuces().get(i).setEncendida(false);
+                    }
+                }
                 break;
         }
+        
+        vista.actualizaLuces();
     }
     
     /**
      * Procesa el evento de selección de luz individual.
      * @param l
      */
-    public void seleccionaLuz(Luz l){
-        modelo.setSeleccionadaActual(l);
+    public void seleccionaLuz(){
+        modelo.setSeleccionadaActual(vista.getSeleccionadaActual());
         vista.actualizaConfiguracion();
     }
     
@@ -127,7 +137,7 @@ public final class PanelControlador {
      */
     public void cambiaValorIntensidad(){
         modelo.getSeleccionadaActual().setIntensidad(vista.getNivelIntensidad());
-        vista.setNivelIntensidad();
+        vista.actualizaNivelIntensidad(modelo.getSeleccionadaActual());
     }
 
     /**
@@ -135,7 +145,7 @@ public final class PanelControlador {
      */
     void procesaNombreCambiado() {
         modelo.getSeleccionadaActual().setNombre(vista.getNombreLuz());
-        vista.actualizaNombreLuz();
+        vista.actualizaNombreLuz(modelo.getSeleccionadaActual());
     }
 
     /**
@@ -143,7 +153,16 @@ public final class PanelControlador {
      */
     void procesaCambioEstado() {
         modelo.getSeleccionadaActual().setEncendida(vista.getEstadoLuz());
-        vista.actualizaIconosLuces();
+        vista.actualizaIconoLuz(modelo.getSeleccionadaActual());
+    }
+    
+    /**
+     * Procesa el evento de cambio de color de la luz.
+     */
+    void procesaColorCambiado() {
+        modelo.getSeleccionadaActual().setColor(new ColorLuz(vista.getColorLuz()));
+        vista.actualizaColorLuz(modelo.getSeleccionadaActual());
+        vista.actualizaIconoLuz(modelo.getSeleccionadaActual());
     }
     
 }
