@@ -1,11 +1,10 @@
 package casadomoticaModelo;
 
-import javax.annotation.Resources;
-import javax.swing.ImageIcon;
-
 /**
- *
- * @author Zarkrosh
+ * Representa un color de la luz.
+ * 
+ * @author abeherr
+ * @author hechila
  */
 public class ColorLuz {
     
@@ -27,9 +26,25 @@ public class ColorLuz {
     private int colorHex;
     private int colorImg;
     
-    public ColorLuz(int colorHex, int colorImg){
-        this.colorHex = colorHex;
+    public ColorLuz(int colorImg){
         this.colorImg = colorImg;
+        switch(colorImg){
+            case COLOR_AMARILLO:
+                colorHex = Long.decode("#fff000").intValue();
+                break;
+            case COLOR_AZUL:
+                colorHex = Long.decode("#00a7e3").intValue();
+                break;
+            case COLOR_VERDE:
+                colorHex = Long.decode("#b8e516").intValue();
+                break;
+            case COLOR_NARANJA:
+                colorHex = Long.decode("#ffca0a").intValue();
+                break;
+            case COLOR_BLANCA:
+                colorHex = Long.decode("#fafafa").intValue();
+                break;
+        }
     }
 
     public int getColorImg() {
@@ -48,4 +63,6 @@ public class ColorLuz {
     public static String getIconoColor(int color){
         return paths[color];
     }
+    
 }
+

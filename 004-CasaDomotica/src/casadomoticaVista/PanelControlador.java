@@ -48,7 +48,7 @@ public final class PanelControlador {
                     int color = (int) Long.parseLong(br.readLine(), 16);
                     int colorImg = Integer.parseInt(br.readLine());
                     boolean encendida = Boolean.parseBoolean(br.readLine());
-                    luces.add(new Luz(nombre, intensidad, new ColorLuz(color, colorImg), encendida));
+                    luces.add(new Luz(nombre, intensidad, new ColorLuz(colorImg), encendida));
                     br.readLine(); // Siguiente sección
                 }
             }
@@ -78,21 +78,36 @@ public final class PanelControlador {
      * 3) Luz ambiental: todas encendidas al 30% de intensidad y color amarillo.
      * 4) Luz de lectura: la primera y la tercera luz están encendidas al 60%
      *     de intensidad y color blanco. El resto están apagadas.
-     * 
-     * @param seleccion Configuración elegida
      */
-    public void procesaSeleccion(int seleccion){
-        switch(seleccion){
+    public void procesaSeleccion(){
+        switch(vista.getSeleccion()){
             case PanelModelo.CONFIG_TODAS_ENCENDIDAS:
+                for(Luz l : modelo.getLuces()){
+                    l.setEncendida(true);
+                    l.setIntensidad(100);
+                    l.setColor(new ColorLuz(ColorLuz.COLOR_BLANCA));
+                }
                 System.out.println("[DEBUG] Selección TODAS ENCENDIDAS");
                 break;
             case PanelModelo.CONFIG_TODAS_APAGADAS:
+                for(Luz l : modelo.getLuces()){
+                    l.setEncendida(false);
+                    l.setIntensidad(0);
+                }
                 System.out.println("[DEBUG] Selección TODAS APAGADAS");
                 break;
             case PanelModelo.CONFIG_AMBIENTE:
                 System.out.println("[DEBUG] Selección LUZ AMBIENTE");
+                for(Luz l : modelo.getLuces()){
+                    l.setEncendida(true);
+                    l.setIntensidad(30);
+                    l.setColor(new ColorLuz(ColorLuz.COLOR_AMARILLO));
+                }
                 break;
             case PanelModelo.CONFIG_LECTURA:
+                modelo.getLuces().get(0).setEncendida(true);
+                modelo.getLuces().get(0).setIntensidad(60);
+                modelo.getLuces().get(0).setColor(new ColorLuz(ColorLuz.COLOR_BLANCA));
                 System.out.println("[DEBUG] Selección LUZ DE LECTURA");
                 break;
         }

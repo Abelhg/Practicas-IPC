@@ -24,6 +24,8 @@ public class PanelVista extends javax.swing.JFrame {
     
     private final ArrayList<JButton> botonesLuces;
     
+    private int SELECCION_ACTUAL = -1;
+    
     public PanelVista() {
         initComponents();
         botonesLuces = new ArrayList<>();
@@ -58,7 +60,7 @@ public class PanelVista extends javax.swing.JFrame {
         selectorColor = new javax.swing.JComboBox<>();
         tituloIntensidad = new javax.swing.JLabel();
         deslizadorIntensidad = new javax.swing.JSlider();
-        previsColor = new javax.swing.JLabel();
+        previsColor = new javax.swing.JPanel();
 
         jLabel5.setText("jLabel5");
 
@@ -205,38 +207,50 @@ public class PanelVista extends javax.swing.JFrame {
         });
 
         previsColor.setBackground(new java.awt.Color(255, 255, 255));
-        previsColor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        previsColor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         previsColor.setPreferredSize(new java.awt.Dimension(104, 104));
+
+        javax.swing.GroupLayout previsColorLayout = new javax.swing.GroupLayout(previsColor);
+        previsColor.setLayout(previsColorLayout);
+        previsColorLayout.setHorizontalGroup(
+            previsColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 102, Short.MAX_VALUE)
+        );
+        previsColorLayout.setVerticalGroup(
+            previsColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 102, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout controlesLayout = new javax.swing.GroupLayout(controles);
         controles.setLayout(controlesLayout);
         controlesLayout.setHorizontalGroup(
             controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tituloColor)
-                    .addComponent(tituloEstado)
-                    .addComponent(tituloLuz))
-                .addGap(34, 34, 34)
-                .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(controlesLayout.createSequentialGroup()
-                        .addComponent(textoEncApa)
-                        .addGap(18, 18, 18)
-                        .addComponent(casillaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nombreLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectorColor, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
             .addGroup(controlesLayout.createSequentialGroup()
                 .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlesLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tituloColor)
+                            .addComponent(tituloEstado)
+                            .addComponent(tituloLuz))
+                        .addGap(34, 34, 34)
+                        .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(controlesLayout.createSequentialGroup()
+                                .addComponent(textoEncApa)
+                                .addGap(18, 18, 18)
+                                .addComponent(casillaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nombreLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(selectorColor, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(controlesLayout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(tituloIntensidad)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(deslizadorIntensidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(previsColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                        .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(controlesLayout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addComponent(tituloIntensidad))
+                            .addComponent(deslizadorIntensidad, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(previsColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         controlesLayout.setVerticalGroup(
             controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,7 +276,7 @@ public class PanelVista extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addComponent(deslizadorIntensidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(controlesLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(18, 18, 18)
                         .addComponent(previsColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -294,19 +308,23 @@ public class PanelVista extends javax.swing.JFrame {
      *              MODOS DE SELECCIÓN            *
      **********************************************/
     private void btnTodasEncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodasEncActionPerformed
-        controlador.procesaSeleccion(PanelModelo.CONFIG_TODAS_ENCENDIDAS);
+        SELECCION_ACTUAL = PanelModelo.CONFIG_TODAS_ENCENDIDAS;
+        controlador.procesaSeleccion();
     }//GEN-LAST:event_btnTodasEncActionPerformed
 
     private void btnTodasApaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodasApaActionPerformed
-        controlador.procesaSeleccion(PanelModelo.CONFIG_TODAS_APAGADAS);
+        SELECCION_ACTUAL = PanelModelo.CONFIG_TODAS_APAGADAS;
+        controlador.procesaSeleccion();
     }//GEN-LAST:event_btnTodasApaActionPerformed
 
     private void btnAmbienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbienteActionPerformed
-        controlador.procesaSeleccion(PanelModelo.CONFIG_AMBIENTE);
+        SELECCION_ACTUAL = PanelModelo.CONFIG_AMBIENTE;
+        controlador.procesaSeleccion();
     }//GEN-LAST:event_btnAmbienteActionPerformed
 
     private void btnLecturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLecturaActionPerformed
-        controlador.procesaSeleccion(PanelModelo.CONFIG_LECTURA);
+        SELECCION_ACTUAL = PanelModelo.CONFIG_LECTURA;
+        controlador.procesaSeleccion();
     }//GEN-LAST:event_btnLecturaActionPerformed
 
     
@@ -380,7 +398,9 @@ public class PanelVista extends javax.swing.JFrame {
     
     
     /********** PANEL DE SELECCIÓN DE MODOS **********/
-    // ...
+    public int getSeleccion(){
+        return SELECCION_ACTUAL;
+    }
     
     /********** PANEL DE SELECCIÓN DE LUZ **********/    
     public void actualizaNombreLuz(){
@@ -420,11 +440,19 @@ public class PanelVista extends javax.swing.JFrame {
     
     public void setNivelIntensidad(){
         Luz actual = modelo.getSeleccionadaActual();
-        Color c = new Color(actual.getColor().getColorHex());
         int intensidad = actual.getIntensidad();
         deslizadorIntensidad.setValue(intensidad);
         // Muestra la previsualización del color
-        previsColor.setBackground(new Color(c.getRed(), c.getGreen(), c.getBlue(), (intensidad * 255 / 100)));
+        /**
+         * IMPORTANTE
+         * 
+         * Como te comentamos en el laboratorio, quisimos implementar una
+         * previsualización teniendo en cuenta el alpha del fondo para mostrar
+         * el nivel de la intensidad de la luz a mayores.
+         * 
+         * No conseguimos hacerlo, pues como viste ocurría un error extraño.
+         */
+        previsColor.setBackground(new Color(actual.getColor().getColorHex()));
     }
     
     public int getNivelIntensidad(){
@@ -445,7 +473,7 @@ public class PanelVista extends javax.swing.JFrame {
     private javax.swing.JPanel luces;
     private javax.swing.JPanel modosSeleccion;
     private javax.swing.JTextField nombreLuz;
-    private javax.swing.JLabel previsColor;
+    private javax.swing.JPanel previsColor;
     private javax.swing.JComboBox<String> selectorColor;
     private javax.swing.JLabel textoEncApa;
     private javax.swing.JLabel tituloColor;
