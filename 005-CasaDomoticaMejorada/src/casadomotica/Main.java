@@ -1,6 +1,6 @@
 package casadomotica;
 
-import casadomoticaVista.PanelVista;
+import casadomoticaVista.VistaPrincipal;
 
 /**
  * Se encarga de ejecutar la aplicación.
@@ -11,7 +11,7 @@ import casadomoticaVista.PanelVista;
 public class Main {
 
     public static void main(String[] args) {
-        new PanelVista().setVisible(true);
+        new VistaPrincipal().setVisible(true);
     }
     
 }

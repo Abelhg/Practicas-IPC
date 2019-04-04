@@ -24,10 +24,10 @@ public final class PanelControlador {
     
     private final String PATH_LUCES = "/casadomoticaRecursos/luces.txt";
     
-    private final PanelVista vista;
+    private final VistaPrincipal vista;
     private final PanelModelo modelo;
     
-    public PanelControlador(PanelVista v, PanelModelo m){
+    public PanelControlador(VistaPrincipal v, PanelModelo m){
         vista = v;
         modelo = m;
         // Inicializa las luces
