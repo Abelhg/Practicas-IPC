@@ -57,8 +57,7 @@ public class PanelVista extends javax.swing.JFrame {
         tituloLuz = new javax.swing.JLabel();
         nombreLuz = new javax.swing.JTextField();
         tituloEstado = new javax.swing.JLabel();
-        textoEncApa = new javax.swing.JLabel();
-        casillaEstado = new javax.swing.JCheckBox();
+        botonEstado = new javax.swing.JToggleButton();
         tituloColor = new javax.swing.JLabel();
         selectorColor = new javax.swing.JComboBox<>();
         tituloIntensidad = new javax.swing.JLabel();
@@ -182,18 +181,12 @@ public class PanelVista extends javax.swing.JFrame {
         tituloEstado.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         tituloEstado.setText("Estado:");
 
-        textoEncApa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        textoEncApa.setText("Encendido/Apagado");
-
-        casillaEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        casillaEstado.setMargin(null);
-        casillaEstado.setMaximumSize(new java.awt.Dimension(33, 33));
-        casillaEstado.setMinimumSize(new java.awt.Dimension(33, 33));
-        casillaEstado.setName(""); // NOI18N
-        casillaEstado.setPreferredSize(new java.awt.Dimension(33, 33));
-        casillaEstado.addActionListener(new java.awt.event.ActionListener() {
+        botonEstado.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        botonEstado.setSelected(true);
+        botonEstado.setText("ENCENDIDA");
+        botonEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                casillaEstadoActionPerformed(evt);
+                botonEstadoActionPerformed(evt);
             }
         });
 
@@ -256,21 +249,18 @@ public class PanelVista extends javax.swing.JFrame {
                                 .addComponent(tituloColor)))
                         .addGap(34, 34, 34)
                         .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(controlesLayout.createSequentialGroup()
-                                .addComponent(textoEncApa)
-                                .addGap(18, 18, 18)
-                                .addComponent(casillaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(selectorColor, 0, 171, Short.MAX_VALUE)
-                            .addComponent(nombreLuz)))
+                            .addComponent(nombreLuz)
+                            .addComponent(botonEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(controlesLayout.createSequentialGroup()
                         .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(controlesLayout.createSequentialGroup()
                                 .addGap(72, 72, 72)
                                 .addComponent(tituloIntensidad))
                             .addComponent(deslizadorIntensidad, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGap(18, 27, Short.MAX_VALUE)
                         .addComponent(previsColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 10, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         controlesLayout.setVerticalGroup(
@@ -280,13 +270,11 @@ public class PanelVista extends javax.swing.JFrame {
                 .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tituloLuz)
                     .addComponent(nombreLuz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(casillaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textoEncApa)
-                        .addComponent(tituloEstado)))
-                .addGap(33, 33, 33)
+                .addGap(39, 39, 39)
+                .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tituloEstado)
+                    .addComponent(botonEstado))
+                .addGap(32, 32, 32)
                 .addGroup(controlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(selectorColor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tituloColor))
@@ -347,13 +335,13 @@ public class PanelVista extends javax.swing.JFrame {
         controlador.procesaSeleccion();
     }//GEN-LAST:event_btnLecturaActionPerformed
 
-    private void casillaEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casillaEstadoActionPerformed
-        controlador.procesaCambioEstado();
-    }//GEN-LAST:event_casillaEstadoActionPerformed
-
     private void nombreLuzKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreLuzKeyReleased
         controlador.procesaNombreCambiado();
     }//GEN-LAST:event_nombreLuzKeyReleased
+
+    private void botonEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEstadoActionPerformed
+        controlador.procesaCambioEstado();
+    }//GEN-LAST:event_botonEstadoActionPerformed
     
     /**********************************************
      *          LLAMADAS DEL CONTROLADOR          *
@@ -511,7 +499,8 @@ public class PanelVista extends javax.swing.JFrame {
     public void actualizaConfiguracion(){
         Luz actual = modelo.getSeleccionadaActual();
         nombreLuz.setText(actual.getNombre());
-        casillaEstado.setSelected(actual.estaEncendida());
+        botonEstado.setText(actual.estaEncendida() ? "ENCENDIDA" : "APAGADA");
+        botonEstado.setSelected(actual.estaEncendida());
         selectorColor.setSelectedIndex(actual.getColor().getColorImg());
         actualizaNivelIntensidad(actual);
     }
@@ -530,7 +519,7 @@ public class PanelVista extends javax.swing.JFrame {
      * @return true si está marcado
      */
     public boolean getEstadoLuz(){
-        return casillaEstado.isSelected();
+        return botonEstado.isSelected();
     }
     
     /**
@@ -617,12 +606,12 @@ public class PanelVista extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton botonEstado;
     private javax.swing.JPanel botonesModos;
     private javax.swing.JButton btnAmbiente;
     private javax.swing.JButton btnLectura;
     private javax.swing.JButton btnTodasApa;
     private javax.swing.JButton btnTodasEnc;
-    private javax.swing.JCheckBox casillaEstado;
     private javax.swing.JPanel controles;
     private javax.swing.JSlider deslizadorIntensidad;
     private javax.swing.JLabel jLabel5;
@@ -631,7 +620,6 @@ public class PanelVista extends javax.swing.JFrame {
     private javax.swing.JTextField nombreLuz;
     private javax.swing.JPanel previsColor;
     private javax.swing.JComboBox<String> selectorColor;
-    private javax.swing.JLabel textoEncApa;
     private javax.swing.JLabel tituloColor;
     private javax.swing.JLabel tituloEstado;
     private javax.swing.JLabel tituloIntensidad;
