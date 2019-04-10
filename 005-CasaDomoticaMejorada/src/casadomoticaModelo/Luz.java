@@ -8,37 +8,20 @@ package casadomoticaModelo;
  */
 public class Luz {
     
-    private String nombre;
     private int intensidad;
     private ColorLuz color;
     private boolean encendida;
 
     /**
      * Construye e inicializa una Luz.
-     * @param nombre Nombre de la luz
      * @param intensidad Intensidad de la luz
      * @param color Color de la luz
      * @param encendida Si esta encendida o no
      */
-    public Luz(String nombre, int intensidad, ColorLuz color, boolean encendida) {
-        this.nombre = nombre;
+    public Luz(int intensidad, ColorLuz color, boolean encendida) {
         this.intensidad = intensidad;
         this.color = color;
         this.encendida = encendida;
-    }
-
-    /**
-     * @return Nombre actual de la luz
-     */
-    public String getNombre() {
-        return nombre;
-    }
-    
-    /**
-     * @param nombre Nombre para asignar a la luz
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     /**
@@ -85,7 +68,7 @@ public class Luz {
     
     @Override
     public String toString(){
-        String res = "[Luz - " + nombre + " | " + intensidad + "% | #" + 
+        String res = "[Luz - " + intensidad + "% | #" + 
                       color + " | ";
         if(encendida){
             res += "Encendida]";

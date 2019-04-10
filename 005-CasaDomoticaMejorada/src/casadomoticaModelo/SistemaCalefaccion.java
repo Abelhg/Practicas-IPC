@@ -10,46 +10,27 @@ package casadomoticaModelo;
  * @author hechila
  */
 public class SistemaCalefaccion {
+    // CONSTANTES
+    public static final int APAGADA = 0;
+    public static final int ENFRIANDO = 1;
+    public static final int CALENTANDO = 2;
     
-    private String nombre;
     private double temperaturaDeseada;
-    private boolean encendida;
     private double temperaturaActual;
+    private int estado;
     
     /**
-     * Construye e inicializa una persiana.
-     * @param nombre Nombre de la persiana
+     * Construye e inicializa un sistema de calefaccion.
      * @param temperaturaDeseada Indica la temperatura objetivo
-     * @param encendida Indica si la calefaccion esta encendida o no
      * @param temperaturaActual Indica la temperatura de la calefaccion
      * 
      */
-    
-    public SistemaCalefaccion(String nombre, int temperaturaActual, boolean encendida, double temperaturaDeseada) {
-        this.nombre = nombre;
-        this.temperaturaDeseada = temperaturaDeseada;
-        if (this.temperaturaDeseada<10)
-            this.temperaturaDeseada = 10;
-        else if (this.temperaturaDeseada >37.5)
-            this.temperaturaDeseada = 37.5;
-        this.encendida = encendida;
+    public SistemaCalefaccion(double temperaturaDeseada, double temperaturaActual) {
+        setTemperaturaDeseada(temperaturaDeseada);
         this.temperaturaActual = temperaturaActual;
+        estado = APAGADA;
     }
-    
-    /**
-     * @return Nombre actual de la calefaccion
-     */
-    public String getNombre() {
-        return nombre;
-    }
-    
-    /**
-     * @param nombre Nombre para asignar a la calefaccion
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    
+
     /**
      * @return temperatura objetivo de la calefaccion
      */
@@ -58,10 +39,14 @@ public class SistemaCalefaccion {
     }
     
     /**
-     * @param temperaturaDeseada Temperatura que queremos
+     * @param temperaturaDeseada Temperatura que queremos.
      */
     public void setTemperaturaDeseada(double temperaturaDeseada) {
         this.temperaturaDeseada = temperaturaDeseada;
+        if (this.temperaturaDeseada < 10)
+            this.temperaturaDeseada = 10;
+        else if (this.temperaturaDeseada > 37.5)
+            this.temperaturaDeseada = 37.5;
     }
     
      /**
@@ -78,19 +63,10 @@ public class SistemaCalefaccion {
         this.temperaturaActual = temperaturaActual;
     }
     
-     /**
-     * @return Si la calefaccion esta encendida
-     */
-    public boolean getEncendida() {
-        return encendida;
+    public int getEstado() {
+        return estado;
     }
     
-    /**
-     * @param encendida Enciende o apaga la calefaccion
-     */
-    public void setEncendida(boolean encendida) {
-        this.encendida = encendida;
-    }
 }
 
 

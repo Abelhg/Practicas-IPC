@@ -1,6 +1,6 @@
 package casadomotica;
 
-import casadomoticaVista.VistaPrincipal;
+import casadomoticaVista.GestorUI;
 
 /**
  * Se encarga de ejecutar la aplicación.
@@ -9,9 +9,11 @@ import casadomoticaVista.VistaPrincipal;
  * @author hechila
  */
 public class Main {
+    
+    private static GestorUI gestorUI;
 
     public static void main(String[] args) {
-        new VistaPrincipal().setVisible(true);
+        gestorUI = GestorUI.getInstancia();
     }
     
 }
