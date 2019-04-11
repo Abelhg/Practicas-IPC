@@ -2,6 +2,10 @@ package casadomoticaVista;
 
 import casadomotica.Main;
 import casadomoticaModelo.Modelo;
+import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Trata los eventos que le notifica la vista,
@@ -12,6 +16,7 @@ import casadomoticaModelo.Modelo;
  */
 public final class PanelVistaCtrl {
     
+    private boolean mostrarSeg;
     private final PanelVista vista;
     private final Modelo modelo;
     
@@ -19,14 +24,41 @@ public final class PanelVistaCtrl {
         vista = v;
         modelo = m;
         configurarEstancia();
+        Runnable runnable = () -> {
+            while(true) {
+                try { 
+                    vista.setHoraActual(getHoraActual());
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new IllegalStateException(e);
+                }
+            }
+        };
+
+        Thread thread = new Thread(runnable);
+
+        thread.start();
+    }
+    
+    private String getHoraActual() {
+        Calendar calendario = new GregorianCalendar();
+        Date fechaHoraActual = new Date();
+        
+        calendario.setTime(fechaHoraActual);
+        int hora = calendario.get(Calendar.HOUR_OF_DAY);
+        int minutos = calendario.get(Calendar.MINUTE);
+        int segundos = calendario.get(Calendar.SECOND);
+        
+        if (!mostrarSeg){
+            return String.format("%02d:%02d", hora, minutos);
+        }
+        return String.format("%02d:%02d:%02d", hora, minutos, segundos);
     }
     
     private void configurarEstancia() {
         vista.setNombre(modelo.getNombreEstanciaActual());
         vista.setTemperaturaActual(modelo.getTemperaturaActualEstanciaActual());
     }
-    
-    
     
     /**
      * Vuelve a la pantalla anterior.
@@ -35,4 +67,43 @@ public final class PanelVistaCtrl {
         GestorUI.getInstancia().atras();
     }
     
+    /**
+     * Muestra o no los segundos
+     */
+    public void procesaClickHora(){
+        mostrarSeg = !mostrarSeg;
+    }
+    
+    /**
+     * 
+     */
+    public void procesaClickSubirUnidad(){
+        double cambiaTemp = modelo.getTemperaturaDeseada() + 1;
+        modelo.cambiaTemperaturaDeseada(cambiaTemp);
+        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseada());
+    }
+    
+    public void procesaClickSubirDecimal(){
+        String cambiaTemp = String.valueOf(modelo.getTemperaturaDeseada());
+        BigDecimal BcambiaTemp = new BigDecimal(cambiaTemp);
+        BigDecimal decimal = new BigDecimal ("0.1");
+        BcambiaTemp = BcambiaTemp.add(decimal);
+        modelo.cambiaTemperaturaDeseada(BcambiaTemp.doubleValue());
+        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseada());
+    }
+    
+    public void procesaClickBajarDecimal(){
+        String cambiaTemp = String.valueOf(modelo.getTemperaturaDeseada());
+        BigDecimal BcambiaTemp = new BigDecimal(cambiaTemp);
+        BigDecimal decimal = new BigDecimal ("0.1");
+        BcambiaTemp = BcambiaTemp.subtract(decimal);
+        modelo.cambiaTemperaturaDeseada(BcambiaTemp.doubleValue());
+        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseada());
+    }
+    
+    public void procesaClickBajarUnidad(){
+        double cambiaTemp = modelo.getTemperaturaDeseada() - 1;
+        modelo.cambiaTemperaturaDeseada(cambiaTemp);
+        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseada());
+    }
 }

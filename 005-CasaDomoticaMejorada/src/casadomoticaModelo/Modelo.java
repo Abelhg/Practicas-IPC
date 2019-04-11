@@ -26,7 +26,9 @@ public class Modelo {
         return estancia.getTemperaturaActual();
     }
     
-    
+    public double getTemperaturaDeseada(){
+        return estancia.getTemperaturaDeseada();
+    }
     
     public void enciendeLuz(int i) {
         estancia.getLuz(i).setEncendida(true);
@@ -36,4 +38,7 @@ public class Modelo {
         estancia.getLuz(i).setEncendida(false);
     }
     
+    public void cambiaTemperaturaDeseada(double cantidad){
+       estancia.setTemperaturaDeseada(cantidad);
+    }
 }
