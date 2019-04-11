@@ -16,6 +16,7 @@ public class PanelVista extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         // Centra en la pantalla
         setLocationRelativeTo(null);
+        
     }
 
 
@@ -64,7 +65,11 @@ public class PanelVista extends javax.swing.JFrame {
                 horaActualMouseClicked(evt);
             }
         });
-        getContentPane().add(horaActual, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 61;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        getContentPane().add(horaActual, gridBagConstraints);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -183,7 +188,7 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipady = 5;
+        gridBagConstraints.ipadx = 50;
         getContentPane().add(jPanel2, gridBagConstraints);
 
         jTabbedPane1.setToolTipText("hola");
@@ -203,11 +208,11 @@ public class PanelVista extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 225, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 187, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();

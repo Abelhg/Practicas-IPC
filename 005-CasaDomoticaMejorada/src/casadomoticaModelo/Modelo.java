@@ -26,7 +26,7 @@ public class Modelo {
         return estancia.getTemperaturaActual();
     }
     
-    public double getTemperaturaDeseada(){
+    public double getTemperaturaDeseadaEstanciaActual(){
         return estancia.getTemperaturaDeseada();
     }
     

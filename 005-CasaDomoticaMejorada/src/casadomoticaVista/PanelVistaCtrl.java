@@ -58,6 +58,7 @@ public final class PanelVistaCtrl {
     private void configurarEstancia() {
         vista.setNombre(modelo.getNombreEstanciaActual());
         vista.setTemperaturaActual(modelo.getTemperaturaActualEstanciaActual());
+        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseadaEstanciaActual());
     }
     
     /**
@@ -78,32 +79,32 @@ public final class PanelVistaCtrl {
      * 
      */
     public void procesaClickSubirUnidad(){
-        double cambiaTemp = modelo.getTemperaturaDeseada() + 1;
+        double cambiaTemp = modelo.getTemperaturaDeseadaEstanciaActual() + 1;
         modelo.cambiaTemperaturaDeseada(cambiaTemp);
-        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseada());
+        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseadaEstanciaActual());
     }
     
     public void procesaClickSubirDecimal(){
-        String cambiaTemp = String.valueOf(modelo.getTemperaturaDeseada());
+        String cambiaTemp = String.valueOf(modelo.getTemperaturaDeseadaEstanciaActual());
         BigDecimal BcambiaTemp = new BigDecimal(cambiaTemp);
         BigDecimal decimal = new BigDecimal ("0.1");
         BcambiaTemp = BcambiaTemp.add(decimal);
         modelo.cambiaTemperaturaDeseada(BcambiaTemp.doubleValue());
-        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseada());
+        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseadaEstanciaActual());
     }
     
     public void procesaClickBajarDecimal(){
-        String cambiaTemp = String.valueOf(modelo.getTemperaturaDeseada());
+        String cambiaTemp = String.valueOf(modelo.getTemperaturaDeseadaEstanciaActual());
         BigDecimal BcambiaTemp = new BigDecimal(cambiaTemp);
         BigDecimal decimal = new BigDecimal ("0.1");
         BcambiaTemp = BcambiaTemp.subtract(decimal);
         modelo.cambiaTemperaturaDeseada(BcambiaTemp.doubleValue());
-        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseada());
+        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseadaEstanciaActual());
     }
     
     public void procesaClickBajarUnidad(){
-        double cambiaTemp = modelo.getTemperaturaDeseada() - 1;
+        double cambiaTemp = modelo.getTemperaturaDeseadaEstanciaActual() - 1;
         modelo.cambiaTemperaturaDeseada(cambiaTemp);
-        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseada());
+        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseadaEstanciaActual());
     }
 }
