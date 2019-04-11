@@ -55,4 +55,11 @@ public class Estancia {
         return sistCalefaccion.getTemperaturaActual();
     }
     
+    public double getTemperaturaDeseada() {
+        return sistCalefaccion.getTemperaturaDeseada();
+    }
+    
+    public void setTemperaturaDeseada(double cantidad){
+        this.sistCalefaccion.setTemperaturaDeseada(cantidad);
+    }
 }

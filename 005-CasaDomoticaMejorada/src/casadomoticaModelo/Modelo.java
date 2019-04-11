@@ -28,8 +28,16 @@ public class Modelo {
     }
     
     
-    /***** LUCES *****/
-    
+	public double getTemperaturaDeseadaEstanciaActual(){
+        return estancia.getTemperaturaDeseada();
+    }
+
+    public void cambiaTemperaturaDeseada(double cantidad){
+       estancia.setTemperaturaDeseada(cantidad);
+    }
+
+
+    			/***** LUCES *****/
     /**
      * Devuelve las luces de la estancia actual.
      * @return Lista de luces
@@ -40,8 +48,7 @@ public class Modelo {
     
     
     
-    /***** PERSIANAS *****/
-    
+    			/***** PERSIANAS *****/
     /**
      * Devuelve las persianas de la estancia actual.
      * @return Lista de persianas
@@ -49,7 +56,5 @@ public class Modelo {
     public ArrayList<Persiana> getPersianasEstancia() {
         return estancia.getPersianas();
     }
-    
-    
-    
+
 }

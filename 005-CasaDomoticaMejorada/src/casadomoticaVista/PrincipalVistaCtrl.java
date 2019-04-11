@@ -59,7 +59,7 @@ public final class PrincipalVistaCtrl {
                 persianas.add(new Persiana(100));
                 persianas.add(new Persiana(100));
                 estancia.setPersianas(persianas);
-                estancia.setSistCalefaccion(new SistemaCalefaccion(22, 21.5));
+                estancia.setSistCalefaccion(new SistemaCalefaccion(23, 22.5));
                 break;
             case Estancia.COCINA:
                 estancia = new Estancia("Cocina");
@@ -75,7 +75,7 @@ public final class PrincipalVistaCtrl {
                 persianas.add(new Persiana(100));
                 persianas.add(new Persiana(100));
                 estancia.setPersianas(persianas);
-                estancia.setSistCalefaccion(new SistemaCalefaccion(22, 21.5));
+                estancia.setSistCalefaccion(new SistemaCalefaccion(20, 22.3));
                 break;
             case Estancia.BANIO:
                 estancia = new Estancia("Baño");
@@ -91,7 +91,7 @@ public final class PrincipalVistaCtrl {
                 persianas.add(new Persiana(100));
                 persianas.add(new Persiana(100));
                 estancia.setPersianas(persianas);
-                estancia.setSistCalefaccion(new SistemaCalefaccion(22, 21.5));
+                estancia.setSistCalefaccion(new SistemaCalefaccion(21.3, 22.7));
                 break;
         }
         
