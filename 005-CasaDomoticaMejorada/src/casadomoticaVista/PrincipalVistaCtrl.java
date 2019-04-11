@@ -47,10 +47,10 @@ public final class PrincipalVistaCtrl {
                 break;
             case Estancia.SALON:
                 estancia = new Estancia("Salón");
-                luces = new ArrayList<>();
+                luces = new ArrayList<>();/*
                 luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
                 luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
-                luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
+                luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_BLANCA), true));*/
                 estancia.setLuces(luces);
                 persianas = new ArrayList<>();
                 persianas.add(new Persiana(100));

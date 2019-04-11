@@ -1,5 +1,6 @@
 package casadomoticaModelo;
 
+import java.util.ArrayList;
 
 /**
  * Contiene la información de la aplicación. 
@@ -18,22 +19,37 @@ public class Modelo {
         this.estancia = estancia;
     }
     
-    public String getNombreEstanciaActual() {
+    public String getNombreEstancia() {
         return estancia.getNombre();
     }
     
-    public double getTemperaturaActualEstanciaActual() {
+    public double getTemperaturaActualEstancia() {
         return estancia.getTemperaturaActual();
     }
     
     
+    /***** LUCES *****/
     
-    public void enciendeLuz(int i) {
-        estancia.getLuz(i).setEncendida(true);
+    /**
+     * Devuelve las luces de la estancia actual.
+     * @return Lista de luces
+     */
+    public ArrayList<Luz> getLucesEstancia() {
+        return estancia.getLuces();
     }
     
-    public void apagaLuz(int i) {
-        estancia.getLuz(i).setEncendida(false);
+    
+    
+    /***** PERSIANAS *****/
+    
+    /**
+     * Devuelve las persianas de la estancia actual.
+     * @return Lista de persianas
+     */
+    public ArrayList<Persiana> getPersianasEstancia() {
+        return estancia.getPersianas();
     }
+    
+    
     
 }

@@ -41,7 +41,6 @@ public class PrincipalVista extends javax.swing.JFrame {
         botonBanio = new javax.swing.JButton();
         horaActual = new javax.swing.JLabel();
         fechaActual = new javax.swing.JLabel();
-        botonAjustes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -58,7 +57,7 @@ public class PrincipalVista extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 0.4;
+        gridBagConstraints.weighty = 0.45;
         getContentPane().add(botonDormitorio, gridBagConstraints);
 
         botonSalon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/casadomoticaRecursos/salon.jpg"))); // NOI18N
@@ -72,7 +71,7 @@ public class PrincipalVista extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 0.4;
+        gridBagConstraints.weighty = 0.45;
         getContentPane().add(botonSalon, gridBagConstraints);
 
         botonCocina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/casadomoticaRecursos/cocina.jpg"))); // NOI18N
@@ -86,7 +85,7 @@ public class PrincipalVista extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 0.4;
+        gridBagConstraints.weighty = 0.45;
         getContentPane().add(botonCocina, gridBagConstraints);
 
         botonBanio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/casadomoticaRecursos/banio.jpg"))); // NOI18N
@@ -100,7 +99,7 @@ public class PrincipalVista extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 0.4;
+        gridBagConstraints.weighty = 0.45;
         getContentPane().add(botonBanio, gridBagConstraints);
 
         horaActual.setFont(new java.awt.Font("Ebrima", 1, 48)); // NOI18N
@@ -109,36 +108,19 @@ public class PrincipalVista extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.ipady = 30;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 0.8;
+        gridBagConstraints.weightx = 0.5;
         gridBagConstraints.weighty = 0.1;
         getContentPane().add(horaActual, gridBagConstraints);
 
         fechaActual.setFont(new java.awt.Font("Ebrima", 1, 36)); // NOI18N
         fechaActual.setText("Miércoles, 10 de abril");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipady = 30;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 0.8;
-        gridBagConstraints.weighty = 0.1;
-        getContentPane().add(fechaActual, gridBagConstraints);
-
-        botonAjustes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/casadomoticaRecursos/ajustes.jpg"))); // NOI18N
-        botonAjustes.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        botonAjustes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAjustesActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.weightx = 0.2;
-        gridBagConstraints.weighty = 0.2;
-        getContentPane().add(botonAjustes, gridBagConstraints);
+        gridBagConstraints.ipady = 30;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.1;
+        getContentPane().add(fechaActual, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -159,10 +141,6 @@ public class PrincipalVista extends javax.swing.JFrame {
         controlador.procesaEstanciaSeleccionada(Estancia.BANIO);
     }//GEN-LAST:event_botonBanioActionPerformed
 
-    private void botonAjustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAjustesActionPerformed
-        // TODO Ventana de ajustes
-    }//GEN-LAST:event_botonAjustesActionPerformed
-
     /**
      * LLAMADAS DESDE EL CONTROLADOR
      */
@@ -178,7 +156,6 @@ public class PrincipalVista extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonAjustes;
     private javax.swing.JButton botonBanio;
     private javax.swing.JButton botonCocina;
     private javax.swing.JButton botonDormitorio;
