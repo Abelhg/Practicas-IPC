@@ -1,4 +1,4 @@
-﻿package casadomoticaVista;
+package casadomoticaVista;
 
 import casadomoticaModelo.ColorLuz;
 import casadomoticaModelo.Luz;
@@ -40,7 +40,7 @@ public class PanelVista extends javax.swing.JFrame {
 
         confLuces = new javax.swing.JPanel();
         lConfigLuz = new javax.swing.JLabel();
-        botonApagarEncender = new javax.swing.JToggleButton();
+        botonEncenderApagar = new javax.swing.JToggleButton();
         lColor = new javax.swing.JLabel();
         selectorColor = new javax.swing.JComboBox<>();
         selectorIntensidad = new javax.swing.JSlider();
@@ -82,11 +82,11 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         confLuces.add(lConfigLuz, gridBagConstraints);
 
-        botonApagarEncender.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
-        botonApagarEncender.setText("APAGADA");
-        botonApagarEncender.addActionListener(new java.awt.event.ActionListener() {
+        botonEncenderApagar.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
+        botonEncenderApagar.setText("APAGADA");
+        botonEncenderApagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonApagarEncenderActionPerformed(evt);
+                botonEncenderApagarActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -97,7 +97,7 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints.ipady = 20;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
-        confLuces.add(botonApagarEncender, gridBagConstraints);
+        confLuces.add(botonEncenderApagar, gridBagConstraints);
 
         lColor.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
         lColor.setText("COLOR");
@@ -117,6 +117,8 @@ public class PanelVista extends javax.swing.JFrame {
         selectorIntensidad.setMajorTickSpacing(25);
         selectorIntensidad.setMinorTickSpacing(5);
         selectorIntensidad.setPaintTicks(true);
+        selectorIntensidad.setMinimumSize(new java.awt.Dimension(300, 36));
+        selectorIntensidad.setPreferredSize(new java.awt.Dimension(300, 36));
         selectorIntensidad.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 selectorIntensidadStateChanged(evt);
@@ -181,6 +183,7 @@ public class PanelVista extends javax.swing.JFrame {
         confPersianas.add(lConfigLuz1, gridBagConstraints);
 
         selectorApertura.setOrientation(javax.swing.JSlider.VERTICAL);
+        selectorApertura.setMinimumSize(new java.awt.Dimension(10, 200));
         selectorApertura.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 selectorAperturaStateChanged(evt);
@@ -488,9 +491,10 @@ public class PanelVista extends javax.swing.JFrame {
        controlador.procesaClickBajarDecimal();
     }//GEN-LAST:event_bajaDecimalMouseClicked
 
-    private void botonApagarEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonApagarEncenderActionPerformed
+    private void botonEncenderApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEncenderApagarActionPerformed
         controlador.procesaClickBotonEncenderApagar();
-    }//GEN-LAST:event_botonApagarEncenderActionPerformed
+        System.out.println(getContentPane().getSize());
+    }//GEN-LAST:event_botonEncenderApagarActionPerformed
 
     private void botonApagarTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonApagarTodasActionPerformed
         controlador.procesaClickApagarTodas();
@@ -572,6 +576,25 @@ public class PanelVista extends javax.swing.JFrame {
         temperaturaDeseada.setText(modelo.getTemperaturaDeseadaEstancia() + "º");
     }
     
+    /**
+     * Actualiza el indicador de estado del sistema de temperatura.
+     */
+    public void actualizaIndicadorTermostato() {
+        int estado = modelo.getEstadoSistemaTemperatura();
+        switch(estado){
+            case SistemaTemperatura.APAGADO:
+                iconoTemperatura.setIcon(null);
+                break;
+            case SistemaTemperatura.CALENTANDO:
+                iconoTemperatura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/casadomoticaRecursos/calor.png")));
+                break;
+            case SistemaTemperatura.ENFRIANDO:
+                iconoTemperatura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/casadomoticaRecursos/frio.png")));
+                break;
+        }
+    }
+    
+    
 
     /**
      * Carga el panel especificado en la zona de configuración.
@@ -583,31 +606,17 @@ public class PanelVista extends javax.swing.JFrame {
      */
     private void cargaPanelConfiguracion(JPanel panel) {
         GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 30;
         gridBagConstraints.weightx = 0.5;
         gridBagConstraints.weighty = 0.7;
         getContentPane().add(panel, gridBagConstraints);
-        // Ajusta el tamaño de la ventana
-        setSize(660, 570);                                          // TODO Poner como constante
+        setSize(700, 640);
         validate();
-
-    public void actualizaIndicadorTermostato() {
-        int estado = modelo.getEstadoSistemaTemperatura();
-        switch(estado){
-            case SistemaTemperatura.APAGADA:
-                iconoTemperatura.setIcon(null);
-                break;
-            case SistemaTemperatura.CALENTANDO:
-                iconoTemperatura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/casadomoticaRecursos/calor.png")));
-                break;
-            case SistemaTemperatura.ENFRIANDO:
-                iconoTemperatura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/casadomoticaRecursos/frio.png")));
-                break;
-        }
     }
+    
     
             /**************************************** 
              *                LUCES                 *
@@ -709,12 +718,12 @@ public class PanelVista extends javax.swing.JFrame {
         // BOTÓN ENCENDIDO/APAGADO
         if(actual.estaEncendida()) {
             // ENCENDIDA
-            botonApagarEncender.setSelected(true);
-            botonApagarEncender.setText("ENCENDIDA");
+            botonEncenderApagar.setSelected(true);
+            botonEncenderApagar.setText("ENCENDIDA");
         } else {
             // APAGADA
-            botonApagarEncender.setSelected(false);
-            botonApagarEncender.setText("APAGADA");
+            botonEncenderApagar.setSelected(false);
+            botonEncenderApagar.setText("APAGADA");
         }
         
         // TODO COLOR
@@ -753,8 +762,18 @@ public class PanelVista extends javax.swing.JFrame {
         JButton btnPersiana;
         int contadorCols = 0;
         for(Persiana persiana : listaPersianas){
-            ImageIcon resIcon = null;
-            resIcon = new ImageIcon(getClass().getResource("/casadomoticaRecursos/persiana.png"));
+            ImageIcon resIcon;  
+            switch (persiana.getApertura()) {
+                case Persiana.APERTURA_MAX:
+                    resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_ABIERTA));
+                    break;
+                case Persiana.APERTURA_MIN:
+                    resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_CERRADA));
+                    break;
+                default:
+                    resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_SEMI));
+                    break;
+            }
             btnPersiana = new JButton(resIcon);
             btnPersiana.setText("");
             btnPersiana.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -794,12 +813,34 @@ public class PanelVista extends javax.swing.JFrame {
     }
     
     /**
-     * Actualiza la luz seleccionada en el selector de luces.
+     * Actualiza el selector de persianas.
+     * 
+     * TODO: Buscar optimizaciones
      */
     public void actualizaSelectorPersianas() {
+        // Marca la persiana actual
         desmarcaPersianas();
-        int i = modelo.getPersianasEstancia().indexOf(modelo.getPersianaSeleccionadaActual());
+        ArrayList<Persiana> persianas = modelo.getPersianasEstancia();
+        int i = persianas.indexOf(modelo.getPersianaSeleccionadaActual());
         botonesPersianas.get(i).setBorderPainted(true);
+        // Actualiza los iconos
+        i = 0;
+        while(i < botonesPersianas.size()) {
+            ImageIcon resIcon;  
+            switch (persianas.get(i).getApertura()) {
+                case Persiana.APERTURA_MAX:
+                    resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_ABIERTA));
+                    break;
+                case Persiana.APERTURA_MIN:
+                    resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_CERRADA));
+                    break;
+                default:
+                    resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_SEMI));
+                    break;
+            }
+            botonesPersianas.get(i).setIcon(resIcon);
+            i++;
+        }
     }
     
     /**
@@ -861,10 +902,10 @@ public class PanelVista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bajaDecimal;
     private javax.swing.JButton bajaUnidad;
-    private javax.swing.JToggleButton botonApagarEncender;
     private javax.swing.JButton botonApagarTodas;
     private javax.swing.JButton botonBajar;
     private javax.swing.JButton botonBajarTodas;
+    private javax.swing.JToggleButton botonEncenderApagar;
     private javax.swing.JButton botonEncenderTodas;
     private javax.swing.JButton botonSubir;
     private javax.swing.JButton botonSubirTodas;

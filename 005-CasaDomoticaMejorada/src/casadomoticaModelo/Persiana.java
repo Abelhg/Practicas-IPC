@@ -1,5 +1,7 @@
 package casadomoticaModelo;
 
+import javax.swing.ImageIcon;
+
 /**
  * Representa una persiana con su nivel de apertura.
  * @author abeherr
@@ -9,6 +11,10 @@ public class Persiana {
     
     public static final int APERTURA_MAX = 100;
     public static final int APERTURA_MIN = 0;
+    
+    public static final String ICONO_ABIERTA = "/casadomoticaRecursos/persiana_abierta.png";
+    public static final String ICONO_CERRADA = "/casadomoticaRecursos/persiana_cerrada.png";
+    public static final String ICONO_SEMI = "/casadomoticaRecursos/persiana_semi.png";
     
     private int apertura;
     

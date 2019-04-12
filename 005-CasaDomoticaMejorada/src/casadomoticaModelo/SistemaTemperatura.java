@@ -11,7 +11,7 @@ package casadomoticaModelo;
  */
 public class SistemaTemperatura {
     // CONSTANTES
-    public static final int APAGADA = 0;
+    public static final int APAGADO = 0;
     public static final int ENFRIANDO = 1;
     public static final int CALENTANDO = 2;
     
@@ -30,7 +30,7 @@ public class SistemaTemperatura {
     public SistemaTemperatura(double temperaturaDeseada, double temperaturaActual) {
         setTemperaturaDeseada(temperaturaDeseada);
         this.temperaturaActual = temperaturaActual;
-        estado = APAGADA;
+        estado = APAGADO;
     }
 
     /**
@@ -71,7 +71,7 @@ public class SistemaTemperatura {
         else if(temperaturaActual >= (temperaturaDeseada + MARGEN))    
             estado = ENFRIANDO;
         else
-            estado = APAGADA;
+            estado = APAGADO;
         
         return estado;
     }

@@ -244,6 +244,7 @@ public final class PanelVistaCtrl {
         int nivel = vista.getNivelApertura();
         actual.setApertura(nivel);
         vista.actualizaConfiguracionPersiana();
+        vista.actualizaSelectorPersianas();
     }
     
     /**
