@@ -13,6 +13,7 @@ public class Modelo {
     
     private String horaActual;
     private Luz luzSeleccionadaActual;
+    private Persiana persianaSeleccionadaActual;
     
     private Estancia estancia;
     
@@ -92,7 +93,10 @@ public class Modelo {
      * Devuelve la luz seleccionada actualmente.
      * @return Luz actualmente seleccionada
      */
-    public Luz getSeleccionadaActual() {
+    public Luz getLuzSeleccionadaActual() {
+        if(luzSeleccionadaActual == null) {
+            luzSeleccionadaActual = getLucesEstancia().get(0);
+        }
         return luzSeleccionadaActual;
     }
     
@@ -100,7 +104,7 @@ public class Modelo {
      * Selecciona una nueva luz.
      * @param l Nueva luz seleccionada
      */
-    public void setSeleccionadaActual(Luz l) {
+    public void setLuzSeleccionadaActual(Luz l) {
         luzSeleccionadaActual = l;
     }
     
@@ -113,6 +117,25 @@ public class Modelo {
      */
     public ArrayList<Persiana> getPersianasEstancia() {
         return estancia.getPersianas();
+    }
+    
+    /**
+     * Devuelve la persiana seleccionada actualmente.
+     * @return Persiana actualmente seleccionada
+     */
+    public Persiana getPersianaSeleccionadaActual() {
+        if(persianaSeleccionadaActual == null) {
+            persianaSeleccionadaActual = getPersianasEstancia().get(0);
+        }
+        return persianaSeleccionadaActual;
+    }
+    
+    /**
+     * Selecciona una nueva persiana.
+     * @param p Nueva persiana seleccionada
+     */
+    public void setPersianaSeleccionadaActual(Persiana p) {
+        persianaSeleccionadaActual = p;
     }
 
 }

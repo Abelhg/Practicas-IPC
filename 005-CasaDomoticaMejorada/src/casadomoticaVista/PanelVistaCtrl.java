@@ -29,7 +29,9 @@ public final class PanelVistaCtrl {
         iniciaHiloHora();
     }
     
-            /***** CONFIGURACION INICIAL *****/
+            /**************************************** 
+             *         CONFIGURACIÓN INICIAL        *
+             ****************************************/
     /**
      * Configura la vista con los datos del modelo para la estancia actual.
      */
@@ -40,20 +42,25 @@ public final class PanelVistaCtrl {
         vista.cargaLuces();
         vista.cargaPersianas();
         // Selecciona la primera luz
-        modelo.setSeleccionadaActual(modelo.getLucesEstancia().get(0));
-        vista.actualizaBotonEncenderApagar();
+        vista.actualizaSelectorLuces();
+        vista.muestraConfiguracionLuces();
+        vista.actualizaConfiguracionLuces();
         //vista.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);               // Quitar comentario en la versión final
         // Centra en la pantalla
         vista.setLocationRelativeTo(null);
     }
     
+    
+            /**************************************** 
+             *             HORA ACTUAL              *
+             ****************************************/
     /**
      * Comienza un hilo que actualiza la hora en la vista cada segundo.
      */
     private void iniciaHiloHora() {
         Runnable runnable = () -> {
             while(true) {
-                try { 
+                try {
                     modelo.setHoraActual(getHoraActual());
                     vista.actualizaHoraActual();
                     Thread.sleep(1000);
@@ -62,6 +69,7 @@ public final class PanelVistaCtrl {
                 }
             }
         };
+        
         new Thread(runnable).start();
     }
     
@@ -89,17 +97,17 @@ public final class PanelVistaCtrl {
         return horaActual;
     }
     
-    
-            /***** HORA *****/
     /**
-     * Muestra o no los segundos
+     * Muestra o no los segundos.
      */
     public void procesaClickHora(){
         mostrarSeg = !mostrarSeg;
     }
     
     
-            /***** TERMOSTATO *****/
+            /**************************************** 
+             *              TERMOSTATO              *
+             ****************************************/
     
     public void procesaClickSubirUnidad(){
         double nTemp = modelo.getTemperaturaDeseadaEstancia() + 1;
@@ -132,17 +140,76 @@ public final class PanelVistaCtrl {
     }
     
     
-            /***** PANEL CONFIGURACION LUCES *****/
+            /**************************************** 
+             *       SELECTOR LUCES/PERSIANAS       *
+             ****************************************/
+    /**
+     * Muestra el panel de configuración de luces y selecciona la luz
+     * actual en el selector.
+     */
+    public void procesaClickTabLuces() {
+        vista.actualizaConfiguracionLuces();
+        vista.muestraConfiguracionLuces();
+        vista.actualizaConfiguracionLuces();
+    }
     
+    /**
+     * Muestra el panel de configuración de persianas y selecciona la persiana
+     * actual en el selector.
+     */
+    public void procesaClickTabPersianas() {
+        vista.actualizaConfiguracionPersianas();
+        vista.muestraConfiguracionPersianas();
+        vista.actualizaConfiguracionPersianas();
+    }
+    
+    /**
+     * Marca la luz como seleccionada y carga su configuración.
+     */
+    public void procesaClickLuz() {
+        vista.actualizaSelectorLuces();
+        vista.actualizaConfiguracionLuces();
+    }
+    
+    
+            /**************************************** 
+             *      PANEL CONFIGURACION LUCES       *
+             ****************************************/
     /**
      * Enciende o apaga la luz seleccionada actual.
      */
     public void procesaClickBotonEncenderApagar() {
         // Obtiene la luz actual y alterna el estado
-        Luz l = modelo.getSeleccionadaActual();
+        Luz l = modelo.getLuzSeleccionadaActual();
         l.setEncendida(!l.estaEncendida());
-        vista.actualizaBotonEncenderApagar();
+        vista.actualizaConfiguracionLuces();
     }
+    
+    /**
+     * Apaga todas las luces.
+     */
+    public void procesaClickApagarTodas() {
+        for(Luz l : modelo.getLucesEstancia()) {
+            l.setEncendida(false);
+        }
+        
+        vista.actualizaSelectorLuces();
+        vista.actualizaConfiguracionLuces();
+    }
+    
+    /**
+     * Enciende todas las luces.
+     */
+    public void procesaClickEncenderTodas() {
+        for(Luz l : modelo.getLucesEstancia()) {
+            l.setEncendida(true);
+        }
+        
+        vista.actualizaSelectorLuces();
+        vista.actualizaConfiguracionLuces();
+    }
+    
+    
     
      /**
      * Vuelve a la pantalla anterior.
