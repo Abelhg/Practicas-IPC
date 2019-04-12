@@ -49,14 +49,16 @@ public final class PrincipalVistaCtrl {
                 persianas.add(new Persiana(100));
                 persianas.add(new Persiana(100));
                 estancia.setPersianas(persianas);
-                estancia.setSistCalefaccion(new SistemaTemperatura(22, 28));
+                estancia.setSistCalefaccion(new SistemaTemperatura(22, 20.7));
                 break;
             case Estancia.SALON:
                 estancia = new Estancia("Salón");
-                luces = new ArrayList<>();/*
-                luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
-                luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
-                luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_BLANCA), true));*/
+                luces = new ArrayList<>();
+                luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_AMARILLA), true));
+                luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_AMARILLA), true));
+                luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_AMARILLA), true));
+                luces.add(new Luz(75, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
+                luces.add(new Luz(75, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
                 estancia.setLuces(luces);
                 persianas = new ArrayList<>();
                 persianas.add(new Persiana(100));
@@ -65,14 +67,15 @@ public final class PrincipalVistaCtrl {
                 persianas.add(new Persiana(100));
                 persianas.add(new Persiana(100));
                 estancia.setPersianas(persianas);
-                estancia.setSistCalefaccion(new SistemaTemperatura(23, 22.5));
+                estancia.setSistCalefaccion(new SistemaTemperatura(22.5, 22));
                 break;
             case Estancia.COCINA:
                 estancia = new Estancia("Cocina");
                 luces = new ArrayList<>();
-                luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
-                luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
-                luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
+                luces.add(new Luz(80, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
+                luces.add(new Luz(80, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
+                luces.add(new Luz(80, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
+                luces.add(new Luz(80, new ColorLuz(ColorLuz.COLOR_AMARILLA), true));
                 estancia.setLuces(luces);
                 persianas = new ArrayList<>();
                 persianas.add(new Persiana(100));
@@ -90,14 +93,8 @@ public final class PrincipalVistaCtrl {
                 luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
                 luces.add(new Luz(100, new ColorLuz(ColorLuz.COLOR_BLANCA), true));
                 estancia.setLuces(luces);
-                persianas = new ArrayList<>();
-                persianas.add(new Persiana(100));
-                persianas.add(new Persiana(100));
-                persianas.add(new Persiana(100));
-                persianas.add(new Persiana(100));
-                persianas.add(new Persiana(100));
-                estancia.setPersianas(persianas);
-                estancia.setSistCalefaccion(new SistemaTemperatura(21.3, 22.7));
+                // SIN PERSIANAS
+                estancia.setSistCalefaccion(new SistemaTemperatura(21.5, 22.7));
                 break;
         }
         

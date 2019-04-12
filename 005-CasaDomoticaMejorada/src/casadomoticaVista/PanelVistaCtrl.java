@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.JFrame;
 
 /**
  * Trata los eventos que le notifica la vista,
@@ -37,6 +38,9 @@ public final class PanelVistaCtrl {
      * Configura la vista con los datos del modelo para la estancia actual.
      */
     private void configurarEstancia() {
+        // Resetea el modelo
+        modelo.resetValores();
+        // Da valores a los campos de la ventana
         vista.actualizaNombre();
         vista.actualizaTemperaturaActual();
         vista.actualizaTemperaturaDeseada();
@@ -46,9 +50,12 @@ public final class PanelVistaCtrl {
         vista.actualizaSelectorLuces();
         vista.actualizaSelectorPersianas();
         // Muestra la configuración de la primera luz por defecto
-        vista.muestraConfiguracionLuces();
-        vista.actualizaConfiguracionLuz();
-        //vista.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);               // Quitar comentario en la versión final
+        if(modelo.getLuzSeleccionadaActual() != null){
+            // En caso de que no haya luces
+            vista.muestraConfiguracionLuces();
+            vista.actualizaConfiguracionLuz();
+        }
+        vista.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);               // Quitar comentario en la versión final
         // Centra en la pantalla
         vista.setLocationRelativeTo(null);
     }
@@ -155,8 +162,12 @@ public final class PanelVistaCtrl {
      * actual en el selector.
      */
     public void procesaClickTabLuces() {
-        vista.muestraConfiguracionLuces();
-        vista.actualizaConfiguracionLuz();
+        if(modelo.getLucesEstancia().size() > 0) {
+            vista.muestraConfiguracionLuces();
+            vista.actualizaConfiguracionLuz();
+        } else {
+            vista.borraPanelConfiguracion();
+        }
     }
     
     /**
@@ -164,8 +175,12 @@ public final class PanelVistaCtrl {
      * actual en el selector.
      */
     public void procesaClickTabPersianas() {
-        vista.muestraConfiguracionPersianas();
-        vista.actualizaConfiguracionPersiana();
+        if(modelo.getPersianasEstancia().size() > 0) {
+            vista.muestraConfiguracionPersianas();
+            vista.actualizaConfiguracionPersiana();
+        } else {
+            vista.borraPanelConfiguracion();
+        }
     }
     
     /**
@@ -195,6 +210,15 @@ public final class PanelVistaCtrl {
         // Obtiene la luz actual y alterna el estado
         modelo.cambiaEstadoLuzActual();
         vista.actualizaConfiguracionLuz();
+        vista.actualizaSelectorLuces();
+    }
+    
+    /**
+     * Cambia el color de la luz actualmente seleccionada.
+     */
+    public void procesaCambioColor() {
+        modelo.cambiaColorLuz(vista.getColorSeleccionado());
+        vista.actualizaSelectorLuces();
     }
     
     /**
@@ -215,8 +239,8 @@ public final class PanelVistaCtrl {
             l.setEncendida(false);
         }
         
-        vista.actualizaSelectorLuces();
         vista.actualizaConfiguracionLuz();
+        vista.actualizaSelectorLuces();
     }
     
     /**
@@ -227,14 +251,13 @@ public final class PanelVistaCtrl {
             l.setEncendida(true);
         }
         
-        vista.actualizaSelectorLuces();
         vista.actualizaConfiguracionLuz();
+        vista.actualizaSelectorLuces();
     }
     
     
-    
             /**************************************** 
-             *       PANEL CONFIGURACION NIVEL      *
+             *     PANEL CONFIGURACION PERSIANAS    *
              ****************************************/
     /**
      * Modifica la intensidad de la persiana actualmente seleccionada.

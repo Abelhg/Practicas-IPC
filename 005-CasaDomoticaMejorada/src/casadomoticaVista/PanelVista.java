@@ -12,6 +12,7 @@ import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -48,7 +49,7 @@ public class PanelVista extends javax.swing.JFrame {
         botonApagarTodas = new javax.swing.JButton();
         botonEncenderTodas = new javax.swing.JButton();
         confPersianas = new javax.swing.JPanel();
-        lConfigLuz1 = new javax.swing.JLabel();
+        lConfigPersiana = new javax.swing.JLabel();
         selectorApertura = new javax.swing.JSlider();
         botonSubir = new javax.swing.JButton();
         porcentajePersiana = new javax.swing.JLabel();
@@ -107,11 +108,19 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.5;
         confLuces.add(lColor, gridBagConstraints);
 
-        selectorColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectorColor.setFont(new java.awt.Font("Ebrima", 0, 18)); // NOI18N
+        selectorColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AMARILLO", "AZUL", "VERDE", "NARANJA", "BLANCO" }));
+        selectorColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectorColorActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 20);
         confLuces.add(selectorColor, gridBagConstraints);
 
         selectorIntensidad.setMajorTickSpacing(25);
@@ -132,7 +141,7 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 5, 20);
         confLuces.add(selectorIntensidad, gridBagConstraints);
 
-        porcentajeLuz.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
+        porcentajeLuz.setFont(new java.awt.Font("Ebrima", 0, 24)); // NOI18N
         porcentajeLuz.setText("50%");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -142,6 +151,7 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 15, 0);
         confLuces.add(porcentajeLuz, gridBagConstraints);
 
+        botonApagarTodas.setBackground(new java.awt.Color(255, 255, 153));
         botonApagarTodas.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
         botonApagarTodas.setText("<html>\nAPAGAR<br>\nTODAS");
         botonApagarTodas.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +165,7 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.5;
         confLuces.add(botonApagarTodas, gridBagConstraints);
 
+        botonEncenderTodas.setBackground(new java.awt.Color(255, 255, 153));
         botonEncenderTodas.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
         botonEncenderTodas.setText("<html>ENCENDER<br> TODAS");
         botonEncenderTodas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -171,8 +182,8 @@ public class PanelVista extends javax.swing.JFrame {
 
         confPersianas.setLayout(new java.awt.GridBagLayout());
 
-        lConfigLuz1.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
-        lConfigLuz1.setText("CONFIGURACIÓN DE PERSIANA");
+        lConfigPersiana.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        lConfigPersiana.setText("CONFIGURACIÓN DE PERSIANA");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -180,7 +191,7 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 0.2;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
-        confPersianas.add(lConfigLuz1, gridBagConstraints);
+        confPersianas.add(lConfigPersiana, gridBagConstraints);
 
         selectorApertura.setOrientation(javax.swing.JSlider.VERTICAL);
         selectorApertura.setMinimumSize(new java.awt.Dimension(10, 200));
@@ -201,7 +212,7 @@ public class PanelVista extends javax.swing.JFrame {
         confPersianas.add(selectorApertura, gridBagConstraints);
 
         botonSubir.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
-        botonSubir.setText("SUBIR");
+        botonSubir.setText("SUBIR AL COMPLETO");
         botonSubir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSubirActionPerformed(evt);
@@ -210,7 +221,8 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.weightx = 0.33;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.weightx = 0.66;
         gridBagConstraints.weighty = 0.2;
         confPersianas.add(botonSubir, gridBagConstraints);
 
@@ -224,7 +236,7 @@ public class PanelVista extends javax.swing.JFrame {
         confPersianas.add(porcentajePersiana, gridBagConstraints);
 
         botonBajar.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
-        botonBajar.setText("BAJAR");
+        botonBajar.setText("BAJAR AL COMPLETO");
         botonBajar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonBajarActionPerformed(evt);
@@ -233,7 +245,8 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.weightx = 0.33;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.weightx = 0.66;
         gridBagConstraints.weighty = 0.2;
         confPersianas.add(botonBajar, gridBagConstraints);
 
@@ -471,39 +484,74 @@ public class PanelVista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cuando el usuario cierra la ventana.
+     * @param evt Evento de cierre
+     */
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         controlador.procesaCierre();
     }//GEN-LAST:event_formWindowClosing
 
+    /**
+     * Cuando el usuario hace click en subir unidad del termostato.
+     * @param evt Evento de click
+     */
     private void subeUnidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subeUnidadMouseClicked
         controlador.procesaClickSubirUnidad();
     }//GEN-LAST:event_subeUnidadMouseClicked
 
+    /**
+     * Cuando el usuario hace click en subir decima del termostato.
+     * @param evt Evento de click
+     */
     private void subeDecimalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subeDecimalMouseClicked
         controlador.procesaClickSubirDecimal();
     }//GEN-LAST:event_subeDecimalMouseClicked
-
+    
+    /**
+     * Cuando el usuario hace click en bajar unidad del termostato.
+     * @param evt Evento de click
+     */
     private void bajaUnidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bajaUnidadMouseClicked
         controlador.procesaClickBajarUnidad();
     }//GEN-LAST:event_bajaUnidadMouseClicked
 
+    /**
+     * Cuando el usuario hace click en bajar decima del termostato.
+     * @param evt Evento de click
+     */
     private void bajaDecimalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bajaDecimalMouseClicked
        controlador.procesaClickBajarDecimal();
     }//GEN-LAST:event_bajaDecimalMouseClicked
 
+    /**
+     * Cuando el usuario hace click en el botón de encender/apagar luz.
+     * @param evt Evento de click
+     */
     private void botonEncenderApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEncenderApagarActionPerformed
         controlador.procesaClickBotonEncenderApagar();
-        System.out.println(getContentPane().getSize());
     }//GEN-LAST:event_botonEncenderApagarActionPerformed
 
+    /**
+     * Cuando el usuario hace click en el botón de apagar todas las luces.
+     * @param evt Evento de click
+     */
     private void botonApagarTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonApagarTodasActionPerformed
         controlador.procesaClickApagarTodas();
     }//GEN-LAST:event_botonApagarTodasActionPerformed
 
+    /**
+     * Cuando el usuario hace click en el botón de encender todas las luces.
+     * @param evt Evento de click
+     */
     private void botonEncenderTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEncenderTodasActionPerformed
         controlador.procesaClickEncenderTodas();
     }//GEN-LAST:event_botonEncenderTodasActionPerformed
 
+    /**
+     * Cuando el usuario cambia las pestañas del selector de luces/persianas.
+     * @param evt Evento de cambio
+     */
     private void pSelectorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_pSelectorStateChanged
         if(controlador != null) {
             // Para evitar procesar al crearse la vista
@@ -515,37 +563,75 @@ public class PanelVista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_pSelectorStateChanged
 
+    /**
+     * Cuando el usuario hace click en la hora actual.
+     * @param evt Evento de click
+     */
     private void horaActualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_horaActualMouseClicked
         controlador.procesaClickHora();
     }//GEN-LAST:event_horaActualMouseClicked
 
+    /**
+     * Cuando el usuario modifica el nivel del selector de intensidad de luz.
+     * @param evt Evento de cambio
+     */
     private void selectorIntensidadStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_selectorIntensidadStateChanged
         if(controlador != null) {
             controlador.procesaCambioIntensidad();
         }
     }//GEN-LAST:event_selectorIntensidadStateChanged
 
+    /**
+     * Cuando el usuario modifica el nivel del selector de apertura de persiana.
+     * @param evt Evento de cambio
+     */
     private void selectorAperturaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_selectorAperturaStateChanged
         if(controlador != null) {
             controlador.procesaCambioApertura();
         }
     }//GEN-LAST:event_selectorAperturaStateChanged
 
+    /**
+     * Cuando el usuario hace click en el botón de subir la persiana.
+     * @param evt Evento de click
+     */
     private void botonSubirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSubirActionPerformed
         controlador.procesaClickSubirPersiana();
     }//GEN-LAST:event_botonSubirActionPerformed
 
+    /**
+     * Cuando el usuario hace click en el botón de bajar la persiana.
+     * @param evt Evento de click
+     */
     private void botonBajarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBajarActionPerformed
         controlador.procesaClickBajarPersiana();
     }//GEN-LAST:event_botonBajarActionPerformed
 
+    /**
+     * Cuando el usuario hace click en el botón de subir todas las persianas.
+     * @param evt Evento de click
+     */
     private void botonSubirTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSubirTodasActionPerformed
         controlador.procesaClickSubirTodas();
     }//GEN-LAST:event_botonSubirTodasActionPerformed
 
+    /**
+     * Cuando el usuario hace click en el botón de bajar todas las persianas.
+     * @param evt Evento de click
+     */
     private void botonBajarTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBajarTodasActionPerformed
         controlador.procesaClickBajarTodas();
     }//GEN-LAST:event_botonBajarTodasActionPerformed
+
+    /**
+     * Cuando el usuario cambia el valor del selector de color de luz.
+     * @param evt Evento de cambio
+     */
+    private void selectorColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorColorActionPerformed
+        if(controlador != null) {
+            controlador.procesaCambioColor();
+        }
+    }//GEN-LAST:event_selectorColorActionPerformed
 
     
     /**
@@ -617,6 +703,14 @@ public class PanelVista extends javax.swing.JFrame {
         validate();
     }
     
+    /**
+     * Quita de la vista el panel de configuración.
+     */
+    public void borraPanelConfiguracion() {
+        // Cualquiera que pueda haber
+        getContentPane().remove(confLuces);
+        getContentPane().remove(confPersianas);
+    }
     
             /**************************************** 
              *                LUCES                 *
@@ -626,60 +720,66 @@ public class PanelVista extends javax.swing.JFrame {
      */
     public void cargaLuces() {
         ArrayList<Luz> listaLuces = modelo.getLucesEstancia();
-        GridBagLayout gbl = new GridBagLayout();
-        JPanel pan = new JPanel();
-        pan.setPreferredSize(null);
-        pan.setLayout(gbl);
-        GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 0.333;
-        c.gridx = GridBagConstraints.RELATIVE;
-        c.gridy = GridBagConstraints.RELATIVE;
-        c.anchor = GridBagConstraints.CENTER;
-        JButton btnLuz;
-        int contadorCols = 0;
-        for(Luz luz : listaLuces){
-            ImageIcon resIcon = null;
-            if(luz.estaEncendida()){
-                resIcon = new ImageIcon(getClass().getResource(
-                          ColorLuz.getIconoColor(luz.getColor().getColorImg())));
-            }else{
-                resIcon = new ImageIcon(getClass().getResource("/casadomoticaRecursos/bomb_apagada.jpg"));
-            }
-            btnLuz = new JButton(resIcon);
-            btnLuz.setText("");
-            btnLuz.setVerticalTextPosition(SwingConstants.BOTTOM);
-            btnLuz.setHorizontalTextPosition(SwingConstants.CENTER);
-            btnLuz.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-            btnLuz.setFocusPainted(false);
-            btnLuz.setBorder(new LineBorder(new java.awt.Color(130, 255, 93), 4, true));
-            btnLuz.setBorderPainted(false);
-            btnLuz.setBackground(Color.WHITE);
-            btnLuz.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    modelo.setLuzSeleccionadaActual(luz);
-                    controlador.procesaClickLuz();
+        if(listaLuces.size() > 0) {
+            GridBagLayout gbl = new GridBagLayout();
+            JPanel pan = new JPanel();
+            pan.setPreferredSize(null);
+            pan.setLayout(gbl);
+            GridBagConstraints c = new GridBagConstraints();
+            c.weightx = 0.333;
+            c.gridx = GridBagConstraints.RELATIVE;
+            c.gridy = GridBagConstraints.RELATIVE;
+            c.anchor = GridBagConstraints.CENTER;
+            JButton btnLuz;
+            int contadorCols = 0;
+            for(Luz luz : listaLuces){
+                ImageIcon resIcon = new ImageIcon(getClass().getResource(
+                                            ColorLuz.getIconoLuz(luz)));
+                btnLuz = new JButton(resIcon);
+                btnLuz.setText("");
+                btnLuz.setVerticalTextPosition(SwingConstants.BOTTOM);
+                btnLuz.setHorizontalTextPosition(SwingConstants.CENTER);
+                btnLuz.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                btnLuz.setFocusPainted(false);
+                btnLuz.setBorder(new LineBorder(new java.awt.Color(130, 255, 93), 4, true));
+                btnLuz.setBorderPainted(false);
+                btnLuz.setBackground(Color.WHITE);
+                btnLuz.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        modelo.setLuzSeleccionadaActual(luz);
+                        controlador.procesaClickLuz();
+                    }
+                });
+                gbl.setConstraints(btnLuz, c);
+                botonesLuces.add(btnLuz);
+                pan.add(btnLuz);
+
+                contadorCols++;
+                if(contadorCols == 3){
+                    contadorCols = 0;
+                    // Añade la fila actual
+                    tabLuces.add(pan);
+                    // Nueva fila
+                    gbl = new GridBagLayout();
+                    pan = new JPanel();
+                    pan.setPreferredSize(null);
+                    pan.setLayout(gbl);
                 }
-            });
-            gbl.setConstraints(btnLuz, c);
-            botonesLuces.add(btnLuz);
-            pan.add(btnLuz);
-            
-            contadorCols++;
-            if(contadorCols == 3){
-                contadorCols = 0;
-                // Añade la fila actual
-                tabLuces.add(pan);
-                // Nueva fila
-                gbl = new GridBagLayout();
-                pan = new JPanel();
-                pan.setPreferredSize(null);
-                pan.setLayout(gbl);
             }
-        }
-        
-        // Comprueba si el panel tiene hijos para añadir
-        if(pan.getComponents().length > 0){
-            tabLuces.add(pan);
+
+            // Comprueba si el panel tiene hijos para añadir
+            if(pan.getComponents().length > 0){
+                tabLuces.add(pan);
+            }
+        } else {
+            JLabel lSinLuces = new JLabel();
+            lSinLuces.setFont(new java.awt.Font("Ebrima", 1, 18));
+            lSinLuces.setText("NO HAY LUCES");
+            GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.gridwidth = 2;
+            tabLuces.add(lSinLuces, gridBagConstraints);
         }
     }
 
@@ -687,9 +787,22 @@ public class PanelVista extends javax.swing.JFrame {
      * Actualiza la luz seleccionada en el selector de luces.
      */
     public void actualizaSelectorLuces() {
+        // Marca la luz actual
         desmarcaLuces();
-        int i = modelo.getLucesEstancia().indexOf(modelo.getLuzSeleccionadaActual());
-        botonesLuces.get(i).setBorderPainted(true);
+        ArrayList<Luz> luces = modelo.getLucesEstancia();
+        if(luces.size() > 0) {
+            int i = luces.indexOf(modelo.getLuzSeleccionadaActual());
+            botonesLuces.get(i).setBorderPainted(true);
+            // Actualiza los iconos
+            i = 0;
+            while(i < botonesLuces.size()) {
+                ImageIcon resIcon;
+                resIcon = new ImageIcon(getClass().getResource(
+                                ColorLuz.getIconoLuz(luces.get(i))));
+                botonesLuces.get(i).setIcon(resIcon);
+                i++;
+            }
+        }
     }
     
     /**
@@ -715,22 +828,25 @@ public class PanelVista extends javax.swing.JFrame {
      */
     public void actualizaConfiguracionLuz() {
         Luz actual = modelo.getLuzSeleccionadaActual();
-        // BOTÓN ENCENDIDO/APAGADO
-        if(actual.estaEncendida()) {
-            // ENCENDIDA
-            botonEncenderApagar.setSelected(true);
-            botonEncenderApagar.setText("ENCENDIDA");
-        } else {
-            // APAGADA
-            botonEncenderApagar.setSelected(false);
-            botonEncenderApagar.setText("APAGADA");
+        if(actual != null) {
+            // BOTÓN ENCENDIDO/APAGADO
+            if(actual.estaEncendida()) {
+                // ENCENDIDA
+                botonEncenderApagar.setSelected(true);
+                botonEncenderApagar.setText("ENCENDIDA");
+            } else {
+                // APAGADA
+                botonEncenderApagar.setSelected(false);
+                botonEncenderApagar.setText("APAGADA");
+            }
+
+            // SELECTOR COLOR
+            selectorColor.setSelectedIndex(actual.getColor().getColorImg());
+
+            // SELECTOR INTENSIDAD
+            selectorIntensidad.setValue(actual.getIntensidad());
+            porcentajeLuz.setText(actual.getIntensidad() + "%");
         }
-        
-        // TODO COLOR
-        
-        // SELECTOR INTENSIDAD
-        selectorIntensidad.setValue(actual.getIntensidad());
-        porcentajeLuz.setText(actual.getIntensidad() + "%");
     }
     
     /**
@@ -740,7 +856,15 @@ public class PanelVista extends javax.swing.JFrame {
     public int getNivelIntensidad() {
         return selectorIntensidad.getValue();
     }
-        
+    
+    /**
+     * Devuelve el índice actual del selector de color.
+     * @return Indice seleccionado
+     */
+    public int getColorSeleccionado() {
+        return selectorColor.getSelectedIndex();
+    }
+    
     
             /**************************************** 
              *              PERSIANAS               *
@@ -750,65 +874,76 @@ public class PanelVista extends javax.swing.JFrame {
      */
     public void cargaPersianas() {
         ArrayList<Persiana> listaPersianas = modelo.getPersianasEstancia();
-        GridBagLayout gbl = new GridBagLayout();
-        JPanel pan = new JPanel();
-        pan.setPreferredSize(null);
-        pan.setLayout(gbl);
-        GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 0.333;
-        c.gridx = GridBagConstraints.RELATIVE;
-        c.gridy = GridBagConstraints.RELATIVE;
-        c.anchor = GridBagConstraints.CENTER;
-        JButton btnPersiana;
-        int contadorCols = 0;
-        for(Persiana persiana : listaPersianas){
-            ImageIcon resIcon;  
-            switch (persiana.getApertura()) {
-                case Persiana.APERTURA_MAX:
-                    resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_ABIERTA));
-                    break;
-                case Persiana.APERTURA_MIN:
-                    resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_CERRADA));
-                    break;
-                default:
-                    resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_SEMI));
-                    break;
-            }
-            btnPersiana = new JButton(resIcon);
-            btnPersiana.setText("");
-            btnPersiana.setVerticalTextPosition(SwingConstants.BOTTOM);
-            btnPersiana.setHorizontalTextPosition(SwingConstants.CENTER);
-            btnPersiana.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-            btnPersiana.setFocusPainted(false);
-            btnPersiana.setBorder(new LineBorder(new java.awt.Color(130, 255, 93), 4, true));
-            btnPersiana.setBorderPainted(false);
-            btnPersiana.setBackground(Color.WHITE);
-            btnPersiana.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    modelo.setPersianaSeleccionadaActual(persiana);
-                    controlador.procesaClickPersiana();
+        if(listaPersianas.size() > 0){
+            GridBagLayout gbl = new GridBagLayout();
+            JPanel pan = new JPanel();
+            pan.setPreferredSize(null);
+            pan.setLayout(gbl);
+            GridBagConstraints c = new GridBagConstraints();
+            c.weightx = 0.333;
+            c.gridx = GridBagConstraints.RELATIVE;
+            c.gridy = GridBagConstraints.RELATIVE;
+            c.anchor = GridBagConstraints.CENTER;
+            JButton btnPersiana;
+            int contadorCols = 0;
+            for(Persiana persiana : listaPersianas){
+                ImageIcon resIcon;  
+                switch (persiana.getApertura()) {
+                    case Persiana.APERTURA_MAX:
+                        resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_ABIERTA));
+                        break;
+                    case Persiana.APERTURA_MIN:
+                        resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_CERRADA));
+                        break;
+                    default:
+                        resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_SEMI));
+                        break;
                 }
-            });
-            gbl.setConstraints(btnPersiana, c);
-            botonesPersianas.add(btnPersiana);
-            pan.add(btnPersiana);
-            
-            contadorCols++;
-            if(contadorCols == 3){
-                contadorCols = 0;
-                // Añade la fila actual
-                tabPersianas.add(pan);
-                // Nueva fila
-                gbl = new GridBagLayout();
-                pan = new JPanel();
-                pan.setPreferredSize(null);
-                pan.setLayout(gbl);
+                btnPersiana = new JButton(resIcon);
+                btnPersiana.setText("");
+                btnPersiana.setVerticalTextPosition(SwingConstants.BOTTOM);
+                btnPersiana.setHorizontalTextPosition(SwingConstants.CENTER);
+                btnPersiana.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                btnPersiana.setFocusPainted(false);
+                btnPersiana.setBorder(new LineBorder(new java.awt.Color(130, 255, 93), 4, true));
+                btnPersiana.setBorderPainted(false);
+                btnPersiana.setBackground(Color.WHITE);
+                btnPersiana.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        modelo.setPersianaSeleccionadaActual(persiana);
+                        controlador.procesaClickPersiana();
+                    }
+                });
+                gbl.setConstraints(btnPersiana, c);
+                botonesPersianas.add(btnPersiana);
+                pan.add(btnPersiana);
+
+                contadorCols++;
+                if(contadorCols == 3){
+                    contadorCols = 0;
+                    // Añade la fila actual
+                    tabPersianas.add(pan);
+                    // Nueva fila
+                    gbl = new GridBagLayout();
+                    pan = new JPanel();
+                    pan.setPreferredSize(null);
+                    pan.setLayout(gbl);
+                }
             }
-        }
-        
-        // Comprueba si el panel tiene hijos para añadir
-        if(pan.getComponents().length > 0){
-            tabPersianas.add(pan);
+
+            // Comprueba si el panel tiene hijos para añadir
+            if(pan.getComponents().length > 0){
+                tabPersianas.add(pan);
+            }
+        } else {
+            JLabel lSinPersianas = new JLabel();
+            lSinPersianas.setFont(new java.awt.Font("Ebrima", 1, 18));
+            lSinPersianas.setText("NO HAY PERSIANAS");
+            GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.gridwidth = 2;
+            tabPersianas.add(lSinPersianas, gridBagConstraints);
         }
     }
     
@@ -821,25 +956,27 @@ public class PanelVista extends javax.swing.JFrame {
         // Marca la persiana actual
         desmarcaPersianas();
         ArrayList<Persiana> persianas = modelo.getPersianasEstancia();
-        int i = persianas.indexOf(modelo.getPersianaSeleccionadaActual());
-        botonesPersianas.get(i).setBorderPainted(true);
-        // Actualiza los iconos
-        i = 0;
-        while(i < botonesPersianas.size()) {
-            ImageIcon resIcon;  
-            switch (persianas.get(i).getApertura()) {
-                case Persiana.APERTURA_MAX:
-                    resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_ABIERTA));
-                    break;
-                case Persiana.APERTURA_MIN:
-                    resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_CERRADA));
-                    break;
-                default:
-                    resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_SEMI));
-                    break;
+        if(persianas.size() > 0) {
+            int i = persianas.indexOf(modelo.getPersianaSeleccionadaActual());
+            botonesPersianas.get(i).setBorderPainted(true);
+            // Actualiza los iconos
+            i = 0;
+            while(i < botonesPersianas.size()) {
+                ImageIcon resIcon;  
+                switch (persianas.get(i).getApertura()) {
+                    case Persiana.APERTURA_MAX:
+                        resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_ABIERTA));
+                        break;
+                    case Persiana.APERTURA_MIN:
+                        resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_CERRADA));
+                        break;
+                    default:
+                        resIcon = new ImageIcon(getClass().getResource(Persiana.ICONO_SEMI));
+                        break;
+                }
+                botonesPersianas.get(i).setIcon(resIcon);
+                i++;
             }
-            botonesPersianas.get(i).setIcon(resIcon);
-            i++;
         }
     }
     
@@ -915,7 +1052,7 @@ public class PanelVista extends javax.swing.JFrame {
     private javax.swing.JLabel iconoTemperatura;
     private javax.swing.JLabel lColor;
     private javax.swing.JLabel lConfigLuz;
-    private javax.swing.JLabel lConfigLuz1;
+    private javax.swing.JLabel lConfigPersiana;
     private javax.swing.JLabel lTempActual;
     private javax.swing.JLabel lTermostato;
     private javax.swing.JLabel nombreEstancia;

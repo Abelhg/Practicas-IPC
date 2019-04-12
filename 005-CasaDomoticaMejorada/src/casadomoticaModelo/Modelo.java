@@ -17,7 +17,9 @@ public class Modelo {
     
     private Estancia estancia;
     
-    public Modelo(){ }
+    public Modelo(){ 
+        resetValores();
+    }
     
     /**
      * Asigna una nueva estancia.
@@ -99,11 +101,11 @@ public class Modelo {
     }
     
     /**
-     * Devuelve la luz seleccionada actualmente.
-     * @return Luz actualmente seleccionada
+     * Devuelve la luz seleccionada actualmente. Devuelve null si no hay luces.
+     * @return Luz actualmente seleccionada, null si no hay
      */
     public Luz getLuzSeleccionadaActual() {
-        if(luzSeleccionadaActual == null) {
+        if(luzSeleccionadaActual == null && getLucesEstancia().size() > 0) {
             luzSeleccionadaActual = getLucesEstancia().get(0);
         }
         return luzSeleccionadaActual;
@@ -125,6 +127,13 @@ public class Modelo {
         l.setEncendida(!l.estaEncendida());
     }
     
+    /**
+     * Cambia el color de la luz actualmente seleccionada.
+     * @param color Nuevo color de la luz
+     */
+    public void cambiaColorLuz(int color) {
+        getLuzSeleccionadaActual().setColor(new ColorLuz(color));
+    }
     
     
             /**************************************** 
@@ -157,4 +166,12 @@ public class Modelo {
         persianaSeleccionadaActual = p;
     }
 
+    /**
+     * Devuelve al modelo a su estado inicial. No resetea la estancia actual.
+     */
+    public void resetValores() {
+        horaActual = null;
+        luzSeleccionadaActual = null;
+        persianaSeleccionadaActual = null;
+    }
 }

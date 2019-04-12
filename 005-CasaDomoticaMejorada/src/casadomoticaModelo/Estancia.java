@@ -17,6 +17,8 @@ public class Estancia {
     
     public Estancia(String nombre) {
         this.nombre = nombre;
+        luces = new ArrayList<>();
+        persianas = new ArrayList<>();
     }
 
     public String getNombre() {
