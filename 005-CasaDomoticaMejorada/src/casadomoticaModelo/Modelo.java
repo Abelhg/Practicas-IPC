@@ -36,7 +36,9 @@ public class Modelo {
     }
     
     
-            /***** TEMPERATURAS *****/
+            /**************************************** 
+             *            TEMPERATURAS              *
+             ****************************************/
     /**
      * Devuelve la temperatura actual de la estancia.
      * @return Temperatura actual
@@ -65,7 +67,9 @@ public class Modelo {
         return estancia.getEstadoSistemaTemperatura();
     }
     
-            /***** HORA *****/
+            /**************************************** 
+             *             HORA ACTUAL              *
+             ****************************************/
     /**
      * Asigna la hora actual.
      * @param hora Hora actual
@@ -83,7 +87,9 @@ public class Modelo {
     }
 
 
-            /***** LUCES *****/
+            /**************************************** 
+             *                LUCES                 *
+             ****************************************/
     /**
      * Devuelve las luces de la estancia actual.
      * @return Lista de luces
@@ -111,9 +117,19 @@ public class Modelo {
         luzSeleccionadaActual = l;
     }
     
+    /**
+     * Alterna el estado de la luz actualmente seleccionada.
+     */
+    public void cambiaEstadoLuzActual() {
+        Luz l = getLuzSeleccionadaActual();
+        l.setEncendida(!l.estaEncendida());
+    }
     
     
-            /***** PERSIANAS *****/
+    
+            /**************************************** 
+             *              PERSIANAS               *
+             ****************************************/
     /**
      * Devuelve las persianas de la estancia actual.
      * @return Lista de persianas

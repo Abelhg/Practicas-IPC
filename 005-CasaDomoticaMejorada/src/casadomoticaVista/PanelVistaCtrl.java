@@ -2,6 +2,7 @@ package casadomoticaVista;
 
 import casadomoticaModelo.Luz;
 import casadomoticaModelo.Modelo;
+import casadomoticaModelo.Persiana;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -42,10 +43,11 @@ public final class PanelVistaCtrl {
         vista.actualizaIndicadorTermostato();
         vista.cargaLuces();
         vista.cargaPersianas();
-        // Selecciona la primera luz
         vista.actualizaSelectorLuces();
+        vista.actualizaSelectorPersianas();
+        // Muestra la configuración de la primera luz por defecto
         vista.muestraConfiguracionLuces();
-        vista.actualizaConfiguracionLuces();
+        vista.actualizaConfiguracionLuz();
         //vista.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);               // Quitar comentario en la versión final
         // Centra en la pantalla
         vista.setLocationRelativeTo(null);
@@ -153,9 +155,8 @@ public final class PanelVistaCtrl {
      * actual en el selector.
      */
     public void procesaClickTabLuces() {
-        vista.actualizaConfiguracionLuces();
         vista.muestraConfiguracionLuces();
-        vista.actualizaConfiguracionLuces();
+        vista.actualizaConfiguracionLuz();
     }
     
     /**
@@ -163,9 +164,8 @@ public final class PanelVistaCtrl {
      * actual en el selector.
      */
     public void procesaClickTabPersianas() {
-        vista.actualizaConfiguracionPersianas();
         vista.muestraConfiguracionPersianas();
-        vista.actualizaConfiguracionPersianas();
+        vista.actualizaConfiguracionPersiana();
     }
     
     /**
@@ -173,7 +173,15 @@ public final class PanelVistaCtrl {
      */
     public void procesaClickLuz() {
         vista.actualizaSelectorLuces();
-        vista.actualizaConfiguracionLuces();
+        vista.actualizaConfiguracionLuz();
+    }
+    
+    /**
+     * Marca la persiana como seleccionada y carga su configuración.
+     */
+    public void procesaClickPersiana() {
+        vista.actualizaSelectorPersianas();
+        vista.actualizaConfiguracionPersiana();
     }
     
     
@@ -185,9 +193,18 @@ public final class PanelVistaCtrl {
      */
     public void procesaClickBotonEncenderApagar() {
         // Obtiene la luz actual y alterna el estado
-        Luz l = modelo.getLuzSeleccionadaActual();
-        l.setEncendida(!l.estaEncendida());
-        vista.actualizaConfiguracionLuces();
+        modelo.cambiaEstadoLuzActual();
+        vista.actualizaConfiguracionLuz();
+    }
+    
+    /**
+     * Modifica la intensidad de la luz actualmente seleccionada.
+     */
+    public void procesaCambioIntensidad() {
+        Luz actual = modelo.getLuzSeleccionadaActual();
+        int intensidad = vista.getNivelIntensidad();
+        actual.setIntensidad(intensidad);
+        vista.actualizaConfiguracionLuz();
     }
     
     /**
@@ -199,7 +216,7 @@ public final class PanelVistaCtrl {
         }
         
         vista.actualizaSelectorLuces();
-        vista.actualizaConfiguracionLuces();
+        vista.actualizaConfiguracionLuz();
     }
     
     /**
@@ -211,8 +228,64 @@ public final class PanelVistaCtrl {
         }
         
         vista.actualizaSelectorLuces();
-        vista.actualizaConfiguracionLuces();
+        vista.actualizaConfiguracionLuz();
     }
+    
+    
+    
+            /**************************************** 
+             *       PANEL CONFIGURACION NIVEL      *
+             ****************************************/
+    /**
+     * Modifica la intensidad de la persiana actualmente seleccionada.
+     */
+    public void procesaCambioApertura() {
+        Persiana actual = modelo.getPersianaSeleccionadaActual();
+        int nivel = vista.getNivelApertura();
+        actual.setApertura(nivel);
+        vista.actualizaConfiguracionPersiana();
+    }
+    
+    /**
+     * Sube la persiana actual a su máxima apertura.
+     */
+    public void procesaClickSubirPersiana() {
+        Persiana actual = modelo.getPersianaSeleccionadaActual();
+        actual.setApertura(Persiana.APERTURA_MAX);
+        vista.actualizaConfiguracionPersiana();
+    }
+    
+    /**
+     * Baja la persiana actual a su mínima apertura.
+     */
+    public void procesaClickBajarPersiana() {
+        Persiana actual = modelo.getPersianaSeleccionadaActual();
+        actual.setApertura(Persiana.APERTURA_MIN);
+        vista.actualizaConfiguracionPersiana();
+    }
+    
+    /**
+     * Sube todas las persianas a su máxima apertura.
+     */
+    public void procesaClickSubirTodas() {
+        for(Persiana p : modelo.getPersianasEstancia()) {
+            p.setApertura(Persiana.APERTURA_MAX);
+        }
+        
+        vista.actualizaConfiguracionPersiana();
+    }
+    
+    /**
+     * Baja todas las persianas a su mínima apertura.
+     */
+    public void procesaClickBajarTodas() {
+        for(Persiana p : modelo.getPersianasEstancia()) {
+            p.setApertura(Persiana.APERTURA_MIN);
+        }
+        
+        vista.actualizaConfiguracionPersiana();
+    }
+    
     
     
     
