@@ -9,11 +9,13 @@ package casadomoticaModelo;
  * @author abeherr
  * @author hechila
  */
-public class SistemaCalefaccion {
+public class SistemaTemperatura {
     // CONSTANTES
     public static final int APAGADA = 0;
     public static final int ENFRIANDO = 1;
     public static final int CALENTANDO = 2;
+    
+    private static final double MARGEN = 0.5;
     
     private double temperaturaDeseada;
     private double temperaturaActual;
@@ -25,7 +27,7 @@ public class SistemaCalefaccion {
      * @param temperaturaActual Indica la temperatura de la calefaccion
      * 
      */
-    public SistemaCalefaccion(double temperaturaDeseada, double temperaturaActual) {
+    public SistemaTemperatura(double temperaturaDeseada, double temperaturaActual) {
         setTemperaturaDeseada(temperaturaDeseada);
         this.temperaturaActual = temperaturaActual;
         estado = APAGADA;
@@ -64,6 +66,13 @@ public class SistemaCalefaccion {
     }
     
     public int getEstado() {
+        if(temperaturaActual <= (temperaturaDeseada - MARGEN))
+            estado = CALENTANDO;
+        else if(temperaturaActual >= (temperaturaDeseada + MARGEN))    
+            estado = ENFRIANDO;
+        else
+            estado = APAGADA;
+        
         return estado;
     }
     

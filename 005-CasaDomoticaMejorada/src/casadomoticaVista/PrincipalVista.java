@@ -104,6 +104,11 @@ public class PrincipalVista extends javax.swing.JFrame {
 
         horaActual.setFont(new java.awt.Font("Ebrima", 1, 48)); // NOI18N
         horaActual.setText("18:30");
+        horaActual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                horaActualMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -141,16 +146,20 @@ public class PrincipalVista extends javax.swing.JFrame {
         controlador.procesaEstanciaSeleccionada(Estancia.BANIO);
     }//GEN-LAST:event_botonBanioActionPerformed
 
+    private void horaActualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_horaActualMouseClicked
+       controlador.procesaClickHora();
+    }//GEN-LAST:event_horaActualMouseClicked
+
     /**
      * LLAMADAS DESDE EL CONTROLADOR
      */
     
-    private void setHoraActual(String hora) {
-        horaActual.setText(hora);
+    public void setFechaActual(String fecha) {
+        fechaActual.setText(fecha);
     }
     
-    private void setFechaActual(String fecha) {
-        fechaActual.setText(fecha);
+    public void actualizaHoraActual() {
+        horaActual.setText(modelo.getHoraActual());
     }
     
     

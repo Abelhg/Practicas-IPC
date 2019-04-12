@@ -39,6 +39,7 @@ public final class PanelVistaCtrl {
         vista.actualizaNombre();
         vista.actualizaTemperaturaActual();
         vista.actualizaTemperaturaDeseada();
+        vista.actualizaIndicadorTermostato();
         vista.cargaLuces();
         vista.cargaPersianas();
         // Selecciona la primera luz
@@ -113,6 +114,7 @@ public final class PanelVistaCtrl {
         double nTemp = modelo.getTemperaturaDeseadaEstancia() + 1;
         modelo.cambiaTemperaturaDeseada(nTemp);
         vista.actualizaTemperaturaDeseada();
+        vista.actualizaIndicadorTermostato();
     }
     
     public void procesaClickSubirDecimal(){
@@ -122,6 +124,7 @@ public final class PanelVistaCtrl {
         BcambiaTemp = BcambiaTemp.add(decimal);
         modelo.cambiaTemperaturaDeseada(BcambiaTemp.doubleValue());
         vista.actualizaTemperaturaDeseada();
+        vista.actualizaIndicadorTermostato();
     }
     
     public void procesaClickBajarDecimal(){
@@ -131,12 +134,14 @@ public final class PanelVistaCtrl {
         BcambiaTemp = BcambiaTemp.subtract(decimal);
         modelo.cambiaTemperaturaDeseada(BcambiaTemp.doubleValue());
         vista.actualizaTemperaturaDeseada();
+        vista.actualizaIndicadorTermostato();
     }
     
     public void procesaClickBajarUnidad(){
         double nTemp = modelo.getTemperaturaDeseadaEstancia() - 1;
         modelo.cambiaTemperaturaDeseada(nTemp);
         vista.actualizaTemperaturaDeseada();
+        vista.actualizaIndicadorTermostato();
     }
     
     
