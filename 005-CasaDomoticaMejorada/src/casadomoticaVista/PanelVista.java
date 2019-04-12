@@ -38,20 +38,36 @@ public class PanelVista extends javax.swing.JFrame {
 
         nombreEstancia = new javax.swing.JLabel();
         horaActual = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        pTemperaturaActual = new javax.swing.JPanel();
+        lTempActual = new javax.swing.JLabel();
         temperaturaActual = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        pTermostato = new javax.swing.JPanel();
+        lTermostato = new javax.swing.JLabel();
         subeUnidad = new javax.swing.JButton();
         subeDecimal = new javax.swing.JButton();
         bajaUnidad = new javax.swing.JButton();
         bajaDecimal = new javax.swing.JButton();
-        temperatura = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        temperaturaDeseada = new javax.swing.JLabel();
+        pSelector = new javax.swing.JTabbedPane();
         tabLuces = new javax.swing.JPanel();
         tabPersianas = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        pConfiguracion = new javax.swing.JPanel();
+        confLuces = new javax.swing.JPanel();
+        lConfigLuz = new javax.swing.JLabel();
+        botonApagarEncender = new javax.swing.JToggleButton();
+        lColor = new javax.swing.JLabel();
+        selectorColor = new javax.swing.JComboBox<>();
+        selectorIntensidad = new javax.swing.JSlider();
+        botonApagarTodas = new javax.swing.JButton();
+        botonEncenderTodas = new javax.swing.JButton();
+        confPersianas = new javax.swing.JPanel();
+        lConfigLuz1 = new javax.swing.JLabel();
+        jSlider1 = new javax.swing.JSlider();
+        botonSubir = new javax.swing.JButton();
+        porcentajePersiana = new javax.swing.JLabel();
+        botonBajar = new javax.swing.JButton();
+        botonSubirTodas = new javax.swing.JButton();
+        botonBajarTodas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Configuración");
@@ -68,35 +84,39 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.weightx = 0.35;
-        gridBagConstraints.weighty = 0.35;
-        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.15;
         getContentPane().add(nombreEstancia, gridBagConstraints);
 
         horaActual.setFont(new java.awt.Font("Carlito", 1, 40)); // NOI18N
         horaActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         horaActual.setText("21:13");
+        horaActual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                horaActualMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 30;
-        gridBagConstraints.weightx = 0.15;
-        gridBagConstraints.weighty = 0.35;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.15;
         getContentPane().add(horaActual, gridBagConstraints);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        pTemperaturaActual.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        pTemperaturaActual.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("Ebrima", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Temperatura Actual");
+        lTempActual.setFont(new java.awt.Font("Ebrima", 0, 18)); // NOI18N
+        lTempActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lTempActual.setText("Temperatura Actual");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 25;
         gridBagConstraints.ipady = 20;
-        jPanel1.add(jLabel1, gridBagConstraints);
+        pTemperaturaActual.add(lTempActual, gridBagConstraints);
 
         temperaturaActual.setFont(new java.awt.Font("Ebrima", 1, 36)); // NOI18N
         temperaturaActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -105,28 +125,31 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipady = 20;
-        jPanel1.add(temperaturaActual, gridBagConstraints);
+        pTemperaturaActual.add(temperaturaActual, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 61;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 60;
         gridBagConstraints.weightx = 0.5;
-        gridBagConstraints.weighty = 0.4;
-        getContentPane().add(jPanel1, gridBagConstraints);
+        gridBagConstraints.weighty = 0.15;
+        getContentPane().add(pTemperaturaActual, gridBagConstraints);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel2.setPreferredSize(new java.awt.Dimension(200, 200));
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        pTermostato.setPreferredSize(new java.awt.Dimension(200, 200));
+        pTermostato.setLayout(new java.awt.GridBagLayout());
 
-        jLabel3.setFont(new java.awt.Font("Ebrima", 0, 18)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Temperatura");
+        lTermostato.setFont(new java.awt.Font("Ebrima", 0, 18)); // NOI18N
+        lTermostato.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lTermostato.setText("Termostato");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 30;
-        jPanel2.add(jLabel3, gridBagConstraints);
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.5;
+        pTermostato.add(lTermostato, gridBagConstraints);
 
         subeUnidad.setText("▲");
         subeUnidad.setAlignmentX(0.5F);
@@ -135,18 +158,15 @@ public class PanelVista extends javax.swing.JFrame {
                 subeUnidadMouseClicked(evt);
             }
         });
-        subeUnidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subeUnidadActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.ipady = 10;
-        gridBagConstraints.weightx = 5.0;
-        jPanel2.add(subeUnidad, gridBagConstraints);
+        gridBagConstraints.weightx = 0.25;
+        gridBagConstraints.weighty = 0.5;
+        pTermostato.add(subeUnidad, gridBagConstraints);
 
         subeDecimal.setText("△");
         subeDecimal.setAlignmentX(0.5F);
@@ -158,10 +178,12 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.ipady = 10;
-        gridBagConstraints.weightx = 5.0;
-        jPanel2.add(subeDecimal, gridBagConstraints);
+        gridBagConstraints.weightx = 0.25;
+        gridBagConstraints.weighty = 0.5;
+        pTermostato.add(subeDecimal, gridBagConstraints);
 
         bajaUnidad.setText("▼");
         bajaUnidad.setAlignmentX(0.5F);
@@ -173,10 +195,12 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.ipady = 10;
-        gridBagConstraints.weightx = 5.0;
-        jPanel2.add(bajaUnidad, gridBagConstraints);
+        gridBagConstraints.weightx = 0.25;
+        gridBagConstraints.weighty = 0.5;
+        pTermostato.add(bajaUnidad, gridBagConstraints);
 
         bajaDecimal.setText("▽");
         bajaDecimal.setAlignmentX(0.5F);
@@ -188,66 +212,203 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.ipady = 10;
-        gridBagConstraints.weightx = 5.0;
-        jPanel2.add(bajaDecimal, gridBagConstraints);
+        gridBagConstraints.weightx = 0.25;
+        gridBagConstraints.weighty = 0.5;
+        pTermostato.add(bajaDecimal, gridBagConstraints);
 
-        temperatura.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
-        temperatura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        temperatura.setText("20.4º");
+        temperaturaDeseada.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
+        temperaturaDeseada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        temperaturaDeseada.setText("20.4º");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        jPanel2.add(temperatura, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipady = 5;
+        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 0.5;
-        gridBagConstraints.weighty = 0.4;
-        getContentPane().add(jPanel2, gridBagConstraints);
+        gridBagConstraints.weighty = 0.5;
+        pTermostato.add(temperaturaDeseada, gridBagConstraints);
 
-        jTabbedPane1.setToolTipText("");
-        jTabbedPane1.setMinimumSize(new java.awt.Dimension(300, 300));
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(300, 300));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.15;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
+        getContentPane().add(pTermostato, gridBagConstraints);
+
+        pSelector.setToolTipText("");
+        pSelector.setMinimumSize(new java.awt.Dimension(300, 300));
+        pSelector.setPreferredSize(new java.awt.Dimension(300, 300));
 
         tabLuces.setLayout(new javax.swing.BoxLayout(tabLuces, javax.swing.BoxLayout.Y_AXIS));
-        jTabbedPane1.addTab("Luces", tabLuces);
+        pSelector.addTab("Luces", tabLuces);
 
         tabPersianas.setLayout(new javax.swing.BoxLayout(tabPersianas, javax.swing.BoxLayout.Y_AXIS));
-        jTabbedPane1.addTab("Persianas", tabPersianas);
+        pSelector.addTab("Persianas", tabPersianas);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.weightx = 0.5;
-        gridBagConstraints.weighty = 0.65;
-        getContentPane().add(jTabbedPane1, gridBagConstraints);
+        gridBagConstraints.weighty = 0.7;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 20);
+        getContentPane().add(pSelector, gridBagConstraints);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        jPanel3.setToolTipText("Configuración");
+        pConfiguracion.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        pConfiguracion.setToolTipText("Configuración");
+        pConfiguracion.setLayout(new javax.swing.OverlayLayout(pConfiguracion));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 225, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 187, Short.MAX_VALUE)
-        );
+        confLuces.setLayout(new java.awt.GridBagLayout());
+
+        lConfigLuz.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        lConfigLuz.setText("CONFIGURACIÓN DE LUZ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        confLuces.add(lConfigLuz, gridBagConstraints);
+
+        botonApagarEncender.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
+        botonApagarEncender.setText("APAGADA");
+        botonApagarEncender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonApagarEncenderActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
+        confLuces.add(botonApagarEncender, gridBagConstraints);
+
+        lColor.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        lColor.setText("COLOR");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.weightx = 0.5;
+        confLuces.add(lColor, gridBagConstraints);
+
+        selectorColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.weightx = 0.5;
+        confLuces.add(selectorColor, gridBagConstraints);
+
+        selectorIntensidad.setMajorTickSpacing(25);
+        selectorIntensidad.setMinorTickSpacing(5);
+        selectorIntensidad.setPaintTicks(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
+        confLuces.add(selectorIntensidad, gridBagConstraints);
+
+        botonApagarTodas.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        botonApagarTodas.setText("<html>\nAPAGAR<br>\nTODAS");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.weightx = 0.5;
+        confLuces.add(botonApagarTodas, gridBagConstraints);
+
+        botonEncenderTodas.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        botonEncenderTodas.setText("<html>ENCENDER<br> TODAS");
+        botonEncenderTodas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.weightx = 0.5;
+        confLuces.add(botonEncenderTodas, gridBagConstraints);
+
+        pConfiguracion.add(confLuces);
+
+        confPersianas.setLayout(new java.awt.GridBagLayout());
+
+        lConfigLuz1.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        lConfigLuz1.setText("CONFIGURACIÓN DE PERSIANA");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 0.2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
+        confPersianas.add(lConfigLuz1, gridBagConstraints);
+
+        jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 5;
+        gridBagConstraints.weightx = 0.33;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        confPersianas.add(jSlider1, gridBagConstraints);
+
+        botonSubir.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        botonSubir.setText("SUBIR");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.weightx = 0.33;
+        gridBagConstraints.weighty = 0.2;
+        confPersianas.add(botonSubir, gridBagConstraints);
+
+        porcentajePersiana.setFont(new java.awt.Font("Ebrima", 0, 24)); // NOI18N
+        porcentajePersiana.setText("50%");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.weightx = 0.33;
+        gridBagConstraints.weighty = 0.2;
+        confPersianas.add(porcentajePersiana, gridBagConstraints);
+
+        botonBajar.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        botonBajar.setText("BAJAR");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.weightx = 0.33;
+        gridBagConstraints.weighty = 0.2;
+        confPersianas.add(botonBajar, gridBagConstraints);
+
+        botonSubirTodas.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        botonSubirTodas.setText("SUBIR TODAS");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.weightx = 0.33;
+        gridBagConstraints.weighty = 0.2;
+        confPersianas.add(botonSubirTodas, gridBagConstraints);
+
+        botonBajarTodas.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        botonBajarTodas.setText("BAJAR TODAS");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.weightx = 0.33;
+        gridBagConstraints.weighty = 0.2;
+        confPersianas.add(botonBajarTodas, gridBagConstraints);
+
+        pConfiguracion.add(confPersianas);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 225;
-        gridBagConstraints.ipady = 187;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.ipady = 30;
         gridBagConstraints.weightx = 0.5;
-        gridBagConstraints.weighty = 0.6;
-        getContentPane().add(jPanel3, gridBagConstraints);
+        gridBagConstraints.weighty = 0.7;
+        getContentPane().add(pConfiguracion, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -255,10 +416,6 @@ public class PanelVista extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         controlador.procesaCierre();
     }//GEN-LAST:event_formWindowClosing
-
-    private void subeUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subeUnidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_subeUnidadActionPerformed
 
     private void horaActualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_horaActualMouseClicked
         controlador.procesaClickHora();
@@ -280,27 +437,41 @@ public class PanelVista extends javax.swing.JFrame {
        controlador.procesaClickBajarDecimal();
     }//GEN-LAST:event_bajaDecimalMouseClicked
 
+    private void botonApagarEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonApagarEncenderActionPerformed
+        controlador.procesaClickBotonEncenderApagar();
+    }//GEN-LAST:event_botonApagarEncenderActionPerformed
+
     /**
-     * LLAMADAS DESDE EL CONTROLADOR
+     * Obtiene el nombre de la estancia del modelo y lo muestra.
      */
-    
-    public void setNombre(String nombre) {
-        nombreEstancia.setText(nombre);
-    }
-    
-    public void setHoraActual(String hora) {
-        horaActual.setText(hora);
-    }
-    
-    public void setTemperaturaActual(double temperatura) {
-        temperaturaActual.setText(Double.toString(temperatura)+"º");
-    }
-    public void setTemperaturaDeseada(double temperatura) {
-        this.temperatura.setText(Double.toString(temperatura)+"º");
+    public void actualizaNombre() {
+        nombreEstancia.setText(modelo.getNombreEstancia());
     }
     
     /**
-     * Carga las luces en su panel..
+     * Obtiene la hora del modelo y la muestra.
+     */
+    public void actualizaHoraActual() {
+        horaActual.setText(modelo.getHoraActual());
+    }
+    
+    /**
+     * Obtiene la temperatura actual de la estancia y la muestra.
+     */
+    public void actualizaTemperaturaActual() {
+        temperaturaActual.setText(modelo.getTemperaturaActualEstancia() + "º");
+    }
+    
+    /**
+     * Obtiene la temperatura deseada de la estancia y la muestra.
+     */
+    public void actualizaTemperaturaDeseada() {
+        temperaturaDeseada.setText(modelo.getTemperaturaDeseadaEstancia() + "º");
+    }
+    
+            /***** LUCES ****/
+    /**
+     * Carga las luces en su panel.
      */
     public void cargaLuces() {
         ArrayList<Luz> listaLuces = modelo.getLucesEstancia();
@@ -359,7 +530,20 @@ public class PanelVista extends javax.swing.JFrame {
         }
     }
 
+    public void actualizaBotonEncenderApagar() {
+        if(modelo.getSeleccionadaActual().estaEncendida()) {
+            // ENCENDIDA
+            botonApagarEncender.setSelected(true);
+            botonApagarEncender.setText("ENCENDIDA");
+        } else {
+            // APAGADA
+            botonApagarEncender.setSelected(false);
+            botonApagarEncender.setText("APAGADA");
+        }
+    }
     
+    
+            /***** PERSIANAS *****/
     /**
      * Carga las persianas en su panel.
      */
@@ -419,19 +603,35 @@ public class PanelVista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bajaDecimal;
     private javax.swing.JButton bajaUnidad;
+    private javax.swing.JToggleButton botonApagarEncender;
+    private javax.swing.JButton botonApagarTodas;
+    private javax.swing.JButton botonBajar;
+    private javax.swing.JButton botonBajarTodas;
+    private javax.swing.JButton botonEncenderTodas;
+    private javax.swing.JButton botonSubir;
+    private javax.swing.JButton botonSubirTodas;
+    private javax.swing.JPanel confLuces;
+    private javax.swing.JPanel confPersianas;
     private javax.swing.JLabel horaActual;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JSlider jSlider1;
+    private javax.swing.JLabel lColor;
+    private javax.swing.JLabel lConfigLuz;
+    private javax.swing.JLabel lConfigLuz1;
+    private javax.swing.JLabel lTempActual;
+    private javax.swing.JLabel lTermostato;
     private javax.swing.JLabel nombreEstancia;
-    private javax.swing.JPanel tabLuces;
-    private javax.swing.JPanel tabPersianas;
+    private javax.swing.JPanel pConfiguracion;
+    private javax.swing.JTabbedPane pSelector;
+    private javax.swing.JPanel pTemperaturaActual;
+    private javax.swing.JPanel pTermostato;
+    private javax.swing.JLabel porcentajePersiana;
+    private javax.swing.JComboBox<String> selectorColor;
+    private javax.swing.JSlider selectorIntensidad;
     private javax.swing.JButton subeDecimal;
     private javax.swing.JButton subeUnidad;
-    private javax.swing.JLabel temperatura;
+    private javax.swing.JPanel tabLuces;
+    private javax.swing.JPanel tabPersianas;
     private javax.swing.JLabel temperaturaActual;
+    private javax.swing.JLabel temperaturaDeseada;
     // End of variables declaration//GEN-END:variables
 }

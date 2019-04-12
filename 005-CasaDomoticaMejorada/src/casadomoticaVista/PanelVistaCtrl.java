@@ -1,8 +1,8 @@
 package casadomoticaVista;
 
+import casadomoticaModelo.Luz;
 import casadomoticaModelo.Modelo;
 
-import javax.swing.JFrame;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,6 +18,7 @@ import java.util.GregorianCalendar;
 public final class PanelVistaCtrl {
     
     private boolean mostrarSeg;
+    
     private final PanelVista vista;
     private final Modelo modelo;
     
@@ -25,55 +26,71 @@ public final class PanelVistaCtrl {
         vista = v;
         modelo = m;
         configurarEstancia();
+        iniciaHiloHora();
+    }
+    
+            /***** CONFIGURACION INICIAL *****/
+    /**
+     * Configura la vista con los datos del modelo para la estancia actual.
+     */
+    private void configurarEstancia() {
+        vista.actualizaNombre();
+        vista.actualizaTemperaturaActual();
+        vista.actualizaTemperaturaDeseada();
+        vista.cargaLuces();
+        vista.cargaPersianas();
+        // Selecciona la primera luz
+        modelo.setSeleccionadaActual(modelo.getLucesEstancia().get(0));
+        vista.actualizaBotonEncenderApagar();
+        //vista.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);               // Quitar comentario en la versión final
+        // Centra en la pantalla
+        vista.setLocationRelativeTo(null);
+    }
+    
+    /**
+     * Comienza un hilo que actualiza la hora en la vista cada segundo.
+     */
+    private void iniciaHiloHora() {
         Runnable runnable = () -> {
             while(true) {
                 try { 
-                    vista.setHoraActual(getHoraActual());
+                    modelo.setHoraActual(getHoraActual());
+                    vista.actualizaHoraActual();
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     throw new IllegalStateException(e);
                 }
             }
         };
-
-        Thread thread = new Thread(runnable);
-
-        thread.start();
+        new Thread(runnable).start();
     }
     
+    /**
+     * Devuelve la hora actual en formato hh:mm[:ss]. Mostrar o no los segundos
+     * depende de la bandera asociada "mostrarSeg".
+     * @return Hora actual
+     */
     private String getHoraActual() {
         Calendar calendario = new GregorianCalendar();
         Date fechaHoraActual = new Date();
         
         calendario.setTime(fechaHoraActual);
-        int hora = calendario.get(Calendar.HOUR_OF_DAY);
+        int horas= calendario.get(Calendar.HOUR_OF_DAY);
         int minutos = calendario.get(Calendar.MINUTE);
         int segundos = calendario.get(Calendar.SECOND);
         
-        if (!mostrarSeg){
-            return String.format("%02d:%02d", hora, minutos);
+        String horaActual;
+        if (!mostrarSeg) {
+            horaActual = String.format("%02d:%02d", horas, minutos);
+        } else {
+            horaActual = String.format("%02d:%02d:%02d", horas, minutos, segundos);
         }
-        return String.format("%02d:%02d:%02d", hora, minutos, segundos);
+        
+        return horaActual;
     }
     
-    private void configurarEstancia() {
-        vista.setNombre(modelo.getNombreEstancia());
-        vista.setTemperaturaActual(modelo.getTemperaturaActualEstancia());
-        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseadaEstanciaActual());
-        vista.cargaLuces();
-        vista.cargaPersianas();
-        //vista.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        // Centra en la pantalla
-        vista.setLocationRelativeTo(null);
-    }
     
-    /**
-     * Vuelve a la pantalla anterior.
-     */
-    public void procesaCierre() {
-        GestorUI.getInstancia().atras();
-    }
-    
+            /***** HORA *****/
     /**
      * Muestra o no los segundos
      */
@@ -81,36 +98,57 @@ public final class PanelVistaCtrl {
         mostrarSeg = !mostrarSeg;
     }
     
-    /**
-     * 
-     */
+    
+            /***** TERMOSTATO *****/
+    
     public void procesaClickSubirUnidad(){
-        double cambiaTemp = modelo.getTemperaturaDeseadaEstanciaActual() + 1;
-        modelo.cambiaTemperaturaDeseada(cambiaTemp);
-        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseadaEstanciaActual());
+        double nTemp = modelo.getTemperaturaDeseadaEstancia() + 1;
+        modelo.cambiaTemperaturaDeseada(nTemp);
+        vista.actualizaTemperaturaDeseada();
     }
     
     public void procesaClickSubirDecimal(){
-        String cambiaTemp = String.valueOf(modelo.getTemperaturaDeseadaEstanciaActual());
-        BigDecimal BcambiaTemp = new BigDecimal(cambiaTemp);
+        String nTemp = String.valueOf(modelo.getTemperaturaDeseadaEstancia());
+        BigDecimal BcambiaTemp = new BigDecimal(nTemp);
         BigDecimal decimal = new BigDecimal ("0.1");
         BcambiaTemp = BcambiaTemp.add(decimal);
         modelo.cambiaTemperaturaDeseada(BcambiaTemp.doubleValue());
-        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseadaEstanciaActual());
+        vista.actualizaTemperaturaDeseada();
     }
     
     public void procesaClickBajarDecimal(){
-        String cambiaTemp = String.valueOf(modelo.getTemperaturaDeseadaEstanciaActual());
-        BigDecimal BcambiaTemp = new BigDecimal(cambiaTemp);
+        String nTemp = String.valueOf(modelo.getTemperaturaDeseadaEstancia());
+        BigDecimal BcambiaTemp = new BigDecimal(nTemp);
         BigDecimal decimal = new BigDecimal ("0.1");
         BcambiaTemp = BcambiaTemp.subtract(decimal);
         modelo.cambiaTemperaturaDeseada(BcambiaTemp.doubleValue());
-        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseadaEstanciaActual());
+        vista.actualizaTemperaturaDeseada();
     }
     
     public void procesaClickBajarUnidad(){
-        double cambiaTemp = modelo.getTemperaturaDeseadaEstanciaActual() - 1;
-        modelo.cambiaTemperaturaDeseada(cambiaTemp);
-        vista.setTemperaturaDeseada(modelo.getTemperaturaDeseadaEstanciaActual());
+        double nTemp = modelo.getTemperaturaDeseadaEstancia() - 1;
+        modelo.cambiaTemperaturaDeseada(nTemp);
+        vista.actualizaTemperaturaDeseada();
     }
+    
+    
+            /***** PANEL CONFIGURACION LUCES *****/
+    
+    /**
+     * Enciende o apaga la luz seleccionada actual.
+     */
+    public void procesaClickBotonEncenderApagar() {
+        // Obtiene la luz actual y alterna el estado
+        Luz l = modelo.getSeleccionadaActual();
+        l.setEncendida(!l.estaEncendida());
+        vista.actualizaBotonEncenderApagar();
+    }
+    
+     /**
+     * Vuelve a la pantalla anterior.
+     */
+    public void procesaCierre() {
+        GestorUI.getInstancia().atras();
+    }
+    
 }
