@@ -63,6 +63,9 @@ public class Modelo {
        estancia.setTemperaturaDeseada(cantidad);
     }
     
+    public int getEstadoSistemaTemperatura(){
+        return estancia.getEstadoSistemaTemperatura();
+    }
     
             /**************************************** 
              *             HORA ACTUAL              *

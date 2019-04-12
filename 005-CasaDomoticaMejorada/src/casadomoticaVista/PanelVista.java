@@ -1,9 +1,11 @@
-package casadomoticaVista;
+﻿package casadomoticaVista;
 
 import casadomoticaModelo.ColorLuz;
 import casadomoticaModelo.Luz;
 import casadomoticaModelo.Modelo;
 import casadomoticaModelo.Persiana;
+import casadomoticaModelo.SistemaTemperatura;
+
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -68,6 +70,7 @@ public class PanelVista extends javax.swing.JFrame {
         pSelector = new javax.swing.JTabbedPane();
         tabLuces = new javax.swing.JPanel();
         tabPersianas = new javax.swing.JPanel();
+        iconoTemperatura = new javax.swing.JLabel();
 
         confLuces.setLayout(new java.awt.GridBagLayout());
 
@@ -274,6 +277,7 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.weightx = 0.5;
         gridBagConstraints.weighty = 0.15;
         getContentPane().add(nombreEstancia, gridBagConstraints);
@@ -291,7 +295,7 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 30;
-        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weightx = 0.3;
         gridBagConstraints.weighty = 0.15;
         getContentPane().add(horaActual, gridBagConstraints);
 
@@ -318,7 +322,7 @@ public class PanelVista extends javax.swing.JFrame {
         pTemperaturaActual.add(temperaturaActual, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 60;
@@ -421,7 +425,7 @@ public class PanelVista extends javax.swing.JFrame {
         pTermostato.add(temperaturaDeseada, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.weightx = 0.5;
         gridBagConstraints.weighty = 0.15;
@@ -446,10 +450,20 @@ public class PanelVista extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.weightx = 0.5;
         gridBagConstraints.weighty = 0.7;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 20);
         getContentPane().add(pSelector, gridBagConstraints);
+
+        iconoTemperatura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/casadomoticaRecursos/calor.png"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.weightx = 0.2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 20);
+        getContentPane().add(iconoTemperatura, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -457,10 +471,6 @@ public class PanelVista extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         controlador.procesaCierre();
     }//GEN-LAST:event_formWindowClosing
-
-    private void horaActualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_horaActualMouseClicked
-        controlador.procesaClickHora();
-    }//GEN-LAST:event_horaActualMouseClicked
 
     private void subeUnidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subeUnidadMouseClicked
         controlador.procesaClickSubirUnidad();
@@ -480,7 +490,6 @@ public class PanelVista extends javax.swing.JFrame {
 
     private void botonApagarEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonApagarEncenderActionPerformed
         controlador.procesaClickBotonEncenderApagar();
-        System.out.println("[*] " + getContentPane().getSize().toString());
     }//GEN-LAST:event_botonApagarEncenderActionPerformed
 
     private void botonApagarTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonApagarTodasActionPerformed
@@ -501,6 +510,10 @@ public class PanelVista extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_pSelectorStateChanged
+
+    private void horaActualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_horaActualMouseClicked
+        controlador.procesaClickHora();
+    }//GEN-LAST:event_horaActualMouseClicked
 
     private void selectorIntensidadStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_selectorIntensidadStateChanged
         if(controlador != null) {
@@ -559,6 +572,7 @@ public class PanelVista extends javax.swing.JFrame {
         temperaturaDeseada.setText(modelo.getTemperaturaDeseadaEstancia() + "º");
     }
     
+
     /**
      * Carga el panel especificado en la zona de configuración.
      * 
@@ -579,6 +593,20 @@ public class PanelVista extends javax.swing.JFrame {
         // Ajusta el tamaño de la ventana
         setSize(660, 570);                                          // TODO Poner como constante
         validate();
+
+    public void actualizaIndicadorTermostato() {
+        int estado = modelo.getEstadoSistemaTemperatura();
+        switch(estado){
+            case SistemaTemperatura.APAGADA:
+                iconoTemperatura.setIcon(null);
+                break;
+            case SistemaTemperatura.CALENTANDO:
+                iconoTemperatura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/casadomoticaRecursos/calor.png")));
+                break;
+            case SistemaTemperatura.ENFRIANDO:
+                iconoTemperatura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/casadomoticaRecursos/frio.png")));
+                break;
+        }
     }
     
             /**************************************** 
@@ -843,6 +871,7 @@ public class PanelVista extends javax.swing.JFrame {
     private javax.swing.JPanel confLuces;
     private javax.swing.JPanel confPersianas;
     private javax.swing.JLabel horaActual;
+    private javax.swing.JLabel iconoTemperatura;
     private javax.swing.JLabel lColor;
     private javax.swing.JLabel lConfigLuz;
     private javax.swing.JLabel lConfigLuz1;

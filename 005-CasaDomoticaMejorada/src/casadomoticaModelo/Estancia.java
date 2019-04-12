@@ -13,7 +13,7 @@ public class Estancia {
     private final String nombre;
     private ArrayList<Luz> luces;
     private ArrayList<Persiana> persianas;
-    private SistemaCalefaccion sistCalefaccion;
+    private SistemaTemperatura sistCalefaccion;
     
     public Estancia(String nombre) {
         this.nombre = nombre;
@@ -47,7 +47,7 @@ public class Estancia {
         return sistCalefaccion;
     }
     */
-    public void setSistCalefaccion(SistemaCalefaccion sistCalefaccion) {
+    public void setSistCalefaccion(SistemaTemperatura sistCalefaccion) {
         this.sistCalefaccion = sistCalefaccion;
     }
     
@@ -61,5 +61,9 @@ public class Estancia {
     
     public void setTemperaturaDeseada(double cantidad){
         this.sistCalefaccion.setTemperaturaDeseada(cantidad);
+    }
+    
+    public int getEstadoSistemaTemperatura(){
+        return sistCalefaccion.getEstado();
     }
 }
