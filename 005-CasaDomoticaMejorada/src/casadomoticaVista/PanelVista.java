@@ -4,6 +4,7 @@ import casadomoticaModelo.ColorLuz;
 import casadomoticaModelo.Luz;
 import casadomoticaModelo.Modelo;
 import casadomoticaModelo.Persiana;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
@@ -479,6 +480,7 @@ public class PanelVista extends javax.swing.JFrame {
 
     private void botonApagarEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonApagarEncenderActionPerformed
         controlador.procesaClickBotonEncenderApagar();
+        System.out.println("[*] " + getContentPane().getSize().toString());
     }//GEN-LAST:event_botonApagarEncenderActionPerformed
 
     private void botonApagarTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonApagarTodasActionPerformed
@@ -557,6 +559,27 @@ public class PanelVista extends javax.swing.JFrame {
         temperaturaDeseada.setText(modelo.getTemperaturaDeseadaEstancia() + "º");
     }
     
+    /**
+     * Carga el panel especificado en la zona de configuración.
+     * 
+     * Nota para Alejandra: es una función utilizada solo por la vista, por eso
+     * se le pasa parámetro.
+     * 
+     * @param panel Nuevo panel de configuración
+     */
+    private void cargaPanelConfiguracion(JPanel panel) {
+        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.ipady = 30;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.7;
+        getContentPane().add(panel, gridBagConstraints);
+        // Ajusta el tamaño de la ventana
+        setSize(660, 570);                                          // TODO Poner como constante
+        validate();
+    }
     
             /**************************************** 
              *                LUCES                 *
@@ -593,6 +616,7 @@ public class PanelVista extends javax.swing.JFrame {
             btnLuz.setFocusPainted(false);
             btnLuz.setBorder(new LineBorder(new java.awt.Color(130, 255, 93), 4, true));
             btnLuz.setBorderPainted(false);
+            btnLuz.setBackground(Color.WHITE);
             btnLuz.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     modelo.setLuzSeleccionadaActual(luz);
@@ -645,15 +669,8 @@ public class PanelVista extends javax.swing.JFrame {
      */
     public void muestraConfiguracionLuces() {
         getContentPane().remove(confPersianas);
-        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 30;
-        gridBagConstraints.weightx = 0.5;
-        gridBagConstraints.weighty = 0.7;
-        getContentPane().add(confLuces, gridBagConstraints);
-        validate();
+        cargaPanelConfiguracion(confLuces);
+        
     }
     
     /**
@@ -718,6 +735,7 @@ public class PanelVista extends javax.swing.JFrame {
             btnPersiana.setFocusPainted(false);
             btnPersiana.setBorder(new LineBorder(new java.awt.Color(130, 255, 93), 4, true));
             btnPersiana.setBorderPainted(false);
+            btnPersiana.setBackground(Color.WHITE);
             btnPersiana.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     modelo.setPersianaSeleccionadaActual(persiana);
@@ -770,15 +788,7 @@ public class PanelVista extends javax.swing.JFrame {
      */
     public void muestraConfiguracionPersianas() {
         getContentPane().remove(confLuces);
-        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 30;
-        gridBagConstraints.weightx = 0.5;
-        gridBagConstraints.weighty = 0.7;
-        getContentPane().add(confPersianas, gridBagConstraints);
-        validate();
+        cargaPanelConfiguracion(confPersianas);
     }
     
     /**
