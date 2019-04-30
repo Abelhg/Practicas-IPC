@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 
 public class GestorUI { 
-    private Stack<JFrame> anteriores;
+    private final Stack<JFrame> anteriores;
     private JFrame actual;
     
     private static GestorUI instancia;
